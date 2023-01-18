@@ -9,13 +9,13 @@ import axios from "axios";
 
 const DashBoard = () => {
 
-  let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
-  let school_id = decodeToken.result.school_id;
-  useEffect(() => {
-     axios.get(`https://9fe4-14-139-208-75.in.ngrok.io/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
-       console.log(res)
-     }) 
-  }, []);
+  // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+  // let school_id = decodeToken.result.school_id;
+  // useEffect(() => {
+  //    axios.get(`https://5b7a-2401-4900-3e94-44bb-d9f4-c134-3726-f4f0.in.ngrok.io/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+  //      console.log(res)
+  //    }) 
+  // }, []);
  
   return (
     <div className='dashboard-container '>

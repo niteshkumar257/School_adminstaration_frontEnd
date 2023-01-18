@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState,useEffect} from 'react'
 import "./Dashboard.scss"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
@@ -9,16 +9,34 @@ import teacher from "../assest/t2.png";
 import department from "../assest/d2.png";
 
 import s4 from "../assest/school4.png";
-const data={
-    SchoolName:"Broad River Grammar public english meddium  School",
-    city:"Ambika pur",
-    Email:"Admin123@gmail.com",
-    Phone:"8249829096",
-    AdminName:"Admin Name"
-}
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+
+
+
+
+
+
 
 
 const Dashboard = () => {
+    const [SchoolName,setSchoolName]=useState(" Broad River Grammar public english meddium  School");
+const [city,setCityName]=useState("Jaballpur");
+const [email,setEmail]=useState("AdminRedy8788@gmail.com");
+const [phone,setPhone]=useState("89273768746");
+const [AdminName,setAdminName]=useState("Lionel Messi");
+
+
+
+// use effect
+let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+let school_id = decodeToken.result.school_id;
+useEffect(() => {
+   axios.get(`https://5b7a-2401-4900-3e94-44bb-d9f4-c134-3726-f4f0.in.ngrok.io/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+    console.log(res.data);
+   }) 
+}, []);
+
   
   return (
   
@@ -33,7 +51,7 @@ const Dashboard = () => {
             <ul>
                 <li>
                  
-                   <span> {data.SchoolName}</span>
+                   <span> {SchoolName}</span>
                 </li>
             </ul>
         </div>
@@ -41,14 +59,14 @@ const Dashboard = () => {
         <div className='basic-info-container-components'>
         <div className="info-container">
            <li>
-            <label>Owner Name : </label>
-            <span> {data.AdminName}</span>
+            <label>Owner Name :</label>
+            <span> {AdminName}</span>
            </li>
           </div>
           <div className="info-container">
             <li>
               <label>City : </label>
-              <span>{     data.city}</span>
+              <span>{city}</span>
             </li>
           </div>
         </div>
@@ -56,13 +74,13 @@ const Dashboard = () => {
          <div className="info-container">
          <li>
           <label>Owner Email</label>
-          <span>: {data.Email}</span>
+          <span>:{email}</span>
             </li>
           </div>
           <div className="info-container">
           <li>
             <lable>Phone : </lable>
-            <span>{data.Phone}</span>
+            <span>{phone}</span>
             </li>
           </div>
          </div>

@@ -15,7 +15,7 @@ const Login = () => {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    axios.post("https://074d-14-139-208-75.in.ngrok.io/user/login", { admin_id: email, password: password }).then((res) => {
+    axios.post("https://5b7a-2401-4900-3e94-44bb-d9f4-c134-3726-f4f0.in.ngrok.io/user/login", { admin_id: email, password: password }).then((res) => {
       localStorage.setItem("auth_token", res.data.token);
       return navigate("/");
     }).catch((err) => {
