@@ -11,13 +11,7 @@ import department from "../assest/d2.png";
 import s4 from "../assest/school4.png";
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
-
-
-
-
-
-
-
+ 
 
 const Dashboard = () => {
     const [SchoolName,setSchoolName]=useState(" Broad River Grammar public english meddium  School");
@@ -25,6 +19,8 @@ const [city,setCityName]=useState("Jaballpur");
 const [email,setEmail]=useState("AdminRedy8788@gmail.com");
 const [phone,setPhone]=useState("89273768746");
 const [AdminName,setAdminName]=useState("Lionel Messi");
+const [studentCount,setStudentCount]=useState("1");
+const [teacherCount,setTeacherCount]=useState("1");
 
 
 
@@ -32,8 +28,15 @@ const [AdminName,setAdminName]=useState("Lionel Messi");
 let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
 let school_id = decodeToken.result.school_id;
 useEffect(() => {
-   axios.get(`https://5b7a-2401-4900-3e94-44bb-d9f4-c134-3726-f4f0.in.ngrok.io/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+   axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
     console.log(res.data);
+    setSchoolName(res.data.schoolDetail.school_name);
+    setAdminName(res.data.schoolDetail.admin_name);
+    setEmail(res.data.schoolDetail.email);
+    setPhone(res.data.schoolDetail.mobile);
+    setCityName(res.data.schoolDetail.city_name);
+    setStudentCount(res.data.totalStudent);
+    setTeacherCount(res.data.totalTeacher);
    }) 
 }, []);
 
@@ -96,7 +99,7 @@ useEffect(() => {
                 Student
             </div>
             <div className="count">
-                10000
+                {studentCount}
             </div>
         </div>
         <div className="right">
@@ -131,7 +134,7 @@ useEffect(() => {
              Teachers
             </div>
             <div className="count">
-                50+
+                {teacherCount}
             </div>
         </div>
         <div className="right">
