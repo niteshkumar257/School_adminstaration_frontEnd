@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
 import "./Studentform.scss";
@@ -127,6 +127,24 @@ const gender = [
 ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const StudentForm = () => {
+  const [checked1,setchecked1]=useState(false);
+  const [checked2,setchecked2]=useState(false);
+  const [checked3,setchecked3]=useState(false);
+  const handleChange1=(e)=>
+  {
+       console.log(e.target.checked)
+        setchecked1(e.target.checked)
+  }
+  const handleChange2=(e)=>
+  {
+       console.log(e.target.checked)
+        setchecked2(e.target.checked)
+  }
+  const handleChange3=(e)=>
+  {
+       console.log(e.target.checked)
+        setchecked3(e.target.checked)
+  }
   const [name, setName] = useState("");
   const [gender,setGender]=useState("");
   const [course,setCourse]=useState("");
@@ -144,6 +162,7 @@ const StudentForm = () => {
   const [AadharNumber,setAadharNumber]=useState("");
   
   const submitHandler = (e) => {
+   
     e.preventDefault();
     console.log("funtion called");
   console.log(name);
@@ -319,12 +338,60 @@ const StudentForm = () => {
               </div>
              </div>
              <div className='student-info-detail-fee-container'>
-             <div className='student-info-detail-fee-container-subheading'>Info Details</div>
+             <div className='student-info-detail-fee-container-subheading'>
+             <span>Fee Details</span>
+             </div>
               <div className='student-info-detail-fee-container-textfield'>
-              <div className='parent-info-section section'>
-              <Checkbox
-              onChange={firstInstallMentClicked}
-               {...label} defaultChecked />
+              <div className='fee-info-section section'>
+                <div className='fee-info-section-installment'>
+                <TextField id="outlined-basic" label="1st InstallMent" variant="outlined" />
+                <Checkbox {...label}
+                 checked={checked1}
+                 onChange={handleChange1}
+                 color="success"
+                 />
+                 {!checked1 &&   
+                  <TextField  variant="outlined" 
+             
+                type="date"
+                onChange={(e)=>setName(e.target.value)}/>}
+              
+                </div>
+                <div className='fee-info-section-installment'>
+                <TextField id="outlined-basic" label="2nd InstallMent" variant="outlined" />
+                <Checkbox {...label}
+                 checked={checked2}
+                 onChange={handleChange2}
+                 color="success"
+                 />
+                 {!checked2 &&
+                 
+                 <TextField   variant="outlined" 
+               
+                  type="date"
+                  onChange={(e)=>setName(e.target)}/>}
+              
+                </div>
+                <div className='fee-info-section-installment'>
+                <TextField id="outlined-basic" label="3rd InstallMent" variant="outlined" />
+                <Checkbox  
+                     checked={checked3}
+                     onChange={handleChange3}
+                     color="success"
+               
+                {...label} 
+                 inputProps={{ 'aria-label': 'controlled' }}
+                 />
+                 {!checked3 &&
+                 
+                 <TextField  variant="outlined" 
+             
+                  type="date"
+                  onChange={(e)=>setName(e.target.value)}/>}
+              
+                </div>
+            
+            
               </div>
               </div>
                </div>

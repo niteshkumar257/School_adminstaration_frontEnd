@@ -175,27 +175,7 @@ salaryStatus:"paid"
 
   
 }
-,{
-  id:4,
-  name:"Nitesh Kumar Reddy",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid",
 
-
-  
-
-  
-}
 ,{
   id:4,
   name:"Nitesh Kumar",
@@ -432,7 +412,7 @@ const Teachers = () => {
         }}
            >
            <DataTable rows={rows} columns={columns} 
-           rowsPerPageOption="9"
+           
            />
            </Box>
            

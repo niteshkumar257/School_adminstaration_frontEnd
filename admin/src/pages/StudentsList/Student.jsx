@@ -58,6 +58,10 @@ const rows = [
 ];
 
 const Student = () => {
+ const handleSelect=(id)=>
+ {
+  console.log(id);
+ }
  
   const viewColumn=[
     {
@@ -70,7 +74,7 @@ const Student = () => {
         return (
           <div className="view">
             <Link to="/Student/studentPage" style={{ textDecoration: "none" }}>
-             <button >View</button>
+             <button onClick={() => handleSelect(params.row.id)} >View</button>
             </Link>
            
           </div>
@@ -127,7 +131,7 @@ const Student = () => {
             p:2
           }}
           disableColumnMenu
-          onRowclik
+         
          rows={rows} columns={columns.concat(viewColumn)}/>
           </Box>
          
