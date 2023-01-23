@@ -3,7 +3,7 @@ import "./Navbar.scss"
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import { Person2Outlined } from '@mui/icons-material';
-import AdminProfile from "../assest/Admin.jpg";
+import AdminProfile from "../../assest/Admin.jpg";
 
 const Navbar = () => {
   return (
