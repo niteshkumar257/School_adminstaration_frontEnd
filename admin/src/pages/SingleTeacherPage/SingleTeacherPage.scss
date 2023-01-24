@@ -1,0 +1,18 @@
+.SingleTeacherPage-container
+{
+    display: flex;
+   
+    .SingleTeacher{
+        flex: 4;
+        .SingleTeacher-page{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            
+             
+           
+        }
+    }
+}

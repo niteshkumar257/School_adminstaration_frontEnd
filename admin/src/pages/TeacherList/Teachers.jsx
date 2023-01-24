@@ -4,6 +4,8 @@ import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
 import DataTable from '../../components/DataTable/DataTable'
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 
 const columns = [
@@ -14,9 +16,10 @@ const columns = [
     headerName:'Name',
     Width:120,
     height:50,
+    flex:1,
     editable:true,
     headerAlign:"center",
-    align:"left",
+    align:"center",
     
     
   },
@@ -25,321 +28,78 @@ const columns = [
     headerName: 'subject',
     minwidth: 100,
     editable:true,
+    flex:1,
     headerAlign:"center",
     align:"center",
     
   },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 50,
-    editable: true,
+    field: 'mob',
+    headerName: 'Mobile Number',
+    minwidth: 100,
+    flex:1,
+    editable:true,
     headerAlign:"center",
     align:"center",
+    
+  },
   
-  },
-  {
-    field: 'gender',
-    headerName: 'Gender',
-    type:'number',
-    width: 100,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field:'experience',
-    headerName: 'Work-Experience',
-    type:'number',
-    width: 60,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field: 'salary',
-    headerName: 'Salary',
-    type:'number',
-    width: 90,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field: 'medium',
-    headerName: 'Medium',
-    
-    width: 90,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field: 'startDate',
-    headerName: 'starDate',
-    type:"date",
-    width: 90,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field: 'city',
-    headerName: 'City',
-    
-    width: 100,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field: 'AadharCard',
-    headerName: 'AadharCard',
-    type:'number',
-    width: 120,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
-  {
-    field: 'salaryStatus',
-    headerName: 'Salary Status',
-    
-    width: 100,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-  },
+ 
+  
+ 
+ 
+  
+ 
+  
+ 
+  
 ];
 
 const rows = [
-{
-  id:1,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
+{id:1,name:"Nitesh Kumar",subject:"Physics",mob:"87456874",},
+{id:2,name:"Ravi Kumar",subject:"Mathematics",mob:"87456874",},
+{id:3,name:"Kumar Panda",subject:"Biology",mob:"87456874",},
+{id:4,name:"Lokesh Kumar",subject:"chemistry",mob:"87456874",},
+{id:5,name:"Prabhu Kumar",subject:"History",mob:"87456874",},
+{id:6,name:"Nitesh Kumar",subject:"Physics",mob:"87456874",},
+{id:7,name:"Ravi Kumar",subject:"Mathematics",mob:"87456874",},
+{id:8,name:"Kumar Panda",subject:"Biology",mob:"87456874",},
+{id:9,name:"Lokesh Kumar",subject:"chemistry",mob:"87456874",},
+{id:10,name:"Prabhu Kumar",subject:"History",mob:"87456874",}
 
-  
 
-  
-}
-,
-{
-  id:2,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-},
-{
-  id:3,
-  name:"Nitesh",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-
-,{
-  id:4,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-,{
-  id:5,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-,{
-  id:6,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-,{
-  id:7,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-,{
-  id:8,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-,
-{
-  id:11,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-},
-{
-  id:10,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
-,{
- id:9,
-  name:"Nitesh Kumar",
-  subject:"Physics",
-  mob:"87456874",
-  email:"Teacher45@gmail.com",
-  age:20,
-  gender:"male",
-  experience:23,
-  salary:86868,
-  medium:"Both",
-  startDate:"12/10/22",
-  city:"Ambikapur",
-  AadharCard:"7635675667",
-salaryStatus:"paid"
-
-  
-
-  
-}
- 
 ];
+
 const Teachers = () => {
+
+  // selected Teachers id
+  const [TeacherId,setTeacherid]=useState(0);
+  // view column of Teachers table
+
+  const handleSelect=(id)=>
+  {
+    setTeacherid(id);
+      console.log(id);
+  }
+  const viewColumn=[
+    {
+      field:"view",
+      headerName:"Student Details",
+      width:200,
+    align:"center",
+    headerAlign:"center",
+      renderCell: (params) => {
+        return (
+          <div className="view">
+            <Link to="/Teachers/TeacherId" style={{ textDecoration: "none" }}>
+             <button onClick={() => handleSelect(params.row.id)} >View</button>
+            </Link>
+           
+          </div>
+        );
+      },
+    }
+  ]
   return (
    <div className='teachers-container '>
     <Sidebar/>
@@ -379,7 +139,7 @@ const Teachers = () => {
             border: "none",
           },
           "& .MuiDataGrid-cell": {
-            borderBottom: "none",
+            borderBottom: "1px solid blue",
           },
           "& .salaryStatus-column--cell": {
             color:"green",
@@ -411,7 +171,7 @@ const Teachers = () => {
          
         }}
            >
-           <DataTable rows={rows} columns={columns} 
+           <DataTable rows={rows} columns={columns.concat(viewColumn)} 
            
            />
            </Box>

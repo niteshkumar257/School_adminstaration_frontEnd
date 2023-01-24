@@ -3,16 +3,16 @@ import "./Notifications.scss"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
 import SingleStudentpage from '../SingleStudentPage/SingleStudentpage'
-const Notification = () => {
+const Notification = (props) => {
   
   
   return (
-    <div className='notification-container '>
+    <div className='SingleTeacherPage-container'>
     <Sidebar/>
-    <div className='notification'>
+    <div className='SingleTeacher'>
         <Navbar/>
-        <div className='notification-page page-container'>
-           <SingleStudentpage/>
+        <div className='SingleTeacher-page page-container'>
+          
     </div>
     
   

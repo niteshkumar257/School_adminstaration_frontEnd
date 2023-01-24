@@ -1,10 +1,11 @@
-import React from 'react'
+import {useState} from 'react'
 import "./Student.scss"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
 import DataGridDemo from '../../components/DataTable/DataTable'
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 const columns = [
   { field: 'id', headerName: 'Serial-No', width: 150, headerAlign:"center",
   align:"center", },
@@ -57,10 +58,16 @@ const rows = [
  
 ];
 
-const Student = () => {
+const Student = (props) => {
+  // selected student id
+  const navigate = useNavigate();
+  
  const handleSelect=(id)=>
  {
-  console.log(id);
+  
+  props.getStudentId(id);
+  navigate(`/Student/${id}`);
+  
  }
  
   const viewColumn=[
@@ -73,9 +80,9 @@ const Student = () => {
       renderCell: (params) => {
         return (
           <div className="view">
-            <Link to="/Student/studentPage" style={{ textDecoration: "none" }}>
+            {/* <Link to= {`/Student/${selecetedStudentId}`} style={{ textDecoration: "none" }}> */}
              <button onClick={() => handleSelect(params.row.id)} >View</button>
-            </Link>
+            {/* </Link> */}
            
           </div>
         );

@@ -28,13 +28,13 @@ const Dashboard = () => {
             <img src={s4}></img>
           </div>
             <div className="basic-info">
-        <div className='Name-of-school'>
-            <ul>
+        <div   className='Name-of-school'>
+           
                 <li>
                  
                    <span> {data.SchoolName}</span>
                 </li>
-            </ul>
+        
         </div>
        <div className="basic-info-container">
         <div className='basic-info-container-components'>

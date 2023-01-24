@@ -1,15 +1,17 @@
 import React from 'react'
 import "./SingleStudentpage.scss";
 import StudentImage from "../../assest/s1.png";
-import { DataGrid } from '@mui/x-data-grid';
+
 import {useState } from "react"
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Navbar from '../../components/Navbar/Navbar';
+import { useParams } from 'react-router';
 
-
-import DataTable from '../../components/DataTable/DataTable';
-
-import Box from '@mui/material/Box';
-
-const SingleStudentpage = () => {
+const SingleStudentpage = (props) => {
+  // props from the app.js
+  // it gives id of the selected studentPage for showing student information
+  const params = useParams();
+  console.log(props.studentId);
 const [name,setName]=useState("Nitesh Kumar Reeddy");
 const [medium,setMedium]=useState("English");
 const [course,setCourse]=useState("Jee");
@@ -27,6 +29,7 @@ const [altNumber,setAltNumber]=useState("8767856873");
 const [primaryNumber,setPrimaryNumber]=useState("58383432");
 const [email,SetEmail]=useState("niteshredd257@gmail.com");
 
+ console.log(params);
  
   // this data will come for database like this
   const FeeDetails = [
@@ -42,7 +45,12 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
   const installMentRows=FeeDetails.filter((item)=> item.total_fees!=0);
   return (
    <>
-   <div className="singleStudentPage-container">
+   <div className="SingleStudent-container">
+    <Sidebar/>
+    <div className="singleStudent">
+    
+      <Navbar/>
+      <div className="singleStudentPage-container page-container">
     <div className='student-info-main-container'>
     <div className='student-info-heading'>
       <h1>Student Details</h1>
@@ -57,7 +65,7 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
     </div>
     <div className="basic-info-right">
       <div className='student-Name'>
-        <span>{name}</span>
+        <span >{name}</span>
       </div>
       <div className='other-info-container'>
         <div className='other-detail-info-container'>
@@ -195,6 +203,9 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
      </div>
     
    </div>
+    </div>
+   </div>
+   
    </>
   )
 }
