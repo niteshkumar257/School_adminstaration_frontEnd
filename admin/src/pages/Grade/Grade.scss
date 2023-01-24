@@ -49,3 +49,20 @@
         }
     }
 }
+.Updatebutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 70px;
+    background-color: #009df1;
+    border-radius: 9px;
+    border: none;
+    font-size: .8rem;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+

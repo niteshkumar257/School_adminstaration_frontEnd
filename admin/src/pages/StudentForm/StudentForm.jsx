@@ -210,7 +210,7 @@ const StudentForm = () => {
                  sx={{ flex:1 }}
                  id="outlined-select-currency-native"
                  select
-                 label="Course"
+              
                  onChange={(e)=>setCourse(e.target.value)}
                  SelectProps={{
                  native: true,
