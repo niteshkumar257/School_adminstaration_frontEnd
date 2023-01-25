@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import "./Student.scss"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
@@ -6,29 +6,46 @@ import DataGridDemo from '../../components/DataTable/DataTable'
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
 const columns = [
   { field: 'id', headerName: 'Serial-No', width: 150, headerAlign:"center", align:"center", },
-  {field: 'Name',flex:1,headerName: 'Name',width: 200,editable:false,headerAlign:"center",align:"center",sortable:false},
-  {field: 'class',headerName: 'Class',type: 'number',width: 200,flex:1,editable:false,headerAlign:"center",align:"center",sortable:false},
+  {field: 'student_name',flex:1,headerName: 'Name',width: 200,editable:false,headerAlign:"center",align:"center",sortable:false},
+  {field: 'class_id',headerName: 'Class',type: 'number',width: 200,flex:1,editable:false,headerAlign:"center",align:"center",sortable:false},
   {field: 'medium',headerName: 'Medium',editable:false,sortable: false,width: 200,flex:1,headerAlign:"center",align:"center",sortable:false},
 ];
 
-const rows = [
-  { id: 1, Name: 'Nitesh', class:7, medium: "English" },
-  { id: 2, Name: 'Nitesh', class:7, medium: "English" },
-  { id: 3, Name: 'Nitesh', class:7, medium: "English"},
-  { id: 4, Name: 'Nitesh', class:7, medium: "English"},
-  { id: 5, Name: 'Nitesh', class:7, medium: "English" },
-  { id: 6, Name: 'Nitesh', class:7,medium: "English" },
-  { id: 7, Name: 'Nitesh', class:7, medium: "English"},
-  { id: 101, Name: 'Nitesh', class:7, medium: "English"},
+// const rows = [
+//   { id: 1, Name: 'Nitesh', class:7, medium: "English" },
+//   { id: 2, Name: 'Nitesh', class:7, medium: "English" },
+//   { id: 3, Name: 'Nitesh', class:7, medium: "English"},
+//   { id: 4, Name: 'Nitesh', class:7, medium: "English"},
+//   { id: 5, Name: 'Nitesh', class:7, medium: "English" },
+//   { id: 6, Name: 'Nitesh', class:7,medium: "English" },
+//   { id: 7, Name: 'Nitesh', class:7, medium: "English"},
+//   { id: 101, Name: 'Nitesh', class:7, medium: "English"},
  
-];
+// ];
 
 const Student = (props) => {
   const [studentId,setStudentId]=useState(0);
+  const [rows, setRows] = useState([]);
   
   const navigate = useNavigate();  // for navigation to the studentId page after cliking the view button
+
+  let decode = jwt_decode(localStorage.getItem("auth_token"));
+  let school_id = decode.result.school_id;
+
+  useEffect(() => {
+
+    axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
+    .then((data) => {
+     // console.log(data.data.allStudent);
+      setRows(data.data.allStudent);
+    }).catch((err) => {
+      console.log(err);
+    })
+  },[])
   
  const handleSelect=(id)=>
  {

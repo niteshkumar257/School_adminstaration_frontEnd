@@ -13,7 +13,7 @@ const Login = () => {
   const loginHandler=(e)=>
   {
     e.preventDefault();
-    axios.post("https://074d-14-139-208-75.in.ngrok.io/user/login", { admin_id: email, password: password }).then((res) => {
+    axios.post("http://localhost:8080/user/login", { admin_id: email, password: password }).then((res) => {
       localStorage.setItem("auth_token", res.data.token);
       return navigate("/");
     }).catch((err) => {
@@ -48,7 +48,7 @@ const Login = () => {
                 <form onSubmit={loginHandler}>
                     <div className="input-container">
                     <label>Email</label>
-                     <input type='email' placeholder='enter Your email...' onChange={(e)=>setEmail(e.target.value)}></input>
+                     <input type='number' placeholder='enter Your email...' onChange={(e)=>setEmail(e.target.value)}></input>
                     </div>
                    <div className="input-container">
                    <label>Password</label>

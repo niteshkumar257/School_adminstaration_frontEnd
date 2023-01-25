@@ -1,21 +1,41 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import "./SingleTeacherPage.scss"
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import StudentImage from "../../assest/s1.png";
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
 const SingleTeacherPage = () => {
+  let params = useParams();
   const [name,setName]=useState("Nitesh Kumar Reddy");
-const [medium,setMedium]=useState("English");
-const [email,SetEmail]=useState("niteshredd257@gmail.com");
-const [age,setAge]=useState(23);
-const [salary,setSalary]=useState(10000);
-const [City,setCity]=useState("Ambikar Pur");
-const [workExp,setWorkExp]=useState(10);
-const [AadharCard,setAadharCard]=useState("1989300192");
-const [date,setDate]=useState("12/10/23");
-const [gender,setGender]=useState("male");
+  const [medium,setMedium]=useState("English");
+  const [email,SetEmail]=useState("niteshredd257@gmail.com");
+  const [age,setAge]=useState(23);
+  const [salary,setSalary]=useState(10000);
+  const [City,setCity]=useState("Ambikar Pur");
+  const [workExp,setWorkExp]=useState(10);
+  const [AadharCard,setAadharCard]=useState("1989300192");
+  const [date,setDate]=useState("12/10/23");
+  const [gender,setGender]=useState("male");
+  let teacher_id = params.teacherId;
+  
+  useEffect(() => {
+    axios.get(`http://localhost:8080/teacher/${teacher_id}`)
+    .then((data) => {
+      console.log(data.data.teacherDetails);
+      setName(data.data.teacherDetails[0].teacher_name);
+      SetEmail(data.data.teacherDetails[0].email);
+      setAge(data.data.teacherDetails[0].age);
+      setSalary(data.data.teacherDetails[0].salary);
+      setCity(data.data.teacherDetails[0].city);
+      setWorkExp(data.data.teacherDetails[0].experience);
+      setGender(data.data.teacherDetails[0].gender);
+    }).catch((err) => {
+      console.log(err);
+    })
+  },[])
   return (
     <div className='SingleTeacherPage-container '>
     <Sidebar/>
