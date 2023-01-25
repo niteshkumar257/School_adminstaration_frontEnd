@@ -5,8 +5,11 @@ import Navbar from "../../components/Navbar/Navbar"
 import DataTable from '../../components/DataTable/DataTable'
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import TextField from '@mui/material/TextField';
+import axios from 'axios'
+import jwt_decode from "jwt-decode";
+import { Co2Sharp } from '@mui/icons-material'
 
 
 const Test = [
@@ -43,7 +46,72 @@ const style = {
   p: 4,
 
 };
+const columns = [
+  { field: 'id', headerName: 'Serial-No', width: 200, headerAlign:"center",
+  align:"center", },
+  {
+    field: 'student_name',
+    headerName: 'Name',
+    maxwidth: 200,
+    editable:true,
+    flex:1,
+    headerAlign:"center",
+    align:"center",
+    disableColumnMenu:true,
+    sortable:false
+  },
+ 
+  {
+    field: 'class_id',
+    headerName: 'Class',
+    type: 'number',
+    maxwidth: 100,
+    editable: true,
+    flex:1,
+    headerAlign:"center",
+    align:"center",
+  },
+  {
+    field: 'medium',
+    headerName: 'Medium',
+ 
+    sortable: false,
+    maxwidth: 100,
+    flex:1,
+    headerAlign:"center",
+    align:"center",
+   
+  },
+];
+// const rows = [
+//   { id: 1, Name: 'Nitesh', class:7, medium: "English" },
+//   { id: 2, Name: 'Nitesh', class:7, medium: "English" },
+//   { id: 3, Name: 'Nitesh', class:7, medium: "English"},
+//   { id: 4, Name: 'Nitesh', class:7, medium: "English"},
+//   { id: 5, Name: 'Nitesh', class:7, medium: "English" },
+//   { id: 6, Name: 'Nitesh', class:7,medium: "English" },
+//   { id: 7, Name: 'Nitesh', class:7, medium: "English"},
+//   { id: 8, Name: 'Nitesh', class:7, medium: "English"},
+ 
+// ];
 const Grade = () => {
+  const [rows, setRows] = useState([]);
+  let decode = jwt_decode(localStorage.getItem("auth_token"));
+  let school_id = decode.result.school_id;
+
+  useEffect(() => {
+
+    axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
+    .then((data) => {
+     // console.log(data.data.allStudent);
+     console.log(data.data.allStudent);
+      setRows(data.data.allStudent);
+    }).catch((err) => {
+      console.log(err);
+    })
+  },[])
+
+  
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -53,55 +121,9 @@ const Grade = () => {
     console.log("form is submited");
     handleClose(true);
   }
-  const columns = [
-    { field: 'id', headerName: 'Serial-No', width: 200, headerAlign:"center",
-    align:"center", },
-    {
-      field: 'Name',
-      headerName: 'Name',
-      maxwidth: 200,
-      editable:true,
-      flex:1,
-      headerAlign:"center",
-      align:"center",
-      disableColumnMenu:true,
-      sortable:false
-    },
-   
-    {
-      field: 'class',
-      headerName: 'Class',
-      type: 'number',
-      maxwidth: 100,
-      editable: true,
-      flex:1,
-      headerAlign:"center",
-      align:"center",
-    },
-    {
-      field: 'medium',
-      headerName: 'Medium',
-   
-      sortable: false,
-      maxwidth: 100,
-      flex:1,
-      headerAlign:"center",
-      align:"center",
-     
-    },
-  ];
   
-  const rows = [
-    { id: 1, Name: 'Nitesh', class:7, medium: "English" },
-    { id: 2, Name: 'Nitesh', class:7, medium: "English" },
-    { id: 3, Name: 'Nitesh', class:7, medium: "English"},
-    { id: 4, Name: 'Nitesh', class:7, medium: "English"},
-    { id: 5, Name: 'Nitesh', class:7, medium: "English" },
-    { id: 6, Name: 'Nitesh', class:7,medium: "English" },
-    { id: 7, Name: 'Nitesh', class:7, medium: "English"},
-    { id: 8, Name: 'Nitesh', class:7, medium: "English"},
-   
-  ];
+  
+ 
   const UpdateColumn=[
     {
       field:"view",

@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState,useEffect} from 'react'
 import "./Dash.scss"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
@@ -8,16 +8,31 @@ import teacher from "../../assest/t2.png";
 import department from "../../assest/d2.png";
 import widgest from '../Widgest/widgest';
 import s4 from "../../assest/school4.png";
-const data={
-    SchoolName:"Broad River Grammar public english meddium  School",
-    city:"Ambika pur",
-    Email:"Admin123@gmail.com",
-    Phone:"8249829096",
-    AdminName:"Admin Name"
-}
+import jwt_decode from "jwt-decode";
+import axios from "axios";
+// const data={
+//     SchoolName:"Broad River Grammar public english meddium  School",
+//     city:"Ambika pur",
+//     Email:"Admin123@gmail.com",
+//     Phone:"8249829096",
+//     AdminName:"Admin Name"
+// }
 
 
 const Dashboard = () => {
+    const [data,setData]=useState({});
+    const [studentCount,setStudentCount] = useState(0);
+    const [teacherCount,setTeacherCount] = useState(0);
+    let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+    let school_id = decodeToken.result.school_id;
+    useEffect(() => {
+       axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+       //  console.log(res)
+         setData(res.data.schoolDetail);
+         setStudentCount(res.data.totalStudent);
+         setTeacherCount(res.data.totalTeacher);
+       }) 
+    }, []);
   
   return (
   
@@ -32,7 +47,7 @@ const Dashboard = () => {
            
                 <li>
                  
-                   <span> {data.SchoolName}</span>
+                   <span> {data.school_name}</span>
                 </li>
         
         </div>
@@ -41,13 +56,13 @@ const Dashboard = () => {
         <div className="info-container">
            <li>
             <label>Owner Name : </label>
-            <span> {data.AdminName}</span>
+            <span> {data.admin_name}</span>
            </li>
           </div>
           <div className="info-container">
             <li>
               <label>City : </label>
-              <span>{ data.city}</span>
+              <span>{ data.city_name}</span>
             </li>
           </div>
         </div>
@@ -55,13 +70,13 @@ const Dashboard = () => {
          <div className="info-container">
          <li>
           <label>Owner Email</label>
-          <span>: {data.Email}</span>
+          <span>: {data.email}</span>
             </li>
           </div>
           <div className="info-container">
           <li>
             <lable>Phone : </lable>
-            <span>{data.Phone}</span>
+            <span>{data.mobile}</span>
             </li>
           </div>
          </div>
@@ -77,7 +92,7 @@ const Dashboard = () => {
                 Student
             </div>
             <div className="count">
-                10000
+                {studentCount}
             </div>
         </div>
         <div className="right">
@@ -112,7 +127,7 @@ const Dashboard = () => {
              Teachers
             </div>
             <div className="count">
-                50+
+                {teacherCount}
             </div>
         </div>
         <div className="right">

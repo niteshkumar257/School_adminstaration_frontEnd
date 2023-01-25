@@ -50,7 +50,7 @@ const App=()=>
           <Route path='Grade' element={<Grade/>}/>
           <Route path='Teachers' >
           <Route index element={<TeacherList getTeacherId={getTeacherId} />} />
-              <Route path=":teacherPage" element={<TeacherPage teacherId={teacherId}  />} />
+              <Route path=":teacherId" element={<TeacherPage teacherId={teacherId}  />} />
           </Route>
          <Route path='AddStudent' element={<StudentForm/>}/>
          <Route path='AddTeacher' element={<TeacherForm/>}/>

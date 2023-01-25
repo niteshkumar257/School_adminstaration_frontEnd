@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import TextField from '@mui/material/TextField';
@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import {useState } from "react"
 import "./TeachersForm.scss"
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 
 const Subject = [
@@ -73,24 +75,44 @@ const Gender = [
 
 ]
 const TeachersForm = () => {
-  const [Name,setName]=useState("");
-  const [Age,setAge]=useState("");
-  const [Phone,setPhone]=useState("");
-  const [Email,setEmail]=useState("");
+  const [teacher_name,setName]=useState("");
+  const [age,setAge]=useState("");
+  const [mobile,setPhone]=useState("");
+  const [email,setEmail]=useState("");
   const [gender,setGender]=useState("");
   const [city,setCity]=useState("");
-  const [workExp,setWorkExp]=useState("");
+  const [experience,setWorkExp]=useState("");
   const [salary,setSalary]=useState("");
  const [medium,setMedium]=useState("");
- const [subject,setSubject]=useState("");
+ const [subject_id,setSubject]=useState("");
  const [address,setAddress]=useState("");
  const [date,setDate]=useState("");
+ 
+  let decode = jwt_decode(localStorage.getItem("auth_token"));
+  let school_id = decode.result.school_id;
 
+ useEffect(() => {
+    axios.get(`http://localhost:8080/school/${school_id}/allSubject`)
+    .then((data) => {
+      console.log(data.data);
+    }).catch((err) => {
+       console.log(err);
+    })
+ },[])
 
   const submitHandler=(e)=>
   {
         e.preventDefault();
-        console.log("submit button is called");
+        axios.post('/user', {
+          teacher_name,
+          age,mobile,email,gender,gender,experience,salary,subject_id,city
+        })
+        .then( (res) => {
+          console.log(res);
+        })
+        .catch( (err) => {
+          console.log(err);
+        });
   }
   return (
     <div className='teachers-container '>
