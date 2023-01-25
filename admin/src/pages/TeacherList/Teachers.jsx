@@ -7,54 +7,16 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
-
+// columns  of the teacher Details table
 const columns = [
-  { field: 'id', headerName: 'Serial No', width: 90, headerAlign:"center",
-  align:"center", },
-  {
-    field: 'name',
-    headerName:'Name',
-    Width:120,
-    height:50,
-    flex:1,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-    
-    
-  },
-  {
-    field: 'subject',
-    headerName: 'subject',
-    minwidth: 100,
-    editable:true,
-    flex:1,
-    headerAlign:"center",
-    align:"center",
-    
-  },
-  {
-    field: 'mob',
-    headerName: 'Mobile Number',
-    minwidth: 100,
-    flex:1,
-    editable:true,
-    headerAlign:"center",
-    align:"center",
-    
-  },
-  
- 
-  
- 
- 
-  
- 
-  
- 
-  
+{ field: 'id', headerName: 'Serial No', width: 90, headerAlign:"center",align:"center", },
+{field: 'name',headerName:'Name',Width:120,height:50,flex:1,editable:true,headerAlign:"center", align:"center",},
+{field: 'subject',headerName: 'subject',minwidth: 100,editable:true,flex:1,headerAlign:"center",align:"center", },
+{ field: 'mob',headerName: 'Mobile Number',minwidth: 100, flex:1,editable:true,headerAlign:"center",align:"center",},
 ];
 
+
+// dummy rows of the teacherTable
 const rows = [
 {id:1,name:"Nitesh Kumar",subject:"Physics",mob:"87456874",},
 {id:2,name:"Ravi Kumar",subject:"Mathematics",mob:"87456874",},
@@ -71,6 +33,7 @@ const rows = [
 ];
 
 const Teachers = () => {
+  const [teachers,setTeachers]=useState([]);
 
   // selected Teachers id
   const [TeacherId,setTeacherid]=useState(0);
@@ -82,12 +45,7 @@ const Teachers = () => {
       console.log(id);
   }
   const viewColumn=[
-    {
-      field:"view",
-      headerName:"Student Details",
-      width:200,
-    align:"center",
-    headerAlign:"center",
+{field:"view",headerName:"Student Details",width:200,align:"center", headerAlign:"center",
       renderCell: (params) => {
         return (
           <div className="view">
@@ -100,6 +58,9 @@ const Teachers = () => {
       },
     }
   ]
+
+
+
   return (
    <div className='teachers-container '>
     <Sidebar/>
@@ -139,7 +100,7 @@ const Teachers = () => {
             border: "none",
           },
           "& .MuiDataGrid-cell": {
-            borderBottom: "1px solid blue",
+            borderBottom: "1px solid black",
           },
           "& .salaryStatus-column--cell": {
             color:"green",
@@ -147,7 +108,7 @@ const Teachers = () => {
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#c7c7c7",
             borderBottom: "none",
-            fontSize:'29'
+            fontSize:'35'
           },
           // "& .MuiDataGrid-virtualScroller": {
           //   backgroundColor:"blueviolet",        // color the background of the table
@@ -155,17 +116,18 @@ const Teachers = () => {
             
           "&.MuiDataGrid-columnHeaderTitle":{
               color:"white",
-              fontSize:"30",
+              fontSize:"2rem",
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
             backgroundColor:"#c7c7c7",
           },
           "& .MuiDataGrid-columnHeaders": {
-            height:"10vh",
+            height:"15vh",
             backgroundColor: "#c7c7c7",
             color: "black",
-            fontSize:15
+            fontSize:15,
+            fontWeight:600
           }
           
          

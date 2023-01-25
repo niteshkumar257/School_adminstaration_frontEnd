@@ -244,7 +244,9 @@ const Grade = () => {
           // "& .MuiDataGrid-virtualScroller": {
           //   backgroundColor:"blueviolet",        // color the background of the table
           // },
-
+          "& .MuiDataGrid-cell": {
+            borderBottom: "1px solid black",
+          },
 
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",

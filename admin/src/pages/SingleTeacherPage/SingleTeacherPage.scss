@@ -10,6 +10,151 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
+            .student-info-main-container{
+                box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  width: 98%;
+                 
+                .student-info-heading{
+                    
+                    border-radius: 9px;
+                    width: 99%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                 
+                   
+                    padding-left: 1rem;
+                   
+                    h1{
+                        font-size: 1.3rem;
+                        font-weight: 700;
+                        color: rgb(174, 169, 169);
+            
+                    }
+                }
+              
+                .section{
+                   
+                    width: 100%;
+                     height: 30vh;
+                    flex: 1;
+                    
+                    }
+                    .basic-info{
+                        padding: 0.5rem;
+                        border-radius: 9px;
+                      
+                        display: flex;
+                        flex: 1;
+                      
+                         height: 40vh;
+                        gap: 20px;
+                        
+                       
+                        .basic-info-right{
+                             flex:3;
+                             display: flex;
+                             flex-direction: column;
+                             justify-content: center;
+                             gap:20px;
+                            
+                             .student-Name{
+                                flex: 1;
+                          padding-left: 15px;
+                                display: flex;
+                                justify-content:flex-start;
+                             
+                                align-items: center;
+                                
+                                span{
+                                  
+                                    font-size: 1.3rem;
+                                    font-weight: 600;
+                                  color: rgb(83, 83, 83);
+                              
+            
+                                }
+                             
+                             }
+                             .other-info-container{
+                                flex: 2;
+                                display: flex;
+                              
+                           gap:20px;
+                           .other-detail-info-container{
+                          
+                               flex: 1;
+                               display: flex;
+                           
+                              justify-content: space-evenly;
+                              align-items: flex-start;
+                            
+                               flex-direction: column;
+                            gap:10px;
+                              
+                               .student{
+                                display: flex;
+                                 height: 6vh;
+                                  gap:12px;
+                                   .lable{
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    color: #1378c09a;
+                                }
+                                span{
+                                    font-size: 1rem;
+                                    color: rgb(83, 83, 83);
+                                }
+                                  
+                                 
+                               }
+                            //    .student{
+                            //     display: flex;
+                            //     // background-color: rgb(42, 231, 231);
+                            //     height: 6vh;
+                            //     gap:12px;
+                            //     .lable{
+                            //         font-size: .9rem;
+                            //         font-weight: 500;
+                            //         color: #1378c09a;
+                            //     }
+                               
+                            //    }
+                            //    .student{
+                            //     display: flex;
+                            //     // background-color: rgb(25, 183, 183);
+                            //     height: 6vh;
+                            //     gap:12px;
+                            //     .lable{
+                            //         font-size: .9rem;
+                            //         font-weight: 500;
+                            //         color: #1378c09a;
+                            //     }
+                                
+            
+                            //    }
+                            //    .student{
+                            //     display: flex;
+                            //     // background-color: rgb(37, 203, 203);
+                            //     height: 6vh;
+                            //     gap:12px;
+                            //     .lable{
+                            //         font-size: .9rem;
+                            //         font-weight: 500;
+                            //         color: #1378c09a;
+                            //     }
+                                
+                            //    }
+                           }
+                             }
+                        }
+                   
+                }
+            }
             
              
            

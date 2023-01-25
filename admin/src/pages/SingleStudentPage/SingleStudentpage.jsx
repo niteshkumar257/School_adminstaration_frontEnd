@@ -1,7 +1,6 @@
 import React from 'react'
 import "./SingleStudentpage.scss";
 import StudentImage from "../../assest/s1.png";
-
 import {useState } from "react"
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
@@ -29,7 +28,12 @@ const [altNumber,setAltNumber]=useState("8767856873");
 const [primaryNumber,setPrimaryNumber]=useState("58383432");
 const [email,SetEmail]=useState("niteshredd257@gmail.com");
 
- console.log(params);
+// fee details
+const [feeDetails,setFeeDetails]=useState([]);
+
+
+
+//  console.log(params);
  
   // this data will come for database like this
   const FeeDetails = [
@@ -37,11 +41,7 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
     { id: 2, total_fees:0, LastDate:"12/4/22", Status: "Paid" ,UpdateStatus:"Action"},
     { id: 3, total_fees:88745, LastDate:"12/4/22", Status: "Unpaid" ,UpdateStatus:"Action"},
     
-    
-
-   
-   
-  ];
+];
   const installMentRows=FeeDetails.filter((item)=> item.total_fees!=0);
   return (
    <>
@@ -50,7 +50,10 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
     <div className="singleStudent">
     
       <Navbar/>
+      {/* main contaiener */}
       <div className="singleStudentPage-container page-container">
+
+        {/* student Details container  */}
     <div className='student-info-main-container'>
     <div className='student-info-heading'>
       <h1>Student Details</h1>
@@ -96,7 +99,7 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
    </div>
     </div>
   
-  
+      {/* student Parent detaiils  */}
    <div className='section  parent-info'>
     <div className="parent-info-heading">
       <h1>Parent Details</h1>
@@ -144,6 +147,8 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
         </div>
       </div>
    </div>
+
+   {/* student Fee details */}
    <div className='section  fee-info'>
     <div className='fee-details-heading'>
       <h1>Fee Details</h1>
@@ -193,6 +198,9 @@ const [email,SetEmail]=useState("niteshredd257@gmail.com");
        
     </div>
      </div>
+
+
+     {/* student performance details */}
      <div className='perfomanceAnalytic'>
      <div className="perfomanceAnalytic-heading">
       <span>Performance Analytic</span>

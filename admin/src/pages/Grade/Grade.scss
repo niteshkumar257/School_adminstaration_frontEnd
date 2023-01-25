@@ -49,20 +49,32 @@
         }
     }
 }
+// .Updatebutton{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 30px;
+//     width: 70px;
+//     background-color: #009df1;
+//     border-radius: 9px;
+//     border: none;
+//     font-size: .8rem;
+//     color: white;
+//     font-weight: 600;
+//     cursor: pointer;
+
+// }
 .Updatebutton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    cursor: pointer;
     height: 30px;
     width: 70px;
-    background-color: #009df1;
-    border-radius: 9px;
-    border: none;
-    font-size: .8rem;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-
+        border-radius: 9px;
+        color: rgb(0, 0, 0);
+        font-size:1rem;
+        // color:white
+      text-decoration: underline;
+    //   text-decoration-color: #009df1;
+        border: none;
+        font-weight: 500;
 }
-
 
