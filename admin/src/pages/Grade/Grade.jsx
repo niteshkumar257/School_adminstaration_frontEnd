@@ -48,19 +48,19 @@ const style = {
 
 };
 const columns = [
-  { field: 'id', headerName: 'Serial-No', width: 150, headerAlign:"center",
+  { field: 'id', headerName: 'SI-No', width: 150,
   flex:1,
-  align:"center", },
+   },
   {
     field: 'student_name',
     headerName: 'Name',
     maxwidth: 150,
     editable:false,
     flex:1,
-    headerAlign:"center",
-    align:"center",
-    disableColumnMenu:true,
-    sortable:false
+    // headerAlign:"center",
+    // align:"center",
+    // disableColumnMenu:true,
+    // sortable:false
   },
  
   {
@@ -70,18 +70,18 @@ const columns = [
     maxwidth: 150,
     editable: false,
     flex:1,
-    headerAlign:"center",
-    align:"center",
+    headerAlign:"left",
+    align:"left",
   },
   {
     field: 'medium',
     headerName: 'Medium',
     editable:false,
-    sortable: false,
+    // sortable: false,
     maxwidth: 150,
     flex:1,
-    headerAlign:"center",
-    align:"center",
+    // headerAlign:"center",
+    // align:"center",
    
   },
 ];
@@ -131,8 +131,10 @@ const Grade = () => {
       field:"view",
       headerName:"Student Details",
       width:200,
-    align:"center",
-    headerAlign:"center",
+      sortable:false,
+    // align:"center",
+    // headerAlign:"center",
+     disableColumnMenu:true,
       renderCell: (params) => {
         return (
           <div>
@@ -211,7 +213,7 @@ const Grade = () => {
        }}
        >
        <div   style={{
-                        flex:1,
+                        flex:1.6,
                         display:"flex",
                         columnGap:"20px",
                      
@@ -222,9 +224,10 @@ const Grade = () => {
                         <span>Physcis:</span>
                         </div>
       
-        <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
+                        <TextField sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
        </div>
-        <TextField sx={{ flex:1 }}  label="Mark Obtained" variant="outlined" />
+       <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
+      
       
 
        </div>
@@ -239,7 +242,7 @@ const Grade = () => {
                     >
                       <div 
                       style={{
-                        flex:1,
+                        flex:1.6,
                         display:"flex",
                         columnGap:"20px",
                          
@@ -251,9 +254,10 @@ const Grade = () => {
                         <span>Chemistry:</span>
                         </div>
                        
-                        <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
+                        <TextField sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
                       </div>
-                    <TextField sx={{ flex:1 }}  label="Mark Obtained" variant="outlined" />
+                   
+                    <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
                    
                     </div>
                    
@@ -268,7 +272,7 @@ const Grade = () => {
                  >
                  <div 
                   style={{
-                    flex:1,
+                    flex:1.6,
                     display:"flex",
                     columnGap:"20px",
                  
@@ -280,9 +284,10 @@ const Grade = () => {
                   <span>Biology:</span>
                   </div>
                 
-                  <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
+                  <TextField sx={{ flex:1.5 }}   label="Mark Obtained" variant="outlined"/>
                  </div>
-                 <TextField sx={{ flex:1 }}   label="Mark obtained" variant="outlined"/>
+              
+                 <TextField sx={{ flex:1}}  label="Total Mark" variant="outlined" />
               
                  </div>
                

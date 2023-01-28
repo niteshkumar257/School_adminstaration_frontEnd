@@ -11,16 +11,16 @@ import axios from "axios"
 const SingleStudentpage = (props) => {
 
   const columns=[
-    "InstallMentNo",
+  
     "Month","Year","Amount","Status"
   ]
   
   const rows = [
-     {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
-     {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+     {"InstallMent-No":1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {"InstallMent-No":2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {"InstallMent-No":3,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
+     {"InstallMent-No":4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {"InstallMent-No":5,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
   
    
   ];

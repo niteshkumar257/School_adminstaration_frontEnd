@@ -16,9 +16,9 @@ const columns=[
 const rows = [
    {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
    {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-   {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+   {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
    {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-   {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+   {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
 
  
 ];

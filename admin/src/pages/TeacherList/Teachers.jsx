@@ -11,10 +11,10 @@ import axios from 'axios'
 
 // columns  of the teacher Details table
 const columns = [
-{ field: 'id', headerName: 'Serial-No', width: 150, flex:1,headerAlign:"center",align:"center",editable:"false" },
-{field: 'teacher_name',headerName:'Name',Width:150,height:50,flex:1,editable:false,headerAlign:"center", align:"center",editable:false},
-{field: 'subject_id',headerName: 'Subject',minwidth: 150,editable:true,flex:1,headerAlign:"center",align:"center",editable:false },
-{ field: 'mobile',headerName: 'Mobile Number',minwidth: 150, flex:1,editable:true,headerAlign:"center",align:"center",editable:false},
+{ field: 'id', headerName: 'SI-No', width: 150, flex:1,editable:"false",align:"left" },
+{field: 'teacher_name',headerName:'Name',Width:150,height:50,flex:1,editable:false,editable:false},
+{field: 'subject_id',headerName: 'Subject',minwidth: 150,editable:true,flex:1,editable:false },
+{ field: 'mobile',headerName: 'Mobile Number',minwidth: 150, flex:1,editable:true,editable:false},
 ];
 
 
@@ -66,7 +66,7 @@ const Teachers = () => {
       navigate(`/Teachers/${id}`);
   }
   const viewColumn=[
-{field:"view",headerName:"Teacher Details",width:200,align:"center", headerAlign:"center",
+{field:"view",headerName:"Teacher Details",width:200,sortable:false,
 editable:false,
 flex:1,
       renderCell: (params) => {

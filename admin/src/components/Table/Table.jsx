@@ -24,7 +24,9 @@ export default function BasicTable(props) {
           sx={ { backgroundColor:"#c7c7c7",
               
                 fontSize:"1rem"} } >{
+                
                   columns.map((item,index)=>(
+                    
                     <TableCell key={index}  sx={{fontWeight:600,border:"none",fontSize:"1rem"}} align="center">{item}</TableCell>
                     ))
                 }
@@ -34,16 +36,22 @@ export default function BasicTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row,index) => (
             <TableRow
               key={row.installMentNo}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-                <TableCell align="center">{row.InstallMentNo}</TableCell>
+                <TableCell align="center">{index+1}</TableCell>
               <TableCell align="center">{row.Month}</TableCell>
               <TableCell align="center">{row.Year}</TableCell>
               <TableCell align="center">{row.Amount}</TableCell>
-              <TableCell align="center"  
+              <TableCell
+              sx={{
+              
+                fontSize:"10px",
+                fontWeight:"600"
+              }}
+              align="center"  
                  
               >
                 <span className={row.Status==="Paid"? "success":"error"}>

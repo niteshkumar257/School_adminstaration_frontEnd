@@ -61,9 +61,9 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
         "& .MuiDataGrid-columnHeaders": {
           // color:"#009df1;",
          
-          // backgroundColor: "#c7c7c7",
+          backgroundColor: "#c7c7c7",
            
-          // fontSize:"17px",
+          fontSize:"17px",
           // fontWeight:900
         }
         
