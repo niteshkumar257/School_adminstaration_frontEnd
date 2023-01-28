@@ -48,7 +48,7 @@ const Login = () => {
                 <form onSubmit={loginHandler}>
                     <div className="input-container">
                     <label>Email</label>
-                     <input type='number' placeholder='enter Your email...' onChange={(e)=>setEmail(e.target.value)}></input>
+                     <input type='number' placeholder='enter Your id...' onChange={(e)=>setEmail(e.target.value)}></input>
                     </div>
                    <div className="input-container">
                    <label>Password</label>

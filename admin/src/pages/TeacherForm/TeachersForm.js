@@ -14,27 +14,24 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 
-const Subject = [
+const subject = [
   {
-    value: 'Physics',
-    label: 'Physics',
+   id:"1",
+   subject_name:"Physics"
   },
   {
-    value: 'Math',
-    label: 'Math',
-  },
-  {
-    value: 'Chemistry',
-    label: 'Chemistry',
-  },
-  {
-    value: 'Biology',
-    label: 'Biology',
-  },
-  {
-    value: 'Hindi',
-    label: 'English',
-  },
+    id:"2",
+    subject_name:"Biology"
+   },
+   {
+    id:"3",
+    subject_name:"Chemistry"
+   },
+   {
+    id:"4",
+    subject_name:"English"
+   },
+  
 
 ];
 const Medium = [
@@ -50,62 +47,49 @@ const Medium = [
 ];
 const Gender = [
   {
-    value: 'Physics',
-    label: 'Physics',
+    value: 'Male',
+    label: 'Male',
   },
   {
-    value: 'Math',
-    label: 'Math',
-  },
-  {
-    value: 'Chemistry',
-    label: 'Chemistry',
-  },
-  {
-    value: 'Biology',
-    label: 'Biology',
-  },
-  {
-    value: 'Hindi',
-    label: 'English',
-  },
- 
-
-
-
+    value: 'Female',
+    label: 'Female',
+  },   
 ]
 const TeachersForm = () => {
   const [teacher_name,setName]=useState("");
   const [age,setAge]=useState("");
-  const [mobile,setPhone]=useState("");
+  const [mobile,setMobile]=useState("");
   const [email,setEmail]=useState("");
   const [gender,setGender]=useState("");
   const [city,setCity]=useState("");
   const [experience,setWorkExp]=useState("");
   const [salary,setSalary]=useState("");
  const [medium,setMedium]=useState("");
- const [subject_id,setSubject]=useState("");
+ const [subject_id,setSubjectId]=useState("");
  const [address,setAddress]=useState("");
  const [date,setDate]=useState("");
+ const [Subject,setSubject] = useState([]);
  
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
 
+  // teacher_name, subject_id, mobile, age, gender, email,city,experience, salary
+
  useEffect(() => {
     axios.get(`http://localhost:8080/school/${school_id}/allSubject`)
-    .then((data) => {
-      console.log(data.data);
+    .then((data) => {      
+      setSubject(data.data.allSubject);
+      
     }).catch((err) => {
        console.log(err);
     })
  },[])
-
+   
   const submitHandler=(e)=>
   {
         e.preventDefault();
-        axios.post('/user', {
-          teacher_name,
-          age,mobile,email,gender,gender,experience,salary,subject_id,city
+        axios.post(`http://localhost:8080/schools/${school_id}/addtecher`, {
+          teacher_name, subject_id, mobile,date, age, gender, email,city,experience, salary
         })
         .then( (res) => {
           console.log(res);
@@ -114,6 +98,7 @@ const TeachersForm = () => {
           console.log(err);
         });
   }
+   
   return (
     <div className='teachers-container '>
     <Sidebar/>
@@ -142,9 +127,9 @@ const TeachersForm = () => {
 
                 <div className='teachers-info-section '>
                 <TextField sx={{ flex:1 }} label="Teacher Name" variant="outlined" 
-                onChange={(e)=>setName(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  label="Gender" variant="outlined" 
-                onChange={(e)=>setGender(e.target.value)}/>
+                onChange={(e)=>setName(e.target.value)}/>  
+                <TextField sx={{ flex:1 }} label="Mobile" variant="outlined" 
+                onChange={(e)=>setMobile(e.target.value)}/>               
                  <TextField sx={{ flex:1 }} label="Email" variant="outlined" 
                 type="email"
                 onChange={(e)=>setEmail(e.target.value)}/>
@@ -160,16 +145,16 @@ const TeachersForm = () => {
                 
                  select
                  label="Subject"
-                 onChange={(e)=>setSubject(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
+                 onChange={(e)=>setSubjectId(e.target.value)}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
                  helperText="Select Subject">
-                {Subject.map((option) => (
-                <option key={option.value} value={option.value}>
-               {option.label}
-               </option>
-               ))}
+                {Subject.length > 0 && Subject.map((option) => (
+                <MenuItem key={option.subject_id} value={option.subject_id}>
+               {option.subject_name}
+               </MenuItem>
+))}
               </TextField>
                  <TextField
                  sx={{ flex:1 }}
@@ -203,14 +188,14 @@ const TeachersForm = () => {
                  select
                  label="Gender"
                  onChange={(e)=>setGender(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
                  helperText="Please select your currency">
                 {Gender.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
               <TextField sx={{ flex:1 }}label="Salary" variant="outlined" 
@@ -230,9 +215,9 @@ const TeachersForm = () => {
                 <div className='teachers-info-section '>
                   
                 <TextField sx={{ flex:1 }} label="Age" variant="outlined" 
-                type="numner"
+                type="number"
                 helperText="Enter Age"
-                onChange={(e)=>setSalary(e.target.value)}/>
+                onChange={(e)=>setAge(e.target.value)}/>
                 
                 <TextField sx={{ flex:1 }} 
                 variant="outlined" 
@@ -240,7 +225,7 @@ const TeachersForm = () => {
                 helperText="Enter StartDate"
                 onChange={(e)=>setDate(e.target.value)}/>
                 <TextField sx={{ flex:1 }} label="Addres" variant="outlined" 
-                type="numner"
+                type="text"
                  helperText="Enter the Addres"
                 onChange={(e)=>setAddress(e.target.value)}/>
               

@@ -30,6 +30,7 @@ const SingleTeacherPage = () => {
       setAge(data.data.teacherDetails[0].age);
       setSalary(data.data.teacherDetails[0].salary);
       setCity(data.data.teacherDetails[0].city);
+      setDate(data.data.teacherDetails[0].date_of_join.slice(0,10))
       setWorkExp(data.data.teacherDetails[0].experience);
       setGender(data.data.teacherDetails[0].gender);
     }).catch((err) => {

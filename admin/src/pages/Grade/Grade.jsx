@@ -102,9 +102,7 @@ const Grade = () => {
   useEffect(() => {
 
     axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
-    .then((data) => {
-     // console.log(data.data.allStudent);
-     console.log(data.data.allStudent);
+    .then((data) => { 
       setRows(data.data.allStudent);
     }).catch((err) => {
       console.log(err);

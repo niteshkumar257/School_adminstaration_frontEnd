@@ -145,30 +145,27 @@ const StudentForm = () => {
        console.log(e.target.checked)
         setchecked3(e.target.checked)
   }
-  const [name, setName] = useState("");
+  const [student_name, setName] = useState("");
   const [gender,setGender]=useState("");
-  const [course,setCourse]=useState("");
-  const [date,setDate]=useState("");
-  const [Class,setClass]=useState("");
+  const [course_name,setCourse]=useState("");
+  const [dob,setDate]=useState("");
+  const [class_id,setClass]=useState("");
   const [email,setEmail]=useState("");
   const [Fathername,setFatherName]=useState("");
   const [MotherName,setMotherName]=useState("");
   const [FatherProfession,setFatherProfession]=useState("");
   const [MotherProfession,setMotherProfession]=useState("");
-  const [addres,setAddres]=useState("");
+  const [address,setAddres]=useState("");
   const [firstInstallment,setfirstInstallment]=useState(false);
   const [PrimaryNumber,setPrimaryNumber]=useState("");
   const [AlternateNumber,setAlternateNumber]=useState("");
   const [AadharNumber,setAadharNumber]=useState("");
+
+  // student_name, gender, dob, address, class_id, course_name, medium, board, parent_id, father_name, father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, total_fees, first_installment, first_installment_eta, first_installment_status, second_installment, second_installment_eta, second_installment_status, third_installment, third_installment_eta, third_installment_status
   
-  const submitHandler = (e) => {
-   
+  const submitHandler = (e) => {   
     e.preventDefault();
-    console.log("funtion called");
-  console.log(name);
-  console.log(gender);
-  console.log(course);
-  alert(name+gender+course);
+     
   }
   // second funtion of 
   // first installment button handler funtion
