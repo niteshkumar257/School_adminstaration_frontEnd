@@ -102,15 +102,14 @@ const Grade = () => {
   let school_id = decode.result.school_id;
 
   useEffect(() => {
-
-    // axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
-    // .then((data) => {
-    //  // console.log(data.data.allStudent);
-    //  console.log(data.data.allStudent);
-    //   setRows(data.data.allStudent);
-    // }).catch((err) => {
-    //   console.log(err);
-    // })
+ 
+    axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
+    .then((data) => { 
+      setRows(data.data.allStudent);
+    }).catch((err) => {
+      console.log(err);
+    })
+ 
   },[])
 
   
