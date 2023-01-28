@@ -4,10 +4,26 @@ import StudentImage from "../../assest/s1.png";
 import { useState } from "react"
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
+import Table from "../../components/Table/Table"
 import { useParams } from 'react-router';
 import axios from "axios"
 
 const SingleStudentpage = (props) => {
+
+  const columns=[
+    "InstallMentNo",
+    "Month","Year","Amount","Status"
+  ]
+  
+  const rows = [
+     {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+     {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+  
+   
+  ];
   // props from the app.js
   // it gives id of the selected studentPage for showing student information
   const params = useParams();
@@ -34,6 +50,7 @@ const SingleStudentpage = (props) => {
   
   let student_id = params.student_id;
 
+ 
   useEffect(() => {
     let parent_id;
     // axios request for student details
@@ -80,6 +97,7 @@ const SingleStudentpage = (props) => {
 
 
   }, [])
+ 
 
  
   // this data will come for database like this
@@ -215,32 +233,9 @@ const SingleStudentpage = (props) => {
                 </div>
               </div>
               <div className="bottom">
-                <table className='installMentTable'>
-                  <tr className='Tableheader'>
-                    <th>InstallMent No</th>
-                    <th>Amount</th>
-                    <th>LastDate</th>
-                    <th>Status</th>
-                    <th>UpdateStatus</th>
-                  </tr>
-
-                  {
-                    feeDetails.length > 0 && feeDetails.map((item, idx) => {
-                      return (
-
-                        <tr className='rowStyle'>
-                          <td >{idx+1}</td>
-                          <td>{item.amount}</td>
-                          <td>{item.lastDate}</td>
-                          <td className={item.status === 1 ? "paidStatus" : "unPaidStatus"}>{item.status}</td>
-                          <td>Update Status</td>
-                        </tr>
-
-                      )
-                    })
-                  }
-                </table>
-
+ 
+                <Table rows={rows} columns={columns}/>
+ 
 
               </div>
             </div>

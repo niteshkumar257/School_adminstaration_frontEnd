@@ -5,7 +5,23 @@ import Navbar from '../../components/Navbar/Navbar'
 import StudentImage from "../../assest/s1.png";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Table from "../../components/Table/Table"
+import { SocialDistance } from '@mui/icons-material';
+import { FaBlackTie } from 'react-icons/fa';
+const columns=[
+  "InstallMentNo",
+  "Month","Year","Amount","Status"
+]
 
+const rows = [
+   {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+   {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+   {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+   {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+   {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+
+ 
+];
 
 const SingleTeacherPage = () => {
   let params = useParams();
@@ -18,7 +34,7 @@ const SingleTeacherPage = () => {
   const [workExp,setWorkExp]=useState(10);
   const [AadharCard,setAadharCard]=useState("1989300192");
   const [date,setDate]=useState("12/10/23");
-  const [gender,setGender]=useState("male");
+  const [gender,setGender]=useState("Male");
   let teacher_id = params.teacherId;
   
   useEffect(() => {
@@ -109,6 +125,23 @@ const SingleTeacherPage = () => {
         </div>
       </div>
     </div>
+   </div>
+   <div 
+   className='student-salary-container'
+   style={{
+    width:"98%",
+  
+   
+   }}
+   >
+    <div className='student-salary-container-heading'>
+      <h1>  Salary Details</h1>
+    
+       </div>
+       <div className='student-info-container-body'>
+       <Table  rows={rows} columns={columns}/>
+       </div>
+
    </div>
     </div>
     </div>

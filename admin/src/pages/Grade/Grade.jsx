@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios'
 import jwt_decode from "jwt-decode";
 import { Co2Sharp } from '@mui/icons-material'
+import { MenuItem } from '@mui/material'
 
 
 const Test = [
@@ -47,13 +48,14 @@ const style = {
 
 };
 const columns = [
-  { field: 'id', headerName: 'Serial-No', width: 200, headerAlign:"center",
+  { field: 'id', headerName: 'Serial-No', width: 150, headerAlign:"center",
+  flex:1,
   align:"center", },
   {
     field: 'student_name',
     headerName: 'Name',
-    maxwidth: 200,
-    editable:true,
+    maxwidth: 150,
+    editable:false,
     flex:1,
     headerAlign:"center",
     align:"center",
@@ -65,8 +67,8 @@ const columns = [
     field: 'class_id',
     headerName: 'Class',
     type: 'number',
-    maxwidth: 100,
-    editable: true,
+    maxwidth: 150,
+    editable: false,
     flex:1,
     headerAlign:"center",
     align:"center",
@@ -74,39 +76,40 @@ const columns = [
   {
     field: 'medium',
     headerName: 'Medium',
- 
+    editable:false,
     sortable: false,
-    maxwidth: 100,
+    maxwidth: 150,
     flex:1,
     headerAlign:"center",
     align:"center",
    
   },
 ];
-// const rows = [
-//   { id: 1, Name: 'Nitesh', class:7, medium: "English" },
-//   { id: 2, Name: 'Nitesh', class:7, medium: "English" },
-//   { id: 3, Name: 'Nitesh', class:7, medium: "English"},
-//   { id: 4, Name: 'Nitesh', class:7, medium: "English"},
-//   { id: 5, Name: 'Nitesh', class:7, medium: "English" },
-//   { id: 6, Name: 'Nitesh', class:7,medium: "English" },
-//   { id: 7, Name: 'Nitesh', class:7, medium: "English"},
-//   { id: 8, Name: 'Nitesh', class:7, medium: "English"},
+const rows = [
+  { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
+  { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
+  { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
+  { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
+  { id: 8, student_name: 'Nitesh', class_id:7, medium: "English"},
  
-// ];
+];
 const Grade = () => {
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
 
   useEffect(() => {
-
+ 
     axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
     .then((data) => { 
       setRows(data.data.allStudent);
     }).catch((err) => {
       console.log(err);
     })
+ 
   },[])
 
   
@@ -132,7 +135,10 @@ const Grade = () => {
       renderCell: (params) => {
         return (
           <div>
-      <button onClick={handleOpen} className="Updatebutton">Update</button>
+            <div className="UpdateButton">
+            <button onClick={handleOpen} >Update</button>
+            </div>
+   
       <Modal
         open={open}
         onClose={handleClose}
@@ -171,19 +177,19 @@ const Grade = () => {
         > 
           <div>
           <TextField
-                 sx={{ width:"15vw" }}
+                 sx={{ width:"18.7vw" }}
                 
                  select
                  label="Test ID"
                  onChange={(e)=>setTestid(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
               >
                 {Test.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
           </div>
@@ -194,14 +200,91 @@ const Grade = () => {
           flexDirection:"column",
           rowGap:"20px"
           }}
-       >
-       <TextField sx={{ flex:1 }}  label="Physics" variant="outlined" 
-               />
-                    <TextField sx={{ flex:1 }}  label="Chemistry" variant="outlined" 
-              />
 
-                 <TextField sx={{ flex:1 }}  label="Mathematics" variant="outlined" 
-                />
+       >            <div
+       style={{
+        display:"flex",
+        flexDirection:"row",
+        columnGap:"20px"
+        
+       }}
+       >
+       <div   style={{
+                        flex:1,
+                        display:"flex",
+                        columnGap:"20px",
+                     
+                        alignItems:"center"
+                      
+                      }}>
+                        <div style={{flex:1}}>
+                        <span>Physcis:</span>
+                        </div>
+      
+        <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
+       </div>
+        <TextField sx={{ flex:1 }}  label="Mark Obtained" variant="outlined" />
+      
+
+       </div>
+                    <div 
+                     style={{
+                      display:"flex",
+                      flexDirection:"row",
+                      columnGap:"20px",
+                      flex:1
+                      
+                     }}
+                    >
+                      <div 
+                      style={{
+                        flex:1,
+                        display:"flex",
+                        columnGap:"20px",
+                         
+                          alignItems:"center"
+                      
+                      }}
+                      >
+                        <div style={{flex:1}}>
+                        <span>Chemistry:</span>
+                        </div>
+                       
+                        <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
+                      </div>
+                    <TextField sx={{ flex:1 }}  label="Mark Obtained" variant="outlined" />
+                   
+                    </div>
+                   
+                 <div
+                  style={{
+                    display:"flex",
+                    flexDirection:"row",
+                    columnGap:"20px",
+                    
+                    
+                   }}
+                 >
+                 <div 
+                  style={{
+                    flex:1,
+                    display:"flex",
+                    columnGap:"20px",
+                 
+                    alignItems:"center"
+                  
+                  }}
+                 >
+                  <div style={{flex:1}}>
+                  <span>Biology:</span>
+                  </div>
+                
+                  <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
+                 </div>
+                 <TextField sx={{ flex:1 }}   label="Mark obtained" variant="outlined"/>
+              
+                 </div>
+               
        </div>
              
         </div>
@@ -211,6 +294,7 @@ const Grade = () => {
           display:"flex",
         justifyContent:"flex-end"
           }}>
+
           <button className='Updatebutton' >Submit</button>
         </div>
         </form>
@@ -240,45 +324,14 @@ const Grade = () => {
               </div>
             </div>
           </div>
-           <div
-           style={{
-            width:"100%",
-            height:"100vh"
-           }}
-           >
-            <Box sx={{
-          
-          // "& .MuiDataGrid-root": {
-          //   border: "none",
-          // },
-          // "& .MuiDataGrid-cell": {
-          //   borderBottom: "none",
-          // },
-          // "& .salaryStatus-column--cell": {
-          //   color:"green",
-          // },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#c7c7c7",
-            borderBottom: "none",
-          },
-          // "& .MuiDataGrid-virtualScroller": {
-          //   backgroundColor:"blueviolet",        // color the background of the table
-          // },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "1px solid black",
-          },
-
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor:"#c7c7c7",
-          },}}
-            
-            >
+         
+            <Box sx={{style}}>
             <DataTable 
+          
            rows={rows} columns={columns.concat(UpdateColumn)}/>
             </Box>
            
-           </div>
+          
         </div>
     </div>
    </div>

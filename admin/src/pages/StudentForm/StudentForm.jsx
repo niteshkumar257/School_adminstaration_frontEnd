@@ -104,22 +104,22 @@ const Batch = [
 ]
 
 // gender 
-const gender = [
+const Gender = [
   {
     value: 'Male',
-    lable: 'Male'
+    label: 'Male'
   },
   {
     value: 'Female',
-    lable: 'Female'
+    label: 'Female'
   },
   {
     value: 'Not-disclose',
-    lable: 'Not-disclose'
+    label: 'Not-disclose'
   },
   {
     value: 'Binary',
-    lable: 'Binary'
+    label: 'Binary'
   },
 
 
@@ -147,9 +147,11 @@ const StudentForm = () => {
   }
   const [student_name, setName] = useState("");
   const [gender,setGender]=useState("");
+ 
   const [course_name,setCourse]=useState("");
   const [dob,setDate]=useState("");
   const [class_id,setClass]=useState("");
+ 
   const [email,setEmail]=useState("");
   const [Fathername,setFatherName]=useState("");
   const [MotherName,setMotherName]=useState("");
@@ -165,7 +167,7 @@ const StudentForm = () => {
   
   const submitHandler = (e) => {   
     e.preventDefault();
-     
+ 
   }
   // second funtion of 
   // first installment button handler funtion
@@ -199,64 +201,79 @@ const StudentForm = () => {
               </div>
               <div className='student-info-detail-student-container-textfield'>
                 <div className='student-info-section '>
+
+
                 <TextField sx={{ flex:1 }} label="Student Name" variant="outlined" 
+                required
                 onChange={(e)=>setName(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  label="Gender" variant="outlined" 
-                onChange={(e)=>setGender(e.target.value)}/>
+               <TextField
+                 sx={{ flex:1 }}
+                
+                 select
+                 label="Gender"
+                 required
+                 onChange={(e)=>setGender(e.target.value)}
+                  helperText="Select Gender">
+                {Gender.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+               {option.label}
+               </MenuItem>
+               ))}
+              </TextField>
                  <TextField
                  sx={{ flex:1 }}
-                 id="outlined-select-currency-native"
+                 id="outlined-select-currency"
                  select
-              b
+                 label="Course"
+                 required
                  onChange={(e)=>setCourse(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
-                 helperText="Please select your currency">
+                  helperText="Select Course">
                 {Course.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
         
                
                 </div>
                 <div className='student-info-section '>
-                <TextField sx={{ flex:1 }}  variant="outlined" 
-               helperText="Choose your birthday"
+                <TextField
+                 sx={{ flex:1 }}  variant="outlined" 
+               helperText="Select Date of Birth"
                 type="date"
                 onChange={(e)=>setName(e.target.value)}/>
                  <TextField
                  sx={{ flex:1 }}
-                 id="outlined-select-currency-native"
-                 select
+                select
                  label="Class"
+                 required
                  onChange={(e)=>setCourse(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
+               
+                //  SelectProps={{
+                //  native: true,
+                //  }}
                  helperText="Select Class">
                 {Batch.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
                  <TextField
                  sx={{ flex:1 }}
-                 id="outlined-select-currency-native"
+                 required
                  select
-                 label="Course"
-                 onChange={(e)=>setCourse(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
-                 helperText="Please select your currency">
+                 label="Medium"
+                 onChange={(e)=>setmedium(e.target.value)}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
+                >
                 {Medium.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
         
@@ -265,29 +282,33 @@ const StudentForm = () => {
                 <div className='student-info-section '>
                 <TextField sx={{ flex:1 }}  variant="outlined" 
                helperText="Enter Address"
-               lable="Address"
+               label="Address"
                 type="text"
+                required
+             
                 onChange={(e)=>setName(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  variant="outlined" 
                helperText="Enter Aadhar Number"
-               lable="Aadhar Number"
+               label="Aadhar Number"
                 type="text"
+                required
                 onChange={(e)=>setAadharNumber(e.target.value)}/>
                 
                  <TextField
                  sx={{ flex:1 }}
-                
+                 required
                  select
                  label="Board"
                  onChange={(e)=>setCourse(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
-                 helperText="Select Class">
+                //  SelectProps={{
+                //  native: true,
+                //  }}
+                //  helperText="Select Class"
+                 >
                 {Board.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
                 
@@ -303,10 +324,13 @@ const StudentForm = () => {
               <div className='student-info-detail-parent-container-textfield'>
               <div className='parent-info-section '>
                 <TextField sx={{ flex:1 }} label="Father Name" variant="outlined" 
+                   required
                 onChange={(e)=>setFatherName(e.target.value)}/>
                 <TextField sx={{ flex:1 }}  label="Father profession" variant="outlined" 
+                   required
                 onChange={(e)=>setFatherProfession(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  label="Primary Number" variant="outlined" 
+                    required
                 onChange={(e)=>setPrimaryNumber(e.target.value)}/>
                 
         
@@ -314,17 +338,21 @@ const StudentForm = () => {
                 </div>
                 <div className='parent-info-section '>
                 <TextField sx={{ flex:1 }} label="Mother Name" variant="outlined" 
+                   required
                 onChange={(e)=>setMotherName(e.target.value)}/>
                 <TextField sx={{ flex:1 }}  label="Mother profession" variant="outlined" 
+                   required
                 onChange={(e)=>setMotherProfession(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  label="Alternate Number" variant="outlined" 
+                    required
                 onChange={(e)=>setAlternateNumber(e.target.value)}/>
                 
         
                
                 </div>
                 <div className='parent-info-section '>
-                <TextField sx={{ width:"25.45vw"}} label="Email" variant="outlined" 
+                <TextField sx={{ flex:0.317}} label="Email" variant="outlined" 
+                   required
                 type="email"
                 onChange={(e)=>setEmail(e.target.value)}/>
                 
@@ -341,40 +369,74 @@ const StudentForm = () => {
               <div className='student-info-detail-fee-container-textfield'>
               <div className='fee-info-section section'>
                 <div className='fee-info-section-installment'>
-                <TextField id="outlined-basic" label="1st InstallMent" variant="outlined" />
+                <TextField 
+                sx={{
+                  height:"7vh"
+                }}
+                id="outlined-basic" label="1st InstallMent" variant="outlined" />
+                <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox {...label}
                  checked={checked1}
                  onChange={handleChange1}
                  color="success"
                  />
                  {!checked1 &&   
-                  <TextField  variant="outlined" 
-             
-                type="date"
+                  <TextField 
+                  sx={{
+                    height:"5vh"
+                  }}
+               variant="outlined" 
+               type="date"
+                helperText="Select a Date"
                 onChange={(e)=>setName(e.target.value)}/>}
+                </div>
+                
               
                 </div>
                 <div className='fee-info-section-installment'>
-                <TextField id="outlined-basic" label="2nd InstallMent" variant="outlined" />
-                <Checkbox {...label}
+                <TextField
+                 sx={{
+                  height:"7vh"
+                }}
+                 id="outlined-basic" label="2nd 
+                
+                InstallMent"
+               
+                 variant="outlined" />
+                 <div className="fee-info-section-installment-checkbox-date">
+                 <Checkbox {...label}
                  checked={checked2}
                  onChange={handleChange2}
                  color="success"
+
                  />
                  {!checked2 &&
                  
-                 <TextField   variant="outlined" 
+                 <TextField  
+                 sx={{
+                  height:"5vh"
+                }}
+                  variant="outlined" 
                
                   type="date"
+                  helperText="Select a Date"
                   onChange={(e)=>setName(e.target)}/>}
+                 </div>
+               
               
                 </div>
                 <div className='fee-info-section-installment'>
-                <TextField id="outlined-basic" label="3rd InstallMent" variant="outlined" />
+                <TextField 
+                sx={{
+                  height:"7vh"
+                }}
+                id="outlined-basic" label="3rd InstallMent" variant="outlined" />
+                <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox  
                      checked={checked3}
                      onChange={handleChange3}
                      color="success"
+                  
                
                 {...label} 
                  inputProps={{ 'aria-label': 'controlled' }}
@@ -384,7 +446,10 @@ const StudentForm = () => {
                  <TextField  variant="outlined" 
              
                   type="date"
+                  helperText="Select a Date"
                   onChange={(e)=>setName(e.target.value)}/>}
+                </div>
+               
               
                 </div>
             

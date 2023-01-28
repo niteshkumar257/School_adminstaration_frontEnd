@@ -124,6 +124,7 @@
                   align-items: center;
                   justify-content: center;
                   gap: 12px;
+            
                
                   .fee-info-section{
                       
@@ -131,10 +132,15 @@
                         display: flex;
                         flex-direction: column;
                        
-                        gap: 25px;
+                        gap: 40px;
                         .fee-info-section-installment{
                               display: flex;
-                        column-gap: 20px;
+                        column-gap: 30px;
+                        }
+                        .fee-info-section-installment-checkbox--date{
+                              display: flex;
+                        column-gap: 10px;
+                        height: 7vh;
                         }
                   }
       
@@ -175,6 +181,7 @@
             border-radius: 9px;
             color: white;
             font-size: 1rem;
+            font-weight: 600;
       }
 
 }

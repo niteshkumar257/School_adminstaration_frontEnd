@@ -64,7 +64,8 @@
 //     cursor: pointer;
 
 // }
-.Updatebutton{
+
+    button{
     cursor: pointer;
     height: 30px;
     width: 70px;
@@ -76,5 +77,7 @@
     //   text-decoration-color: #009df1;
         border: none;
         font-weight: 500;
-}
+        background-color: white;
+    }
+
 

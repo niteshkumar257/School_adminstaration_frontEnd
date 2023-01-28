@@ -11,45 +11,45 @@ import axios from 'axios'
 
 // columns  of the teacher Details table
 const columns = [
-{ field: 'id', headerName: 'Serial No', width: 90, headerAlign:"center",align:"center", },
-{field: 'teacher_name',headerName:'Name',Width:120,height:50,flex:1,editable:true,headerAlign:"center", align:"center",},
-{field: 'subject_id',headerName: 'subject',minwidth: 100,editable:true,flex:1,headerAlign:"center",align:"center", },
-{ field: 'mobile',headerName: 'Mobile Number',minwidth: 100, flex:1,editable:true,headerAlign:"center",align:"center",},
+{ field: 'id', headerName: 'Serial-No', width: 150, flex:1,headerAlign:"center",align:"center",editable:"false" },
+{field: 'teacher_name',headerName:'Name',Width:150,height:50,flex:1,editable:false,headerAlign:"center", align:"center",editable:false},
+{field: 'subject_id',headerName: 'Subject',minwidth: 150,editable:true,flex:1,headerAlign:"center",align:"center",editable:false },
+{ field: 'mobile',headerName: 'Mobile Number',minwidth: 150, flex:1,editable:true,headerAlign:"center",align:"center",editable:false},
 ];
 
 
 // dummy rows of the teacherTable
-// const rows = [
-// {id:1,name:"Nitesh Kumar",subject:"Physics",mob:"87456874",},
-// {id:2,name:"Ravi Kumar",subject:"Mathematics",mob:"87456874",},
-// {id:3,name:"Kumar Panda",subject:"Biology",mob:"87456874",},
-// {id:4,name:"Lokesh Kumar",subject:"chemistry",mob:"87456874",},
-// {id:5,name:"Prabhu Kumar",subject:"History",mob:"87456874",},
-// {id:6,name:"Nitesh Kumar",subject:"Physics",mob:"87456874",},
-// {id:7,name:"Ravi Kumar",subject:"Mathematics",mob:"87456874",},
-// {id:8,name:"Kumar Panda",subject:"Biology",mob:"87456874",},
-// {id:9,name:"Lokesh Kumar",subject:"chemistry",mob:"87456874",},
-// {id:10,name:"Prabhu Kumar",subject:"History",mob:"87456874",}
+const rows = [
+{id:1,teacher_name:"Nitesh Kumar",subject_id:"Physics",mobile:"87456874",},
+{id:2,teacher_name:"Ravi Kumar",subject_id:"Mathematics",mobile:"87456874",},
+{id:3,teacher_name:"Kumar Panda",subject_id:"Biology",mobile:"87456874",},
+{id:4,teacher_name:"Lokesh Kumar",subject_id:"chemistry",mobile:"87456874",},
+{id:5,teacher_name:"Prabhu Kumar",subject_id:"History",mobile:"87456874",},
+{id:6,teacher_name:"Nitesh Kumar",subject_id:"Physics",mobile:"87456874",},
+{id:7,teacher_name:"Ravi Kumar",subject_id:"Mathematics",mobile:"87456874",},
+{id:8,teacher_name:"Kumar Panda",subject_id:"Biology",mobile:"87456874",},
+{id:9,teacher_name:"Lokesh Kumar",subject_id:"chemistry",mobile:"87456874",},
+{id:10,teacher_name:"Prabhu Kumar",subject_id:"History",mobile:"87456874",}
 
 
-// ];
+];
 
 const Teachers = () => {
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
   let navigate = useNavigate();
-  useEffect(() => {
+  // useEffect(() => {
 
-    axios.get(`http://localhost:8080/schools/${school_id}/allteacher`)
-    .then((data) => {
-     // console.log(data.data.allStudent);
-      setRows(data.data.teacherDetails);
+  //   axios.get(`http://localhost:8080/schools/${school_id}/allteacher`)
+  //   .then((data) => {
+  //    // console.log(data.data.allStudent);
+  //     setRows(data.data.teacherDetails);
       
-    }).catch((err) => {
-      console.log(err);
-    })
-  },[])
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   })
+  // },[])
 
 
 
@@ -66,11 +66,13 @@ const Teachers = () => {
       navigate(`/Teachers/${id}`);
   }
   const viewColumn=[
-{field:"view",headerName:"Student Details",width:200,align:"center", headerAlign:"center",
+{field:"view",headerName:"Teacher Details",width:200,align:"center", headerAlign:"center",
+editable:false,
+flex:1,
       renderCell: (params) => {
         return (
-          <div className="view">
-            {/* <Link to="/Teachers/TeacherId" style={{ textDecoration: "none" }}> */}
+          <div className="viewButton">
+            {/* <Link  to= {`/Teachers/${TeacherId}`}style={{ textDecoration: "none" }}> */}
              <button onClick={() => handleSelect(params.row.id)} >View</button>
             {/* </Link> */}
            
@@ -101,65 +103,16 @@ const Teachers = () => {
               </div>
             </div>
            </div>
-           <Box
-           style={{
-            width:"100%",
-            height:"auto",
-           
-            
-        }}
-    
-        height="75vh"
-        sx={{
-          '.MuiDataGrid-columnSeparator': {
-            display: 'none',
-          },
-          '&.MuiDataGrid-root': {
-            border: 'none',
-          },
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "1px solid black",
-          },
-          "& .salaryStatus-column--cell": {
-            color:"green",
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#c7c7c7",
-            borderBottom: "none",
-            fontSize:'35'
-          },
-          // "& .MuiDataGrid-virtualScroller": {
-          //   backgroundColor:"blueviolet",        // color the background of the table
-          // },
-            
-          "&.MuiDataGrid-columnHeaderTitle":{
-              color:"white",
-              fontSize:"2rem",
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor:"#c7c7c7",
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            height:"15vh",
-            backgroundColor: "#c7c7c7",
-            color: "black",
-            fontSize:15,
-            fontWeight:600
-          }
-          
-         
-        }}
-           >
-           <DataTable rows={rows} columns={columns.concat(viewColumn)} 
-           
-           />
+           <Box>
+           <DataTable  rows={rows} columns={columns.concat(viewColumn)}/>
            </Box>
            
-           
+           <div className='newButton'> 
+           <Link to="/Teachers/newTeacher">
+           <button>Add new Teacher</button>
+           </Link>
+        
+           </div>
            
           
         </div>

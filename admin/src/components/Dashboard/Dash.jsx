@@ -10,29 +10,29 @@ import widgest from '../Widgest/widgest';
 import s4 from "../../assest/school4.png";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-// const data={
-//     SchoolName:"Broad River Grammar public english meddium  School",
-//     city:"Ambika pur",
-//     Email:"Admin123@gmail.com",
-//     Phone:"8249829096",
-//     AdminName:"Admin Name"
-// }
+const data={
+    school_name:"Broad River Grammar public english meddium  School",
+    city_name:"Ambika pur",
+    email:"Admin123@gmail.com",
+    mobile:"8249829096",
+    admin_name:"Admin Name"
+}
 
 
 const Dashboard = () => {
-    const [data,setData]=useState({});
+    // const [data,setData]=useState({});
     const [studentCount,setStudentCount] = useState(0);
     const [teacherCount,setTeacherCount] = useState(0);
-    let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
-    let school_id = decodeToken.result.school_id;
-    useEffect(() => {
-       axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
-       //  console.log(res)
-         setData(res.data.schoolDetail);
-         setStudentCount(res.data.totalStudent);
-         setTeacherCount(res.data.totalTeacher);
-       }) 
-    }, []);
+    // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+    // let school_id = decodeToken.result.school_id;
+    // useEffect(() => {
+    //    axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+    //    //  console.log(res)
+    //      setData(res.data.schoolDetail);
+    //      setStudentCount(res.data.totalStudent);
+    //      setTeacherCount(res.data.totalTeacher);
+    //    }) 
+    // }, []);
   
   return (
   

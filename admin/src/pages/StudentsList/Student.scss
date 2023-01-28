@@ -8,7 +8,7 @@
             display: flex;
         flex-direction: column;
         gap: 20px;
-          width: 99%;
+        
         justify-content: center;
         // padding: 1rem 0 0 4rem ;
         
@@ -54,13 +54,13 @@
         }
         }
     }
-    .view{
+    .viewButtton{
      
      button{
     // background-color: #009df1;
     cursor: pointer;
     height: 30px;
-    width: 50px;
+    width: 70px;
         border-radius: 9px;
         color: rgb(0, 0, 0);
         font-size:1rem;
@@ -68,5 +68,8 @@
       text-decoration: underline;
     //   text-decoration-color: #009df1;
         border: none;
+        font-weight: 500;
+        background-color: white;
      }
+
     }
