@@ -4,10 +4,26 @@ import StudentImage from "../../assest/s1.png";
 import { useState } from "react"
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
+import Table from "../../components/Table/Table"
 import { useParams } from 'react-router';
 import axios from "axios"
 
 const SingleStudentpage = (props) => {
+
+  const columns=[
+    "InstallMentNo",
+    "Month","Year","Amount","Status"
+  ]
+  
+  const rows = [
+     {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+     {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+     {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+  
+   
+  ];
   // props from the app.js
   // it gives id of the selected studentPage for showing student information
   const params = useParams();
@@ -34,43 +50,43 @@ const SingleStudentpage = (props) => {
 
   let student_id = params.student_id;
 
-  useEffect(() => {
-    let parent_id;
-    axios.get(`http://localhost:8080/students/${student_id}`)
-      .then((data) => {
-        setName(data.data.studentDetails[0].student_name);
-        setMedium(data.data.studentDetails[0].medium);
-        setCourse(data.data.studentDetails[0].course_name);
-        setBoard(data.data.studentDetails[0].board);
-        setClass(data.data.studentDetails[0].class_id);
-        parent_id = data.data.studentDetails[0].parent_id;
-        axios.get(`http://localhost:8080/parents/${parent_id}`)
-          .then((data) => {
-            console.log(data.data.parentDetails);
-            setPrimaryNumber(data.data.parentDetails.whatsapp_no);
-            SetEmail(data.data.parentDetails.email);
-            setMotherProfessin(data.data.parentDetails.mother_profession);
-            setMotherrname(data.data.parentDetails.mother_name);
-            setFathername(data.data.parentDetails.father_name);
-            setFatherProfession(data.data.parentDetails.father_profession);
-            setAltNumber(data.data.parentDetails.alternative_mobile);
-            axios.get(`http://localhost:8080/students/${student_id}/fees`)
-              .then((data) => {
-                console.log(data.data);
+  // useEffect(() => {
+  //   let parent_id;
+  //   axios.get(`http://localhost:8080/students/${student_id}`)
+  //     .then((data) => {
+  //       setName(data.data.studentDetails[0].student_name);
+  //       setMedium(data.data.studentDetails[0].medium);
+  //       setCourse(data.data.studentDetails[0].course_name);
+  //       setBoard(data.data.studentDetails[0].board);
+  //       setClass(data.data.studentDetails[0].class_id);
+  //       parent_id = data.data.studentDetails[0].parent_id;
+  //       axios.get(`http://localhost:8080/parents/${parent_id}`)
+  //         .then((data) => {
+  //           console.log(data.data.parentDetails);
+  //           setPrimaryNumber(data.data.parentDetails.whatsapp_no);
+  //           SetEmail(data.data.parentDetails.email);
+  //           setMotherProfessin(data.data.parentDetails.mother_profession);
+  //           setMotherrname(data.data.parentDetails.mother_name);
+  //           setFathername(data.data.parentDetails.father_name);
+  //           setFatherProfession(data.data.parentDetails.father_profession);
+  //           setAltNumber(data.data.parentDetails.alternative_mobile);
+  //           axios.get(`http://localhost:8080/students/${student_id}/fees`)
+  //             .then((data) => {
+  //               console.log(data.data);
 
-              }).catch((err) => {
-                console.log(err);
-            })
-          }).catch((err) => {
-            console.log(err);
-        })
-      }).catch((err) => {
-        console.log(err);
-    });
+  //             }).catch((err) => {
+  //               console.log(err);
+  //           })
+  //         }).catch((err) => {
+  //           console.log(err);
+  //       })
+  //     }).catch((err) => {
+  //       console.log(err);
+  //   });
 
 
 
-  }, [])
+  // }, [])
 
 
   console.log(params);
@@ -208,32 +224,8 @@ const SingleStudentpage = (props) => {
                 </div>
               </div>
               <div className="bottom">
-                <table className='installMentTable'>
-                  <tr className='Tableheader'>
-                    <th>InstallMent No</th>
-                    <th>Amount</th>
-                    <th>LastDate</th>
-                    <th>Status</th>
-                    <th>UpdateStatus</th>
-                  </tr>
-
-                  {
-                    installMentRows.map((item) => {
-                      return (
-
-                        <tr className='rowStyle'>
-                          <td >{item.id}</td>
-                          <td>{item.total_fees}</td>
-                          <td>{item.LastDate}</td>
-                          <td className={item.Status === "Paid" ? "paidStatus" : "unPaidStatus"}>{item.Status}</td>
-                          <td>{item.UpdateStatus}</td>
-                        </tr>
-
-                      )
-                    })
-                  }
-                </table>
-
+              
+                <Table rows={rows} columns={columns}/>
 
               </div>
             </div>

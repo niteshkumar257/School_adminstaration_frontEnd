@@ -49,8 +49,10 @@ const App=()=>
           </Route>
           <Route path='Grade' element={<Grade/>}/>
           <Route path='Teachers' >
-          <Route index element={<TeacherList getTeacherId={getTeacherId} />} />
-              <Route path=":teacherId" element={<TeacherPage teacherId={teacherId}  />} />
+              <Route index element={<TeacherList getTeacherId={getTeacherId} />} />
+              <Route path="newTeacher"   element={<TeacherForm/>}/>
+              <Route path=":TeacherId"  element={<TeacherPage teacherId={teacherId}  />} />
+             
           </Route>
          <Route path='AddStudent' element={<StudentForm/>}/>
          <Route path='AddTeacher' element={<TeacherForm/>}/>

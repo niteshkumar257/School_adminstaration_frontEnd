@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import logo from "../../assest/Img1.png"
-import { Link } from "react-router-dom";
+import { Link ,NavLink} from "react-router-dom";
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
@@ -43,13 +43,7 @@ const Sidebar = () => {
 
 
     },
-    {
-      path: "/AddTeacher",
-      name: "Add Teacher",
-      icon: <AddIcon className='icon' />
-
-
-    },
+   
     {
       path: "/Notification",
       name: "Notification",
@@ -97,9 +91,9 @@ const Sidebar = () => {
               {
                 menuItem.map((item, index) => {
                   return (
-                    <div key={index} className="items">
-                      <Link className='item' style={{ textDecoration: "none" }} to={item.path}>
-
+                  
+                      <NavLink  activeClassName="active" className='items' style={{ textDecoration: "none" }} to={item.path}>
+                     <div  activeClassName="active" key={index} className={isExpanded ? "item" :  "item-toggle"} >
                         <div className="icon"> {item.icon}</div>
                         {
                           isExpanded && (
@@ -107,9 +101,9 @@ const Sidebar = () => {
                           )
                         }
 
-
-                      </Link>
-                    </div>
+                     </div>
+                      </NavLink>
+                   
 
 
 

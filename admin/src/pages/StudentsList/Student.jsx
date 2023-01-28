@@ -2,50 +2,50 @@ import {useEffect, useState} from 'react'
 import "./Student.scss"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
-import DataGridDemo from '../../components/DataTable/DataTable'
+import DataTable from '../../components/DataTable/DataTable'
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 const columns = [
-  { field: 'id', headerName: 'Serial-No', width: 150, headerAlign:"center", align:"center", },
-  {field: 'student_name',flex:1,headerName: 'Name',width: 200,editable:false,headerAlign:"center",align:"center",sortable:false},
-  {field: 'class_id',headerName: 'Class',type: 'number',width: 200,flex:1,editable:false,headerAlign:"center",align:"center",sortable:false},
-  {field: 'medium',headerName: 'Medium',editable:false,sortable: false,width: 200,flex:1,headerAlign:"center",align:"center",sortable:false},
+  { field: 'id', headerName: 'Serial-No', width: 150, flex:1,headerAlign:"left", align:"Left", },
+  {field: 'student_name',flex:1,headerName: 'Name',width: 150,editable:false,headerAlign:"left",align:"Leftr"},
+  {field: 'class_id',headerName: 'Class',type: 'number',width: 150,flex:1,editable:false,headerAlign:"left",align:"center"},
+  {field: 'medium',headerName: 'Medium',editable:false,sortable: false,width: 150,flex:1,headerAlign:"left",align:"center"},
 ];
 
-// const rows = [
-//   { id: 1, Name: 'Nitesh', class:7, medium: "English" },
-//   { id: 2, Name: 'Nitesh', class:7, medium: "English" },
-//   { id: 3, Name: 'Nitesh', class:7, medium: "English"},
-//   { id: 4, Name: 'Nitesh', class:7, medium: "English"},
-//   { id: 5, Name: 'Nitesh', class:7, medium: "English" },
-//   { id: 6, Name: 'Nitesh', class:7,medium: "English" },
-//   { id: 7, Name: 'Nitesh', class:7, medium: "English"},
-//   { id: 101, Name: 'Nitesh', class:7, medium: "English"},
+const rows = [
+  { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
+  { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
+  { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
+  { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
+  { id: 101, student_name: 'Nitesh', class_id:7, medium: "English"},
  
-// ];
+];
 
 const Student = (props) => {
   const [studentId,setStudentId]=useState(0);
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
   
   const navigate = useNavigate();  // for navigation to the studentId page after cliking the view button
 
-  let decode = jwt_decode(localStorage.getItem("auth_token"));
-  let school_id = decode.result.school_id;
+  // let decode = jwt_decode(localStorage.getItem("auth_token"));
+  // let school_id = decode.result.school_id;
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
-    .then((data) => {
-     // console.log(data.data.allStudent);
-      setRows(data.data.allStudent);
-    }).catch((err) => {
-      console.log(err);
-    })
-  },[])
+  //   axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
+  //   .then((data) => {
+  //    // console.log(data.data.allStudent);
+  //     setRows(data.data.allStudent);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   })
+  // },[])
   
  const handleSelect=(id)=>
  {
@@ -59,11 +59,13 @@ const Student = (props) => {
       field:"view",
       headerName:"Student Details",
       width:200,
+      editable:false,
     align:"center",
     headerAlign:"center",
+    flex:1,
       renderCell: (params) => {
         return (
-          <div className="view">
+          <div className="viewButton">
             {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
              <button  onClick={() => handleSelect(params.row.id)}  >View</button>
             {/* </Link> */}
@@ -88,45 +90,14 @@ const Student = (props) => {
               </div>
             </div>
           </div>
-          <Box
-     
-    
-           sx={{
-           
-            // "& .MuiDataGrid-root": {
-            //   border: "none",
-            // },
-            // "& .MuiDataGrid-cell": {
-            //   borderBottom: "none",
-            // },
-            // "& .salaryStatus-column--cell": {
-            //   color:"green",
-            // },
-            height:"30vh" ,width: '99%',
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#c7c7c7",
-              borderBottom: "none",
+          <Box>
+          <DataTable
+         sx={{
+          '& .MuiDataGrid-cell:focus': {
+            outline: 'none',
             },
-            // "& .MuiDataGrid-virtualScroller": {
-            //   backgroundColor:"blueviolet",        // color the background of the table
-            // },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "1px solid black",
-            },
-            
-  
-            "& .MuiDataGrid-footerContainer": {
-              borderTop: "none",
-              backgroundColor:"#c7c7c7",
-            },}}
-          >
-          <DataGridDemo 
-          sx={{
-            p:2
-          }}
-          disableColumnMenu
-         
-         rows={rows} columns={columns.concat(viewColumn)}/>
+         }}
+             rows={rows} columns={columns.concat(viewColumn)}/>
           </Box>
          
         

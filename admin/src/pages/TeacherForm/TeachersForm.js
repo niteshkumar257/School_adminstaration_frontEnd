@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -12,6 +12,7 @@ import {useState } from "react"
 import "./TeachersForm.scss"
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import MenuItem from '@mui/material/MenuItem';
 
 
 const Subject = [
@@ -161,14 +162,12 @@ const TeachersForm = () => {
                  select
                  label="Subject"
                  onChange={(e)=>setSubject(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
+               
                  helperText="Select Subject">
                 {Subject.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
                  <TextField
@@ -177,14 +176,12 @@ const TeachersForm = () => {
                  select
                  label="Medium"
                  onChange={(e)=>setMedium(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
+                
                  helperText="Please select your currency">
                 {Medium.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
               <TextField sx={{ flex:1 }} label="Work-Exp" variant="outlined" 
@@ -208,9 +205,9 @@ const TeachersForm = () => {
                  }}
                  helperText="Please select your currency">
                 {Gender.map((option) => (
-                <option key={option.value} value={option.value}>
+                <MenuItem key={option.value} value={option.value}>
                {option.label}
-               </option>
+               </MenuItem>
                ))}
               </TextField>
               <TextField sx={{ flex:1 }}label="Salary" variant="outlined" 

@@ -9,7 +9,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 98%;
+            align-items: center;
+          
+            // width: 100%;
            row-gap: 20px;
             height: auto;
            .student-info-main-container{
@@ -18,11 +20,12 @@
               flex-direction: column;
               justify-content: center;
               align-items: center;
-              width: 98%;
+             border-radius: 9px;
+              width:100%;
             .student-info-heading{
                 
                 border-radius: 9px;
-                width: 100%;
+                width: 98%;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
@@ -39,7 +42,8 @@
           
             .section{
                
-                width: 100%;
+                width: 98%;
+               
                  height: 30vh;
                 flex: 1;
                 
@@ -47,7 +51,7 @@
                 .basic-info{
                     padding: 0.5rem;
                     border-radius: 9px;
-                  
+                    width: 100%;
                     display: flex;
                     flex: 1;
                   
@@ -175,8 +179,10 @@
             }
         }
             // parent info details
+            
             .parent-info{
                 width: 98%;
+               
                 padding: 0.5rem;
                 border-radius: 9px;
                 box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
@@ -189,7 +195,7 @@
                 padding-left: 1rem;
                 .parent-info-heading{
                     
-                    width: 100%;
+                    width: 98%;
                     h1{
                         font-size: 1.3rem;
                         font-weight: 700;
@@ -197,7 +203,7 @@
                     }
                 }
                 .parent-info-container{
-                    width: 100%;
+                    width: 98%;
                   
                     flex: 1;
                     display: flex;
@@ -323,29 +329,9 @@
                     width: 100%;
                 min-height: 20vh;
                 max-height: 70vh;
-            
+                background-color: white;
                   
-                    
-                    justify-content: center;
-                    align-items: center;
-                    .installMentTable{
-                        width: 98%;
-                        border-radius: 9px;
-                        height: auto;
-                        .Tableheader{
-                          background-color: rgb(231, 231, 231);
-                          color: rgb(3, 3, 3);
-                          height: 6vh;
-                        }
-                        .rowStyle{
-                            height: 6vh;
-                           text-align: center;
-                           }
-                      }
-                    table, th, td {
-                        border:1px solid rgb(190, 190, 190);
-                      }
-                     
+                  
                    
                  
         
@@ -356,7 +342,7 @@
             }
             .perfomanceAnalytic{
                 height:40vh;
-                width: 100%;
+              
                 box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                 width: 98%;
             }
