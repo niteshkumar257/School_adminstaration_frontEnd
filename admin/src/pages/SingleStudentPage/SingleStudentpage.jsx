@@ -4,26 +4,64 @@ import StudentImage from "../../assest/s1.png";
 import { useState } from "react"
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
-import Table from "../../components/Table/Table"
+import Table from "../../components/Table/TableFee"
 import { useParams } from 'react-router';
 import axios from "axios"
 
+// fee details column and row
+const columns = [
+  { field: 'id', headerName: 'SI-No', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
+  {field: 'total_fees',flex:1,headerName: 'Amount',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
+  {field: 'LastDate',headerName: 'LastDate',width: 150,flex:1,editable:false,headerAlign:"left",
+  align:"left",sortable:false},
+  {field: 'Status',headerName: 'Status',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+
+ 
+];
+
+const rows = [
+{id:1,total_fees:1000,LastDate:"12/10/23",Status:"paid"},
+{id:2,total_fees:4000,LastDate:"12/10/23",Status:"paid"},
+{id:3,total_fees:8000,LastDate:"12/10/23",Status:"paid"}
+
+
+ 
+ 
+];
+// fee details column and row 
+
+
+/////
+////////
+const performanceColumn = [
+  { field: 'id', headerName: 'Test_id', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
+  {field: 'Date',flex:1,headerName: 'Amount',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
+  {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left",
+  align:"left",sortable:false},
+  {field: 'Math',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+  {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+  {field: 'Percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+
+ 
+];
+
+const  performanceRow= [
+{id:1,Date:"12/10/23",physics:89,Chemistry:67,Math:91,Percentage:""}
+
+ 
+ 
+];
+///////
+////
+
+
 const SingleStudentpage = (props) => {
 
-  const columns=[
-  
-    "Month","Year","Amount","Status"
-  ]
-  
-  const rows = [
-     {"InstallMent-No":1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {"InstallMent-No":2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {"InstallMent-No":3,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
-     {"InstallMent-No":4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {"InstallMent-No":5,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
-  
    
-  ];
   // props from the app.js
   // it gives id of the selected studentPage for showing student information
   const params = useParams();
@@ -44,6 +82,42 @@ const SingleStudentpage = (props) => {
   const [altNumber, setAltNumber] = useState("8767856873");
   const [primaryNumber, setPrimaryNumber] = useState("58383432");
   const [email, SetEmail] = useState("niteshredd257@gmail.com");
+
+  // installMentupdateHandle Select funtion
+
+  const  InstallmentUpdateHandler=(id)=>
+  {
+       console.log(id);
+       
+  }
+
+  // new row 
+
+  const viewColumn=[
+    {
+      field:"view",
+      headerName:"Update",
+      width:200,
+      editable:false,
+      sortable:false,
+    align:"left",
+    headerAlign:"left",
+    flex:1,
+      renderCell: (params) => {
+        return (
+          <div className="InstallmentUpdateHandler">
+            {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
+             <button  onClick={() => InstallmentUpdateHandler(params.row.id)}  >Update</button>
+            {/* </Link> */}
+           
+          </div>
+        );
+      },
+    }
+  ]
+
+
+  // ----
 
   // fee details
   const [feeDetails, setFeeDetails] = useState([]);
@@ -225,7 +299,7 @@ const SingleStudentpage = (props) => {
               </div>
               <div className="bottom">
               
-                <Table rows={rows} columns={columns}/>
+                <Table rows={rows} columns={columns.concat(viewColumn)}/>
 
               </div>
             </div>
@@ -237,6 +311,13 @@ const SingleStudentpage = (props) => {
                 <span>Performance Analytic</span>
               </div>
               <div className='PerformanceAnalytic-body'>
+                <div className="performanceAnalytic-body-heading">
+                  header
+                </div>
+               <div className="performanceAnalytic-body-content">
+               <Table rows={performanceRow} columns={performanceColumn}/>
+               </div>
+
 
               </div>
             </div>

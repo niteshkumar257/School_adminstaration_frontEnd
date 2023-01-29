@@ -5,21 +5,31 @@ import Navbar from '../../components/Navbar/Navbar'
 import StudentImage from "../../assest/s1.png";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Table from "../../components/Table/Table"
+import Table from "../../components/Table/TableFee"
 import { SocialDistance } from '@mui/icons-material';
 import { FaBlackTie } from 'react-icons/fa';
-const columns=[
-  "InstallMentNo",
-  "Month","Year","Amount","Status"
-]
+
+
+
+const columns = [
+  { field: 'id', headerName: 'SI-No', width: 150, headerAlign:"left", align:"left",flex:1,sortable:false },
+  {field: 'Month',headerName: 'Month',width: 150,editable:false,headerAlign:"left",align:"left",
+  sortable:false,flex:1},
+  {field: 'Year',headerName: 'Year',type: 'number',width: 150,editable:false,headerAlign:"left",
+  sortable:false,flex:1,
+  align:"left"},
+  {field: 'Amount',headerName: 'Amount',type: 'number',width: 150,editable:false,headerAlign:"left",
+  sortable:false,flex:1,
+  align:"left"},
+ 
+ 
+];
 
 const rows = [
-   {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-   {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-   {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
-   {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-   {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"Un-Paid"},
-
+  { id: 1, Month: 'Jan',Year:"2002",Amount:1000 },
+  { id: 2, Month: 'March',Year:"2004" ,Amount:2000},
+  { id: 3, Month: 'Feb',Year:"2006" ,Amount:3000},
+ 
  
 ];
 
@@ -37,6 +47,42 @@ const SingleTeacherPage = () => {
   const [gender,setGender]=useState("Male");
   let teacher_id = params.teacherId;
   
+
+  /// new column for update status
+
+
+const salaryUpdate=(id)=>
+{
+    console.log(id);
+}
+  const updateColumn=[
+    {
+      field:"view",
+      headerName:"Update",
+      width:200,
+      editable:false,
+      sortable:false,
+    align:"left",
+    headerAlign:"left",
+    flex:1,
+      renderCell: (params) => {
+        return (
+          <div className="viewButton">
+            {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
+             <button  onClick={() => salaryUpdate(params.row.id)}  >View</button>
+            {/* </Link> */}
+           
+          </div>
+        );
+      },
+    }
+  ]
+
+
+
+
+  // new column for update status
+
   useEffect(() => {
     axios.get(`http://localhost:8080/teacher/${teacher_id}`)
     .then((data) => {
@@ -129,16 +175,17 @@ const SingleTeacherPage = () => {
    className='student-salary-container'
    style={{
     width:"98%",
+    height:"60vh"
   
    
    }}
    >
     <div className='student-salary-container-heading'>
-      <h1>  Salary Details</h1>
+      <h1>Salary Details</h1>
     
        </div>
        <div className='student-info-container-body'>
-       <Table  rows={rows} columns={columns}/>
+       <Table  rows={rows} columns={columns.concat(updateColumn)}/>
        </div>
 
    </div>
