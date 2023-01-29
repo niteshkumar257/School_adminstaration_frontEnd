@@ -11,19 +11,19 @@ import axios from "axios"
 const SingleStudentpage = (props) => {
 
   const columns=[
-    "InstallMentNo",
-    "Month","Year","Amount","Status"
+    { field: 'InstallMentNo', headerName: 'Serial-No', width: 150, flex:1,headerAlign:"left", align:"Left", },
+    "total_fees","LastDate","Status","UpdateStatus"
   ]
   
-  const rows = [
-     {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
-     {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-     {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+  // const rows = [
+  //    {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+  //    {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+  //    {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
+  //    {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
+  //    {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
   
    
-  ];
+  // ];
   // props from the app.js
   // it gives id of the selected studentPage for showing student information
   const params = useParams();
@@ -113,7 +113,7 @@ const SingleStudentpage = (props) => {
       <div className="SingleStudent-container">
         <Sidebar />
         <div className="singleStudent">
-
+ 
           <Navbar />
           {/* main contaiener */}
           <div className="singleStudentPage-container page-container">
@@ -234,7 +234,7 @@ const SingleStudentpage = (props) => {
               </div>
               <div className="bottom">
  
-                <Table rows={rows} columns={columns}/>
+                {/* <Table rows={feeDetails} columns={columns}/> */}
  
 
               </div>

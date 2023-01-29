@@ -35,21 +35,21 @@ const rows = [
 ];
 
 const Teachers = () => {
-  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
   let navigate = useNavigate();
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   axios.get(`http://localhost:8080/schools/${school_id}/allteacher`)
-  //   .then((data) => {
-  //    // console.log(data.data.allStudent);
-  //     setRows(data.data.teacherDetails);
+    axios.get(`http://localhost:8080/schools/${school_id}/allteacher`)
+    .then((data) => {
+     // console.log(data.data.allStudent);
+      setRows(data.data.teacherDetails);
       
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   })
-  // },[])
+    }).catch((err) => {
+      console.log(err);
+    })
+  },[])
 
 
 

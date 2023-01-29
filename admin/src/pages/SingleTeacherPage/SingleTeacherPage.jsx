@@ -139,7 +139,7 @@ const SingleTeacherPage = () => {
     
        </div>
        <div className='student-info-container-body'>
-       <Table  rows={rows} columns={columns}/>
+       {/* <Table  rows={rows} columns={columns}/> */}
        </div>
 
    </div>

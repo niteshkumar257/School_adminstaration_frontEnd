@@ -9,13 +9,13 @@ import axios from "axios";
 import { useEffect } from 'react'
 
 const DashBoard = () => {
-  // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
-  // let school_id = decodeToken.result.school_id;
-  // useEffect(() => {
-  //    axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
-  //      console.log(res)
-  //    }) 
-  // }, []);
+  let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+  let school_id = decodeToken.result.school_id;
+  useEffect(() => {
+     axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+       console.log(res)
+     }) 
+  }, []);
   return (
    
     <div className='dashboard-container '>

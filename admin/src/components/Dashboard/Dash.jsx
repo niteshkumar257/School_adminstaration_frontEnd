@@ -20,19 +20,19 @@ const data={
 
 
 const Dashboard = () => {
-    // const [data,setData]=useState({});
+    const [data,setData]=useState({});
     const [studentCount,setStudentCount] = useState(0);
     const [teacherCount,setTeacherCount] = useState(0);
-    // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
-    // let school_id = decodeToken.result.school_id;
-    // useEffect(() => {
-    //    axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
-    //    //  console.log(res)
-    //      setData(res.data.schoolDetail);
-    //      setStudentCount(res.data.totalStudent);
-    //      setTeacherCount(res.data.totalTeacher);
-    //    }) 
-    // }, []);
+    let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+    let school_id = decodeToken.result.school_id;
+    useEffect(() => {
+       axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+       //  console.log(res)
+         setData(res.data.schoolDetail);
+         setStudentCount(res.data.totalStudent);
+         setTeacherCount(res.data.totalTeacher);
+       }) 
+    }, []);
   
   return (
   

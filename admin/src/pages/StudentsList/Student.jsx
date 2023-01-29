@@ -29,23 +29,23 @@ const rows = [
 
 const Student = (props) => {
   const [studentId,setStudentId]=useState(0);
-  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);
   
   const navigate = useNavigate();  // for navigation to the studentId page after cliking the view button
 
-  // let decode = jwt_decode(localStorage.getItem("auth_token"));
-  // let school_id = decode.result.school_id;
+  let decode = jwt_decode(localStorage.getItem("auth_token"));
+  let school_id = decode.result.school_id;
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
-  //   .then((data) => {
-  //    // console.log(data.data.allStudent);
-  //     setRows(data.data.allStudent);
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   })
-  // },[])
+    axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
+    .then((data) => {
+     // console.log(data.data.allStudent);
+      setRows(data.data.allStudent);
+    }).catch((err) => {
+      console.log(err);
+    })
+  },[])
   
  const handleSelect=(id)=>
  {

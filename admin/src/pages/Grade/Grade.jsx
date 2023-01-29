@@ -85,19 +85,19 @@ const columns = [
    
   },
 ];
-const rows = [
-  { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
-  { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
-  { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
-  { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
-  { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
-  { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
-  { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
-  { id: 8, student_name: 'Nitesh', class_id:7, medium: "English"},
+// const rows = [
+//   { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
+//   { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
+//   { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
+//   { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
+//   { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
+//   { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
+//   { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
+//   { id: 8, student_name: 'Nitesh', class_id:7, medium: "English"},
  
-];
+// ];
 const Grade = () => {
-  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
 

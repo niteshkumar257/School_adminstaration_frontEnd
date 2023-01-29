@@ -13,12 +13,12 @@ const Login = () => {
   const loginHandler=(e)=>
   {
     e.preventDefault();
-    // axios.post("http://localhost:8080/user/login", { admin_id: email, password: password }).then((res) => {
-    //   localStorage.setItem("auth_token", res.data.token);
-    //   return navigate("/");
-    // }).catch((err) => {
-    //   console.log(err.response.data.error);
-    // })
+    axios.post("http://localhost:8080/user/login", { admin_id: email, password: password }).then((res) => {
+      localStorage.setItem("auth_token", res.data.token);
+      return navigate("/");
+    }).catch((err) => {
+      console.log(err.response.data.error);
+    })
   }
   return (
     <div>

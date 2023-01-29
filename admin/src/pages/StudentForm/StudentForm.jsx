@@ -151,7 +151,7 @@ const StudentForm = () => {
   const [course_name,setCourse]=useState("");
   const [dob,setDate]=useState("");
   const [class_id,setClass]=useState("");
- 
+  const [medium, setmedium] = useState("");
   const [email,setEmail]=useState("");
   const [Fathername,setFatherName]=useState("");
   const [MotherName,setMotherName]=useState("");
