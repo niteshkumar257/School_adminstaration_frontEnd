@@ -7,12 +7,100 @@ import Navbar from '../../components/Navbar/Navbar';
 import Table from "../../components/Table/TableFee"
 import { useParams } from 'react-router';
 import axios from "axios"
+import Chart from '../../components/Chart/Chart';
 
 // fee details column and row
+
+   
+const subjectlist=[
+  {
+    value:"Physics",
+    lable:"Physics",
+    color:"#82ca9d",
+    array:[  { "Month": "Jan","Physics": 20,},
+      {"Month": "Feb", "Physics": 30,},
+      {"Month": "March","Physics": 30,},
+      {"Month": "April","Physics": 20,},
+      {"Month": "May","Physics": 45,},
+      {"Month": "June","Physics": 10,},
+      {"Month": "July","Physics": 30,}]
+ },
+  {
+    value:"Math",
+    lable:"Math",
+    color:"#82ca9d",
+    array:[
+      {
+"Month": "Jan",
+        "Math": 90,
+      },
+      {
+        "Month": "Feb",
+        "Math": 20,
+      },
+      {
+        "Month": "March",
+        "Math": 90,
+      },
+      {
+        "Month": "April",
+        "Math": 10,
+      },
+      {
+        "Month": "May",
+        "Math": 60,
+     },
+      {
+        "Month": "June",
+        "Math": 80,
+      },
+      {
+        "Month": "July",
+        "Math": 90, 
+      }
+    ]
+  },
+  {
+    value:"Biology",
+    lable:"Biology",
+    color:"#82ca9d",
+    array:[
+      {
+        "Month": "Jan",
+        "Biology": 98,
+      },
+      {
+        "Month": "Feb",
+        "Biology": 67,
+      },
+      {
+        "Month": "March",
+        "Biology": 90,
+      },
+      {
+        "Month": "April",
+        "Biology": 12,
+      },
+      {
+        "Month": "May",
+        "Biology": 97,
+     },
+      {
+        "Month": "June",
+        "Biology": 23,
+      },
+      {
+        "Month": "July",
+        "Biology": 34, 
+      }
+    ]
+  },
+ 
+]
 const columns = [
-  { field: 'id', headerName: 'SI-No', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
+  { field: 'id', headerName: 'InstallMent No.', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
   {field: 'total_fees',flex:1,headerName: 'Amount',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
-  {field: 'LastDate',headerName: 'LastDate',width: 150,flex:1,editable:false,headerAlign:"left",
+  {field: 'LastDate',headerName: 'Last_Date',width: 150,flex:1,editable:false,headerAlign:"left",
   align:"left",sortable:false},
   {field: 'Status',headerName: 'Status',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
   align:"left"},
@@ -23,7 +111,9 @@ const columns = [
 const rows = [
 {id:1,total_fees:1000,LastDate:"12/10/23",Status:"paid"},
 {id:2,total_fees:4000,LastDate:"12/10/23",Status:"paid"},
-{id:3,total_fees:8000,LastDate:"12/10/23",Status:"paid"}
+{id:3,total_fees:8000,LastDate:"12/10/23",Status:"paid"},
+{id:4,total_fees:4000,LastDate:"12/10/23",Status:"paid"},
+{id:5,total_fees:8000,LastDate:"12/10/23",Status:"paid"}
 
 
  
@@ -36,21 +126,21 @@ const rows = [
 ////////
 const performanceColumn = [
   { field: 'id', headerName: 'Test_id', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
-  {field: 'Date',flex:1,headerName: 'Amount',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
-  {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left",
-  align:"left",sortable:false},
-  {field: 'Math',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
-  align:"left"},
-  {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
-  align:"left"},
-  {field: 'Percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
-  align:"left"},
+  {field: 'Date',flex:1,headerName: 'Date',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
+  {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left", align:"left",sortable:false},
+  {field: 'Math',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
+  {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
+  {field: 'Percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false, align:"left"},
 
  
 ];
 
 const  performanceRow= [
-{id:1,Date:"12/10/23",physics:89,Chemistry:67,Math:91,Percentage:""}
+{id:1,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+{id:2,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+{id:3,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+{id:4,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+{id:5,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
 
  
  
@@ -306,16 +396,35 @@ const SingleStudentpage = (props) => {
 
 
             {/* student performance details */}
-            <div className='perfomanceAnalytic'>
+            <div className='section perfomanceAnalytic-info'>
               <div className="perfomanceAnalytic-heading">
-                <span>Performance Analytic</span>
+                <h1>Performance Analytic</h1>
+               
               </div>
               <div className='PerformanceAnalytic-body'>
-                <div className="performanceAnalytic-body-heading">
-                  header
-                </div>
+             
                <div className="performanceAnalytic-body-content">
-               <Table rows={performanceRow} columns={performanceColumn}/>
+                <div className='perfomanceAnalytic-body-content-table'>
+                <Table rows={performanceRow} columns={performanceColumn}/> </div>
+             <div className="performanceAnalytic-body-content-charts">
+              {subjectlist.map((item,index)=>(
+                     <div className="container">
+                      <div className='heading'>
+                        <span className='head'>{item.value}</span>
+                        <span className='subhead'>Recent Test Results</span>
+                      </div>
+                      <div className='content'>
+                       <Chart  color={item.color} dataKey={item.value} data={item.array} />
+                      </div>
+                    </div>    
+              ))}
+             
+                 
+            
+              
+              
+                
+             </div>
                </div>
 
 

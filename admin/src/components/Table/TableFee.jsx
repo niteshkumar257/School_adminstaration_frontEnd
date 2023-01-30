@@ -4,10 +4,11 @@ import { DataGrid } from '@mui/x-data-grid';
 
 export default function DataTable({rows,columns}) {
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{  width: '100%' }}>
       <DataGrid
       sx={{
         height:"auto",
+      
         "& .MuiDataGrid-columnHeaders": {
           // color:"#009df1;",
          

@@ -205,8 +205,10 @@ const StudentForm = () => {
                 <div className='student-info-section '>
 
 
-                <TextField sx={{ flex:1 }} label="Student Name" variant="outlined" 
+                <TextField sx={{ flex:1 }} label="Student Name" 
+                variant="outlined" 
                 required
+                helperText="Enter Student Name"
                 onChange={(e)=>setName(e.target.value)}/>
                <TextField
                  sx={{ flex:1 }}
@@ -214,6 +216,7 @@ const StudentForm = () => {
                  select
                  label="Gender"
                  required
+                 
                  onChange={(e)=>setGender(e.target.value)}
                   helperText="Select Gender">
                 {Gender.map((option) => (
@@ -242,7 +245,7 @@ const StudentForm = () => {
                 <div className='student-info-section '>
                 <TextField
                  sx={{ flex:1 }}  variant="outlined" 
-               helperText="Select Date of Birth"
+               helperText="Select Date Of Birth"
                 type="date"
                 onChange={(e)=>setName(e.target.value)}/>
                  <TextField
@@ -266,6 +269,7 @@ const StudentForm = () => {
                  sx={{ flex:1 }}
                  required
                  select
+                 helperText="Select Medium"
                  label="Medium"
                  onChange={(e)=>setmedium(e.target.value)}
                 //  SelectProps={{
@@ -287,7 +291,7 @@ const StudentForm = () => {
                label="Address"
                 type="text"
                 required
-             
+               
                 onChange={(e)=>setName(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  variant="outlined" 
                helperText="Enter Aadhar Number"
@@ -301,6 +305,7 @@ const StudentForm = () => {
                  required
                  select
                  label="Board"
+                 helperText="Select Board"
                  onChange={(e)=>setCourse(e.target.value)}
                 //  SelectProps={{
                 //  native: true,
@@ -327,12 +332,15 @@ const StudentForm = () => {
               <div className='parent-info-section '>
                 <TextField sx={{ flex:1 }} label="Father Name" variant="outlined" 
                    required
+                   helperText="Father Name"
                 onChange={(e)=>setFatherName(e.target.value)}/>
                 <TextField sx={{ flex:1 }}  label="Father profession" variant="outlined" 
+                helperText="Father Profession"
                    required
                 onChange={(e)=>setFatherProfession(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  label="Primary Number" variant="outlined" 
                     required
+                   helperText="Primary Number"
                 onChange={(e)=>setPrimaryNumber(e.target.value)}/>
                 
         
@@ -341,12 +349,15 @@ const StudentForm = () => {
                 <div className='parent-info-section '>
                 <TextField sx={{ flex:1 }} label="Mother Name" variant="outlined" 
                    required
+                   helperText="Mohter Name"
                 onChange={(e)=>setMotherName(e.target.value)}/>
                 <TextField sx={{ flex:1 }}  label="Mother profession" variant="outlined" 
+                helperText="Mother Profession"
                    required
                 onChange={(e)=>setMotherProfession(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  label="Alternate Number" variant="outlined" 
                     required
+                    helperText="Alternate Number"
                 onChange={(e)=>setAlternateNumber(e.target.value)}/>
                 
         
@@ -356,6 +367,7 @@ const StudentForm = () => {
                 <TextField sx={{ flex:0.317}} label="Email" variant="outlined" 
                    required
                 type="email"
+                helperText="Enter Parent Email"
                 onChange={(e)=>setEmail(e.target.value)}/>
                 
         

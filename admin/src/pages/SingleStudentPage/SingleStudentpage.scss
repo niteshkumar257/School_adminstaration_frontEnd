@@ -17,11 +17,12 @@
            .student-info-main-container{
             box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
               display: flex;
+              width: 100%;
               flex-direction: column;
               justify-content: center;
               align-items: center;
              border-radius: 9px;
-              width:100%;
+              
             .student-info-heading{
                 
                 border-radius: 9px;
@@ -340,11 +341,81 @@
                    
                 }
             }
-            .perfomanceAnalytic{
-                height:40vh;
-              
+            .perfomanceAnalytic-info{
+                height:auto;
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                border-radius: 9px;
                 box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                 width: 98%;
+                row-gap: 20px;
+                .perfomanceAnalytic-heading{
+                    width: 90%;
+                    height: auto;
+                  
+                      h1{
+                          font-size: 1.3rem;
+                          font-weight: 700;
+                      color: rgb(83, 83, 83);
+              
+                      }
+                }
+                .performanceAnalytic-body-content{
+                    width: 100%;
+                    .performanceAnalytic-body-content-table{
+                        display: flex;
+                        row-gap: 30px;
+                        
+                        
+                       
+                    }
+                    .performanceAnalytic-body-content-charts{
+                        display: grid;
+                        grid-template-columns: repeat(2,2fr);
+                        grid-gap:20px;
+            
+                        .container{
+                            display: flex;
+                            flex-direction: column;
+                            row-gap: 20px;
+                            align-items: center;
+                            justify-content: center;
+                          
+                            border-radius: 9px;
+                            height: 50vh;
+                            box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                            .heading{
+                                display: flex;
+                                width: 98%;
+                                align-items: center;
+                                justify-content: space-between;
+                                .head{
+                                    color: rgb(79, 79, 79);
+                                    font-size: 1.2rem;
+                                }
+                                .subhead{
+                                  color:rgb(100, 100, 100);
+                                  font-size: .7rem;
+                                }
+
+                               
+                            }
+                            .content{
+                                width: 98%;
+                                height: 30vh;
+                                display: flex;
+                                justify-content: flex-start;
+                             
+                                padding: 0;
+                              
+
+                            }
+                        }
+                       
+                    }
+                    
+                }
             }
         }
     }

@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react'
 import TextField from '@mui/material/TextField';
 import axios from 'axios'
 import jwt_decode from "jwt-decode";
-import { Co2Sharp } from '@mui/icons-material'
+import { Co2Sharp, LensTwoTone } from '@mui/icons-material'
 import { MenuItem } from '@mui/material'
 
 
@@ -25,6 +25,21 @@ const Test = [
   {
     value: '3',
     label: '3',
+  },
+  
+]
+const subject_list=[
+  {
+    value:"p",
+    lable:"p"
+  },
+  {
+    value:"chem",
+    lable:"chem"
+  },
+  {
+    value:"bio",
+    lable:"bio"
   },
   
 ]
@@ -48,7 +63,7 @@ const style = {
 
 };
 const columns = [
-  { field: 'id', headerName: 'SI-No', width: 150,
+  { field: 'id', headerName: 'SI.No', width: 150,
   flex:1,
    },
   {
@@ -118,6 +133,16 @@ const Grade = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [testid,setTestid]=useState(0);
+  let [obtained,setObtained] = useState([]);
+  const [mark,setMark]=useState(0);
+  const markHandler=(e)=>
+  {
+    console.log(e.target.value)
+   setMark(mark);
+   obtained.push(mark);
+  }
+
+  
   const makrUploadHandler=()=>
   {
     console.log("form is submited");
@@ -204,33 +229,27 @@ const Grade = () => {
           rowGap:"20px"
           }}
 
-       >            <div
-       style={{
-        display:"flex",
-        flexDirection:"row",
-        columnGap:"20px"
-        
-       }}
-       >
-       <div   style={{
-                        flex:1.6,
-                        display:"flex",
-                        columnGap:"20px",
-                     
-                        alignItems:"center"
-                      
-                      }}>
-                        <div style={{flex:1}}>
-                        <span>Physcis:</span>
-                        </div>
-      
-                        <TextField sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
-       </div>
-       <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
-      
-      
+       >          
+       {
+        subject_list.map((item,index)=>(
+          <div key={index} className='modal-subject-container'  >
+          <div  className='modal-subject-container-main'>
+                      <div style={{flex:1}}>
+                      <span>{item.lable}:</span>
+                      </div>
+    
+                      <TextField 
+                      onClick={markHandler}
+                      sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
+     </div>
+     <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
+    
+    
 
-       </div>
+     </div>
+        ))
+       }
+{/*          
                     <div 
                      style={{
                       display:"flex",
@@ -259,9 +278,9 @@ const Grade = () => {
                    
                     <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
                    
-                    </div>
+                    </div> */}
                    
-                 <div
+                 {/* <div
                   style={{
                     display:"flex",
                     flexDirection:"row",
@@ -289,7 +308,7 @@ const Grade = () => {
               
                  <TextField sx={{ flex:1}}  label="Total Mark" variant="outlined" />
               
-                 </div>
+                 </div> */}
                
        </div>
              

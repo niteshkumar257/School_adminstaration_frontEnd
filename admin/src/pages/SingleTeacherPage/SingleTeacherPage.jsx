@@ -6,13 +6,77 @@ import StudentImage from "../../assest/s1.png";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Table from "../../components/Table/TableFee"
-import { SocialDistance } from '@mui/icons-material';
+import { ConstructionOutlined, SocialDistance } from '@mui/icons-material';
 import { FaBlackTie } from 'react-icons/fa';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import { TextField ,Stack,MenuItem} from '@mui/material';
 
+const Month = [
+  {
+    value: 'Jan',
+    label: 'jan',
+  },
+  {
+    value: 'Feb',
+    label: 'Feb',
+  },
+  {
+    value: 'March',
+    label: 'March',
+  },
+  {
+    value: 'April',
+    label: 'April',
+  },
+  {
+    value: 'May',
+    label: 'May',
+  },
+  {
+    value: 'June',
+    label: 'July',
+  },
+  {
+    value: 'Aug',
+    label: 'Aug',
+  },
+  {
+    value: 'Sep',
+    label: 'Sep',
+  },
+  {
+    value: 'October',
+    label: 'October',
+  },
+  {
+    value: 'November',
+    label: 'November',
+  },
+  {
+    value: 'December',
+    label: 'December',
+  },
+  
+
+
+];
+const Year=[
+ { value:"2020",
+  label:"2020"},
+  { value:"2021",
+  label:"2021"},
+  { value:"2022",
+  label:"2022"},
+  { value:"2023",
+  label:"2023"},
+  { value:"2024",
+  label:"2024"}
+]
 
 
 const columns = [
-  { field: 'id', headerName: 'SI-No', width: 150, headerAlign:"left", align:"left",flex:1,sortable:false },
+  { field: 'id', headerName: 'SI.No', width: 150, headerAlign:"left", align:"left",flex:1,sortable:false },
   {field: 'Month',headerName: 'Month',width: 150,editable:false,headerAlign:"left",align:"left",
   sortable:false,flex:1},
   {field: 'Year',headerName: 'Year',type: 'number',width: 150,editable:false,headerAlign:"left",
@@ -34,6 +98,35 @@ const rows = [
 ];
 
 const SingleTeacherPage = () => {
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    height:400,
+    bgcolor: 'background.paper',
+    border: 'none',
+    
+    borderRadius: 3,
+    boxShadow: 24,
+    p: 4,
+  
+  };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () =>
+  {
+    console.log("button is cliekc");
+    setOpen(true);
+  } 
+  const handleClose = () => 
+  {
+    console.log("Submit button is clicked");
+    console.log(month);
+    console.log(year);
+    console.log(amount)
+    setOpen(false);
+  }
   let params = useParams();
   const [name,setName]=useState("Nitesh Kumar Reddy");
   const [medium,setMedium]=useState("English");
@@ -45,6 +138,15 @@ const SingleTeacherPage = () => {
   const [AadharCard,setAadharCard]=useState("1989300192");
   const [date,setDate]=useState("12/10/23");
   const [gender,setGender]=useState("Male");
+
+
+
+  // salary update useState variable
+  const [year,setYear]=useState("");
+  const [month,setMonth]=useState("");
+  const [amount,setAmount]=useState("");
+
+  // salary update useState variable
   let teacher_id = params.teacherId;
   
 
@@ -69,7 +171,7 @@ const salaryUpdate=(id)=>
         return (
           <div className="viewButton">
             {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
-             <button  onClick={() => salaryUpdate(params.row.id)}  >View</button>
+             <button  onClick={() => salaryUpdate(params.row.id)}  >Update</button>
             {/* </Link> */}
            
           </div>
@@ -175,18 +277,115 @@ const salaryUpdate=(id)=>
    className='student-salary-container'
    style={{
     width:"98%",
-    height:"60vh"
-  
-   
    }}
    >
     <div className='student-salary-container-heading'>
       <h1>Salary Details</h1>
+     
     
        </div>
        <div className='student-info-container-body'>
-       <Table  rows={rows} columns={columns.concat(updateColumn)}/>
+       <Table  rows={rows} columns={columns}/>
+       
        </div>
+       <div  className='btn'>
+       <button onClick={handleOpen}>Update Salary</button>
+       <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style} >
+            <div style={{
+                display:"flex",
+                flexDirection:"column",
+                rowGap:20
+            }}>
+            <div>
+            <Stack    spacing={3}>
+              <div>
+                <span>Salary update</span>
+              </div>
+          <TextField
+                 sx={{ flex:1 }}
+                 required
+                 select
+                 label="Month"
+                
+                 onChange={(e)=>setMonth(e.target.value)}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
+                 helperText="Select Month">
+                {Month.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+               {option.label}
+               </MenuItem>
+               ))}
+              </TextField>
+              <TextField
+                 sx={{ flex:1 }}
+                 required
+                 select
+                 label="year"
+                
+                 onChange={(e)=>setYear(e.target.value)}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
+                 helperText="Select year">
+                {Year.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+               {option.label}
+               </MenuItem>
+               ))}
+              </TextField>
+              <TextField
+                 sx={{ flex:1 }}
+                 required
+               
+                 label="Amount"
+                
+                 onChange={(e)=>setAmount(e.target.value)}
+                //  SelectProps={{
+                //  native: true,
+                //  }}
+                 helperText="Enter Amount">
+               
+              </TextField>
+</Stack>
+            </div>
+        
+            <div style={{
+         display:"flex",
+         justifyContent:"flex-end"
+       }}>
+        <button
+        onClick={()=>handleClose()}
+        // onClick={scoreHandler}
+         style={{
+         
+            width:100,
+            height:30,
+            backgroundColor:"#08B3F3 ",
+            border:"none",
+            borderRadius:9,
+            color:"white",
+            fontSize:"1rem",
+            cursor:"pointer"
+        }}>Submit</button>
+       </div>
+            </div>
+           
+        </Box>
+       
+          
+        
+      </Modal>
+       </div>
+     
+      
 
    </div>
     </div>
