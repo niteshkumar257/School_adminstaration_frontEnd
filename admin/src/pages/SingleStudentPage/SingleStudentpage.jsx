@@ -4,29 +4,68 @@ import StudentImage from "../../assest/s1.png";
 import { useState } from "react"
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
-import Table from "../../components/Table/Table"
+import Table from "../../components/Table/TableFee"
 import { useParams } from 'react-router';
 import axios from "axios"
 
-const SingleStudentpage = (props) => {
+// fee details column and row
+const columns = [
+  { field: 'id', headerName: 'SI-No', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
+  {field: 'amount',flex:1,headerName: 'Amount',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
+  {field: 'lastDate',headerName: 'LastDate',width: 150,flex:1,editable:false,headerAlign:"left",
+  align:"left",sortable:false},
+  {field: 'status',headerName: 'Status',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
 
-  const columns=[
-    { field: 'InstallMentNo', headerName: 'Serial-No', width: 150, flex:1,headerAlign:"left", align:"Left", },
-    "total_fees","LastDate","Status","UpdateStatus"
-  ]
-  
-  // const rows = [
-  //    {InstallMentNo:1,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-  //    {InstallMentNo:2,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-  //    {InstallMentNo:3,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
-  //    {InstallMentNo:4,Month:"jan",Year:"2023",Amount:10002,Status:"Paid"},
-  //    {InstallMentNo:5,Month:"jan",Year:"2023",Amount:10002,Status:"UnPaid"},
-  
-   
-  // ];
+ 
+];
+
+// const rows = [
+// {id:1,total_fees:1000,LastDate:"12/10/23",Status:"paid"},
+// {id:2,total_fees:4000,LastDate:"12/10/23",Status:"paid"},
+// {id:3,total_fees:8000,LastDate:"12/10/23",Status:"paid"}
+
+
+ 
+ 
+// ];
+// fee details column and row 
+
+
+/////
+////////
+const performanceColumn = [
+  { field: 'id', headerName: 'Test_id', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
+  {field: 'Date',flex:1,headerName: 'Amount',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
+  {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left",
+  align:"left",sortable:false},
+  {field: 'Math',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+  {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+  {field: 'Percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,
+  align:"left"},
+
+ 
+];
+
+const  performanceRow= [
+{id:1,Date:"12/10/23",physics:89,Chemistry:67,Math:91,Percentage:""}
+
+ 
+ 
+];
+///////
+////
+
+
+const SingleStudentpage = (props) => {
+ 
   // props from the app.js
   // it gives id of the selected studentPage for showing student information
   const params = useParams();
+  
+  let student_id = params.student_id;
 
   const [name, setName] = useState("Nitesh Kumar Reeddy");
   const [medium, setMedium] = useState("English");
@@ -45,10 +84,96 @@ const SingleStudentpage = (props) => {
   const [primaryNumber, setPrimaryNumber] = useState("58383432");
   const [email, SetEmail] = useState("niteshredd257@gmail.com");
 
+  const [total_fees, setTotalFees] = useState("");
+
+
+  const [first_installment_status, setFirstInstallment] = useState(0); 
+  const [second_installment_status, setSecondInstallment] = useState(0); 
+  const [third_installment_status, setThirdInstallment] = useState(0); 
+  // installMentupdateHandle Select funtion
+
+  const renderFees = () => {
+    axios.get(`http://localhost:8080/students/${student_id}/fees`)
+              .then((data) => { 
+                  let tot = parseInt(data.data.studentFees[0].first_installment) + parseInt(data.data.studentFees[0].second_installment) + parseInt(data.data.studentFees[0].third_installment);
+                  setTotalFees(tot);
+                  let newFeeDetails = [];                 
+                  let arr1 = {id: 1,amount : data.data.studentFees[0].first_installment,lastDate: data.data.studentFees[0].first_installment_eta.slice(0,10), status: data.data.studentFees[0].first_installment_status};
+                  let arr2 = {id: 2, amount : data.data.studentFees[0].second_installment,lastDate: data.data.studentFees[0].second_installment_eta.slice(0,10), status: data.data.studentFees[0].second_installment_status};
+                  let arr3 = {id: 3,amount: data.data.studentFees[0].third_installment,lastDate: data.data.studentFees[0].third_installment_eta.slice(0,10), status: data.data.studentFees[0].third_installment_status};
+                  newFeeDetails.push(arr1);
+                  newFeeDetails.push(arr2);
+                  newFeeDetails.push(arr3);
+                  setFeeDetails(newFeeDetails);    
+                  
+                  setFirstInstallment(arr1.status);
+                  setSecondInstallment(arr2.status);
+                  setThirdInstallment(arr3.status);          
+              }).catch((err) => {
+                console.log(err);
+            })
+  }
+
+  const updatePayment = (first_installment_status, second_installment_status, third_installment_status) => {
+    axios.put(`http://localhost:8080/students/${student_id}/updatepaymentstatus`, {
+      first_installment_status,
+      second_installment_status,
+      third_installment_status
+     }).then((data) => {
+      // console.log(data);
+      renderFees();
+     }).catch((err) => {
+      console.log(err);
+     })
+  }
+
+  const  InstallmentUpdateHandler=async (id)=>
+  {
+       console.log(id);
+       if(id == 1){
+        setFirstInstallment(1);
+        updatePayment(1,second_installment_status,third_installment_status);
+       }else if(id == 2){
+        setSecondInstallment(1);
+        updatePayment(first_installment_status,1,third_installment_status);
+       }else{        
+          setThirdInstallment(1);    
+          updatePayment(first_installment_status,second_installment_status,1); 
+       }   
+  }
+
+  // new row  
+
+  const viewColumn=[
+    {
+      field:"view",
+      headerName:"Update",
+      width:200,
+      editable:false,
+      sortable:false,
+    align:"left",
+    headerAlign:"left",
+    flex:1,
+      renderCell: (params) => {
+        
+        return (
+          <div className="InstallmentUpdateHandler">
+            {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
+            
+            { params.row.status == 0 && <button  onClick={() => InstallmentUpdateHandler(params.row.id)}  >Update</button>
+            }
+          </div>
+        );
+      },
+    }
+  ]
+
+
+  // ----
+
   // fee details
   const [feeDetails, setFeeDetails] = useState([]);
-  
-  let student_id = params.student_id;
+   
 
  
   useEffect(() => {
@@ -72,21 +197,8 @@ const SingleStudentpage = (props) => {
             setFathername(data.data.parentDetails.father_name);
             setFatherProfession(data.data.parentDetails.father_profession);
             setAltNumber(data.data.parentDetails.alternative_mobile);
-            // axios request for fee details
-            axios.get(`http://localhost:8080/students/${student_id}/fees`)
-              .then((data) => {
-                  let newFeeDetails = [];
-                  console.log(data.data.studentFees);
-                  let arr1 = {amount : data.data.studentFees[0].first_installment,lastDate: data.data.studentFees[0].first_installment_eta.slice(0,10), status: data.data.studentFees[0].first_installment_status};
-                  let arr2 = { amount : data.data.studentFees[0].second_installment,lastDate: data.data.studentFees[0].second_installment_eta.slice(0,10), status: data.data.studentFees[0].second_installment_status};
-                  let arr3 = {amount: data.data.studentFees[0].third_installment,lastDate: data.data.studentFees[0].third_installment_eta.slice(0,10), status: data.data.studentFees[0].third_installment_status};
-                  newFeeDetails.push(arr1);
-                  newFeeDetails.push(arr2);
-                  newFeeDetails.push(arr3);
-                  setFeeDetails(newFeeDetails);
-              }).catch((err) => {
-                console.log(err);
-            })
+            // function for request for fee details             
+            renderFees();
           }).catch((err) => {
             console.log(err);
         })
@@ -97,8 +209,7 @@ const SingleStudentpage = (props) => {
 
 
   }, [])
- 
-
+  
  
   // this data will come for database like this
   // const FeeDetails = [
@@ -223,7 +334,7 @@ const SingleStudentpage = (props) => {
                   <div className="left">
                     <div className="fee-amount">
                       <span >Total Fees</span>
-                      <h1>100000</h1>
+                      <h1>{total_fees}</h1>
                     </div>
                     <div className="feeIcon">
                       <img src={StudentImage} alt='fee'></img>
@@ -234,9 +345,8 @@ const SingleStudentpage = (props) => {
               </div>
               <div className="bottom">
  
-                {/* <Table rows={feeDetails} columns={columns}/> */}
- 
-
+              
+                <Table rows={feeDetails} columns={columns.concat(viewColumn)}/> 
               </div>
             </div>
 
@@ -247,6 +357,13 @@ const SingleStudentpage = (props) => {
                 <span>Performance Analytic</span>
               </div>
               <div className='PerformanceAnalytic-body'>
+                <div className="performanceAnalytic-body-heading">
+                  header
+                </div>
+               <div className="performanceAnalytic-body-content">
+               <Table rows={performanceRow} columns={performanceColumn}/>
+               </div>
+
 
               </div>
             </div>
@@ -257,6 +374,6 @@ const SingleStudentpage = (props) => {
 
     </>
   )
-}
 
+}
 export default SingleStudentpage

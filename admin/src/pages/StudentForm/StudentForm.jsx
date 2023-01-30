@@ -10,6 +10,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from 'react';
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+
 // select medium for the selecti list
 const Medium = [
   {
@@ -127,24 +130,43 @@ const Gender = [
 ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const StudentForm = () => {
-  const [checked1,setchecked1]=useState(false);
-  const [checked2,setchecked2]=useState(false);
-  const [checked3,setchecked3]=useState(false);
+  let objectDate = new Date();
+
+
+let day = objectDate.getDate();
+
+let month = objectDate.getMonth()+1;
+month=month.toString();
+if(month.length==1) month="0"+month;
+if(day.length==1) day="0"+day;
+let year = objectDate.getFullYear();
+let format = year + "-" + month + "-" + day;
+ 
   const handleChange1=(e)=>
-  {
-       console.log(e.target.checked)
-        setchecked1(e.target.checked)
+  { 
+    setFirstInstallmentEta(format);
+       if(e.target.checked===false)
+       setFirstInstallmentStatus(0)
+       else setFirstInstallmentStatus(1);
   }
   const handleChange2=(e)=>
   {
-       console.log(e.target.checked)
-        setchecked2(e.target.checked)
+    setSecondInstallmentEta(format);
+    if(e.target.checked===false)
+    setSecondInstallmentStatus(0)
+    else setSecondInstallmentStatus(1);
   }
   const handleChange3=(e)=>
   {
-       console.log(e.target.checked)
-        setchecked3(e.target.checked)
+    setThirdInstallmentEta(format);
+    if(e.target.checked===false)
+    setThirdInstallmentStatus(0)
+    else setThirdInstallmentStatus(1);
   }
+
+  let decode = jwt_decode(localStorage.getItem("auth_token"));
+  let school_id = decode.result.school_id;
+
   const [student_name, setName] = useState("");
   const [gender,setGender]=useState("");
  
@@ -153,30 +175,60 @@ const StudentForm = () => {
   const [class_id,setClass]=useState("");
   const [medium, setmedium] = useState("");
   const [email,setEmail]=useState("");
-  const [Fathername,setFatherName]=useState("");
-  const [MotherName,setMotherName]=useState("");
-  const [FatherProfession,setFatherProfession]=useState("");
-  const [MotherProfession,setMotherProfession]=useState("");
+  const [board, setBoard] = useState("");
+  const [father_name,setFatherName]=useState("");
+  const [mother_name,setMotherName]=useState("");
+  const [father_profession,setFatherProfession]=useState("");
+  const [mother_profession,setMotherProfession]=useState("");
   const [address,setAddres]=useState("");
-  const [firstInstallment,setfirstInstallment]=useState(false);
-  const [PrimaryNumber,setPrimaryNumber]=useState("");
-  const [AlternateNumber,setAlternateNumber]=useState("");
-  const [AadharNumber,setAadharNumber]=useState("");
 
-  // student_name, gender, dob, address, class_id, course_name, medium, board, parent_id, father_name, father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, total_fees, first_installment, first_installment_eta, first_installment_status, second_installment, second_installment_eta, second_installment_status, third_installment, third_installment_eta, third_installment_status
+  const [whatsapp_no,setPrimaryNumber]=useState("");
+  const [alternative_mobile,setAlternateNumber]=useState("");
+  const [aadhar_no,setAadharNumber]=useState("");
+  const [total_fees, setTotal_fees] = useState(0);
+  const [first_installment,setFirstInstallment]=useState(0);
+  const [first_installment_eta, setFirstInstallmentEta] = useState("");
+  const [first_installment_status, setFirstInstallmentStatus] = useState(0);
+  const [second_installment,setSecondInstallment]=useState(0);
+  const [second_installment_eta, setSecondInstallmentEta] = useState("");
+  const [second_installment_status, setSecondInstallmentStatus] = useState(0);
+  const [third_installment,setThirdInstallment]=useState(0);
+  const [third_installment_eta, setThirdInstallmentEta] = useState("");
+  const [third_installment_status, setThirdInstallmentStatus] = useState(0);
+
+  // student_name, gender, dob, address, class_id, course_name, medium, board, father_name, father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, total_fees, first_installment, first_installment_eta, first_installment_status, second_installment, second_installment_eta, second_installment_status, third_installment, third_installment_eta, third_installment_status, aadhar_no
   
   const submitHandler = (e) => {   
-    e.preventDefault();
- 
+    e.preventDefault();  
+
+    if(first_installment_status == 1){
+      setFirstInstallmentEta(format);
+    }
+    if(second_installment_status == 1){
+      setSecondInstallmentEta(format);
+    }
+    if(third_installment_status == 1){
+      setThirdInstallmentEta(format);
+    }
+
+    let tot = parseInt(first_installment)  + parseInt(second_installment) + parseInt(third_installment);
+    setTotal_fees(tot);
+     
+    console.log(student_name, gender, dob, address, class_id, course_name, medium, board, father_name, father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, total_fees, first_installment, first_installment_eta, first_installment_status, second_installment, second_installment_eta, second_installment_status, third_installment, third_installment_eta, third_installment_status, aadhar_no);
+   
+    axios.post(`http://localhost:8080/schools/${school_id}/addStudent`, {
+      student_name, gender, dob, address, class_id, course_name, medium, board, father_name, father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, total_fees, first_installment, first_installment_eta, first_installment_status, second_installment, second_installment_eta, second_installment_status, third_installment, third_installment_eta, third_installment_status, aadhar_no
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
   }
   // second funtion of 
   // first installment button handler funtion
   const firstInstallMentClicked=(e)=>
   {
-    e.preventDefault();
-    setfirstInstallment(e.target.value)
-    console.log("button is clicked");
-    console.log(firstInstallment);
+    e.preventDefault();  
   }
 
   return (
@@ -222,7 +274,7 @@ const StudentForm = () => {
               </TextField>
                  <TextField
                  sx={{ flex:1 }}
-                 id="outlined-select-currency"
+               
                  select
                  label="Course"
                  required
@@ -242,13 +294,13 @@ const StudentForm = () => {
                  sx={{ flex:1 }}  variant="outlined" 
                helperText="Select Date of Birth"
                 type="date"
-                onChange={(e)=>setName(e.target.value)}/>
+                onChange={(e)=>setDate(e.target.value)}/>
                  <TextField
                  sx={{ flex:1 }}
                 select
                  label="Class"
                  required
-                 onChange={(e)=>setCourse(e.target.value)}
+                 onChange={(e)=>setClass(e.target.value)}
                
                 //  SelectProps={{
                 //  native: true,
@@ -286,7 +338,7 @@ const StudentForm = () => {
                 type="text"
                 required
              
-                onChange={(e)=>setName(e.target.value)}/>
+                onChange={(e)=>setAddres(e.target.value)}/>
                  <TextField sx={{ flex:1 }}  variant="outlined" 
                helperText="Enter Aadhar Number"
                label="Aadhar Number"
@@ -299,7 +351,7 @@ const StudentForm = () => {
                  required
                  select
                  label="Board"
-                 onChange={(e)=>setCourse(e.target.value)}
+                 onChange={(e)=>setBoard(e.target.value)}
                 //  SelectProps={{
                 //  native: true,
                 //  }}
@@ -373,14 +425,15 @@ const StudentForm = () => {
                 sx={{
                   height:"7vh"
                 }}
+                onChange={((e)=>setFirstInstallment(e.target.value))}
                 id="outlined-basic" label="1st InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox {...label}
-                 checked={checked1}
+                 checked={first_installment_status}
                  onChange={handleChange1}
                  color="success"
                  />
-                 {!checked1 &&   
+                 {!first_installment_status &&   
                   <TextField 
                   sx={{
                     height:"5vh"
@@ -388,7 +441,7 @@ const StudentForm = () => {
                variant="outlined" 
                type="date"
                 helperText="Select a Date"
-                onChange={(e)=>setName(e.target.value)}/>}
+                onChange={(e)=>setFirstInstallmentEta(e.target.value)}/>}
                 </div>
                 
               
@@ -398,6 +451,7 @@ const StudentForm = () => {
                  sx={{
                   height:"7vh"
                 }}
+                onChange={((e)=>setSecondInstallment(e.target.value))}
                  id="outlined-basic" label="2nd 
                 
                 InstallMent"
@@ -405,12 +459,12 @@ const StudentForm = () => {
                  variant="outlined" />
                  <div className="fee-info-section-installment-checkbox-date">
                  <Checkbox {...label}
-                 checked={checked2}
+                 checked={second_installment_status}
                  onChange={handleChange2}
                  color="success"
 
                  />
-                 {!checked2 &&
+                 {!second_installment_status &&
                  
                  <TextField  
                  sx={{
@@ -420,7 +474,7 @@ const StudentForm = () => {
                
                   type="date"
                   helperText="Select a Date"
-                  onChange={(e)=>setName(e.target)}/>}
+                  onChange={(e)=>setSecondInstallmentEta(e.target.value)}/>}
                  </div>
                
               
@@ -430,10 +484,11 @@ const StudentForm = () => {
                 sx={{
                   height:"7vh"
                 }}
+                onChange={((e)=>setThirdInstallment(e.target.value))}
                 id="outlined-basic" label="3rd InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox  
-                     checked={checked3}
+                     checked={third_installment_status}
                      onChange={handleChange3}
                      color="success"
                   
@@ -441,13 +496,13 @@ const StudentForm = () => {
                 {...label} 
                  inputProps={{ 'aria-label': 'controlled' }}
                  />
-                 {!checked3 &&
+                 {!third_installment_status &&
                  
                  <TextField  variant="outlined" 
              
                   type="date"
                   helperText="Select a Date"
-                  onChange={(e)=>setName(e.target.value)}/>}
+                  onChange={(e)=>setThirdInstallmentEta(e.target.value)}/>}
                 </div>
                
               

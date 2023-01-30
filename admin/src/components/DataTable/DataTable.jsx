@@ -47,12 +47,16 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
             outline: 'none',
             },
           
-        "&.MuiDataGrid-columnHeaderTitle":{
-            // color:"red",
-            // fontSize:"8rem",
-            fontWeight:600
+        // "&.MuiDataGrid-columnHeaderTitle":{
+        //     // color:"red",
+        //     // fontSize:"8rem",
+        //     fontWeight:600
           
-        },
+        // },
+        // "&.css-1jbbcbn-MuiDataGrid-columnHeaderTitle":{
+        //   fontWeight:600
+        // },
+      
         "& .MuiDataGrid-footerContainer": {
           borderTop: "none",
           backgroundColor:"#c7c7c7",
@@ -61,9 +65,9 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
         "& .MuiDataGrid-columnHeaders": {
           // color:"#009df1;",
          
-          // backgroundColor: "#c7c7c7",
+          backgroundColor: "#c7c7c7",
            
-          // fontSize:"17px",
+          fontSize:"17px",
           // fontWeight:900
         }
         
@@ -75,7 +79,8 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
         pageSize={8}
         rowsPerPageOptions={[20]}
       // disableColumnMenu
-      
+        autoHeight={true}
+        autoPageSize={true}
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
       />

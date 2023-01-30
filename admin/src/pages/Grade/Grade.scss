@@ -79,5 +79,17 @@
         font-weight: 500;
         background-color: white;
     }
+    .modal-subject-container{
+    flex:1.6;
+    display:flex;
+    column-gap:20px;
+ 
+    align-items:center;
+    .modal-subject-container-main{
+        display: flex;
+        flex-direction: row;
+        column-gap: 20px;
+    }
+}
 
 

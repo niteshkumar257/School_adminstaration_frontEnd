@@ -29,6 +29,19 @@ const Test = [
   
 ]
 
+const subjects=[
+ {
+  value:"Physics",
+  lable:"Physics"
+ },{
+  value:"Chesmistry",
+  lable:"chemistry"
+ },{
+  value:"Math",
+  lable:"Math"
+ }
+
+]
 const style = {
   position: 'absolute',
   top: '50%',
@@ -48,19 +61,19 @@ const style = {
 
 };
 const columns = [
-  { field: 'id', headerName: 'Serial-No', width: 150, headerAlign:"center",
+  { field: 'id', headerName: 'SI-No', width: 150,
   flex:1,
-  align:"center", },
+   },
   {
     field: 'student_name',
     headerName: 'Name',
     maxwidth: 150,
     editable:false,
     flex:1,
-    headerAlign:"center",
-    align:"center",
-    disableColumnMenu:true,
-    sortable:false
+    // headerAlign:"center",
+    // align:"center",
+    // disableColumnMenu:true,
+    // sortable:false
   },
  
   {
@@ -70,21 +83,36 @@ const columns = [
     maxwidth: 150,
     editable: false,
     flex:1,
-    headerAlign:"center",
-    align:"center",
+    headerAlign:"left",
+    align:"left",
   },
   {
     field: 'medium',
     headerName: 'Medium',
     editable:false,
-    sortable: false,
+    // sortable: false,
     maxwidth: 150,
     flex:1,
-    headerAlign:"center",
-    align:"center",
+    // headerAlign:"center",
+    // align:"center",
    
   },
 ];
+const subject_list=[
+  {
+    value:"p",
+    lable:"p"
+  },
+  {
+    value:"chem",
+    lable:"chem"
+  },
+  {
+    value:"bio",
+    lable:"bio"
+  },
+  
+]
 // const rows = [
 //   { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
 //   { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
@@ -102,7 +130,7 @@ const Grade = () => {
   let school_id = decode.result.school_id;
 
   useEffect(() => {
- 
+    
     axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
     .then((data) => { 
       setRows(data.data.allStudent);
@@ -114,13 +142,44 @@ const Grade = () => {
 
   
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [test, setTest] = useState([]);
+  const [student_id, setStudentId] = useState();
+  const handleOpen = (student_id) => {
+    setOpen(true);  
+    setStudentId(student_id);
+    axios.get(`http://localhost:8080/schools/${school_id}/tests`)
+    .then((data) => { 
+      setTest(data.data.testDetails);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  const handleClose = () =>{
+    setOpen(false);
+    setSubjectList([]);
+  } 
   const [testid,setTestid]=useState(0);
   const makrUploadHandler=()=>
   {
     console.log("form is submited");
     handleClose(true);
+  }
+   
+  const [subject_list, setSubjectList] = useState([]);
+
+  const pushMarks = (test_id) => {
+    axios.post(`http://localhost:8080/students/${student_id}/tests/${test_id}/uploadmarks`)
+  }
+  
+  const getSubjects = (test_id) =>{
+    
+    axios.get(`http://localhost:8080/student/${student_id}/getSubjects`)
+    .then((data) => { 
+      setSubjectList(data.data.allSubjects);
+      pushMarks(test_id);
+    }).catch((err) => {
+      console.log(err);
+    })
   }
   
   
@@ -130,13 +189,15 @@ const Grade = () => {
       field:"view",
       headerName:"Student Details",
       width:200,
-    align:"center",
-    headerAlign:"center",
+      sortable:false,
+    // align:"center",
+    // headerAlign:"center",
+     disableColumnMenu:true,
       renderCell: (params) => {
         return (
           <div>
             <div className="UpdateButton">
-            <button onClick={handleOpen} >Update</button>
+            <button onClick={() => {handleOpen(params.row.id)}} >Update</button>
             </div>
    
       <Modal
@@ -181,14 +242,17 @@ const Grade = () => {
                 
                  select
                  label="Test ID"
-                 onChange={(e)=>setTestid(e.target.value)}
+                 onChange={(e)=>{
+                  setTestid(e.target.value);
+                  getSubjects(e.target.value);
+                 }}
                 //  SelectProps={{
                 //  native: true,
                 //  }}
               >
-                {Test.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
+                {test.map((option) => (
+                <MenuItem key={option.test_id} value={option.test_id}>
+               {option.test_id}
                </MenuItem>
                ))}
               </TextField>
@@ -200,90 +264,27 @@ const Grade = () => {
           flexDirection:"column",
           rowGap:"20px"
           }}
-
-       >            <div
-       style={{
-        display:"flex",
-        flexDirection:"row",
-        columnGap:"20px"
-        
-       }}
-       >
-       <div   style={{
-                        flex:1,
-                        display:"flex",
-                        columnGap:"20px",
-                     
-                        alignItems:"center"
-                      
-                      }}>
-                        <div style={{flex:1}}>
-                        <span>Physcis:</span>
-                        </div>
-      
-        <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
-       </div>
-        <TextField sx={{ flex:1 }}  label="Mark Obtained" variant="outlined" />
-      
-
-       </div>
-                    <div 
-                     style={{
-                      display:"flex",
-                      flexDirection:"row",
-                      columnGap:"20px",
-                      flex:1
-                      
-                     }}
-                    >
-                      <div 
-                      style={{
-                        flex:1,
-                        display:"flex",
-                        columnGap:"20px",
-                         
-                          alignItems:"center"
-                      
-                      }}
-                      >
-                        <div style={{flex:1}}>
-                        <span>Chemistry:</span>
-                        </div>
-                       
-                        <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
-                      </div>
-                    <TextField sx={{ flex:1 }}  label="Mark Obtained" variant="outlined" />
-                   
-                    </div>
-                   
-                 <div
-                  style={{
-                    display:"flex",
-                    flexDirection:"row",
-                    columnGap:"20px",
-                    
-                    
-                   }}
-                 >
-                 <div 
-                  style={{
-                    flex:1,
-                    display:"flex",
-                    columnGap:"20px",
-                 
-                    alignItems:"center"
+         
+>            
                   
-                  }}
-                 >
-                  <div style={{flex:1}}>
-                  <span>Biology:</span>
-                  </div>
-                
-                  <TextField sx={{ flex:1.5 }}  label="Total mark" variant="outlined" />
-                 </div>
-                 <TextField sx={{ flex:1 }}   label="Mark obtained" variant="outlined"/>
-              
-                 </div>
+                   
+{
+        subject_list.map((item,index)=>(
+          <div key={index} className='modal-subject-container'  >
+          <div  className='modal-subject-container-main'>
+                      <div style={{flex:1}}>
+                      <span>{item.subject_name}:</span>
+                      </div>
+    
+                      <TextField sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
+     </div>
+     <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
+    
+    
+
+     </div>
+        ))
+       }
                
        </div>
              

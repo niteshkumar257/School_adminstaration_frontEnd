@@ -9,23 +9,23 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 const columns = [
-  { field: 'id', headerName: 'Serial-No', width: 150, flex:1,headerAlign:"left", align:"Left", },
-  {field: 'student_name',flex:1,headerName: 'Name',width: 150,editable:false,headerAlign:"left",align:"Leftr"},
-  {field: 'class_id',headerName: 'Class',type: 'number',width: 150,flex:1,editable:false,headerAlign:"left",align:"center"},
-  {field: 'medium',headerName: 'Medium',editable:false,sortable: false,width: 150,flex:1,headerAlign:"left",align:"center"},
+  { field: 'id', headerName: 'SI-No', width: 150, flex:1,headerAlign:"left", align:"left", },
+  {field: 'student_name',flex:1,headerName: 'Name',width: 150,editable:false,headerAlign:"left",align:"left"},
+  {field: 'class_id',headerName: 'Class',type: 'number',width: 150,flex:1,editable:false,headerAlign:"left",align:"left"},
+  {field: 'medium',headerName: 'Medium',editable:false,width: 150,flex:1,headerAlign:"left",align:"left"},
 ];
 
-const rows = [
-  { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
-  { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
-  { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
-  { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
-  { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
-  { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
-  { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
-  { id: 101, student_name: 'Nitesh', class_id:7, medium: "English"},
+// const rows = [
+//   { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
+//   { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
+//   { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
+//   { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
+//   { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
+//   { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
+//   { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
+//   { id: 101, student_name: 'Nitesh', class_id:7, medium: "English"},
  
-];
+// ];
 
 const Student = (props) => {
   const [studentId,setStudentId]=useState(0);
@@ -40,7 +40,7 @@ const Student = (props) => {
 
     axios.get(`http://localhost:8080/schools/${school_id}/allstudent`)
     .then((data) => {
-     // console.log(data.data.allStudent);
+     console.log(data.data.allStudent);
       setRows(data.data.allStudent);
     }).catch((err) => {
       console.log(err);
@@ -60,8 +60,9 @@ const Student = (props) => {
       headerName:"Student Details",
       width:200,
       editable:false,
-    align:"center",
-    headerAlign:"center",
+      sortable:false,
+    align:"left",
+    headerAlign:"left",
     flex:1,
       renderCell: (params) => {
         return (
