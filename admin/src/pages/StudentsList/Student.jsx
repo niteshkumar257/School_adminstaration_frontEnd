@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 const columns = [
-  { field: 'id', headerName: 'SI-No', width: 150, flex:1,headerAlign:"left", align:"left", },
+  { field: 'id', headerName: 'SI.No', width: 150, flex:1,headerAlign:"left", align:"left", },
   {field: 'student_name',flex:1,headerName: 'Name',width: 150,editable:false,headerAlign:"left",align:"left"},
   {field: 'class_id',headerName: 'Class',type: 'number',width: 150,flex:1,editable:false,headerAlign:"left",align:"left"},
   {field: 'medium',headerName: 'Medium',editable:false,width: 150,flex:1,headerAlign:"left",align:"left"},

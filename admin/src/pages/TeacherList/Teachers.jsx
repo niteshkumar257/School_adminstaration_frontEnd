@@ -11,7 +11,7 @@ import axios from 'axios'
 
 // columns  of the teacher Details table
 const columns = [
-{ field: 'id', headerName: 'SI-No', width: 150, flex:1,editable:"false",align:"left" },
+{ field: 'id', headerName: 'SI.No', width: 150, flex:1,editable:"false",align:"left" },
 {field: 'teacher_name',headerName:'Name',Width:150,height:50,flex:1,editable:false,editable:false},
 {field: 'subject_id',headerName: 'Subject',minwidth: 150,editable:true,flex:1,editable:false },
 { field: 'mobile',headerName: 'Mobile Number',minwidth: 150, flex:1,editable:true,editable:false},

@@ -164,16 +164,19 @@
                 .student-salary-container{
                     // border: 2px solid black;
                     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-                      width: 102%;
-                      height: auto;
+                      width: 98%;
+                      height: 70vh;
                       border-radius: 9px;
-                      height:auto;
+                   
+                     
+                   
+
                      
                       
                       .student-salary-container-heading{
                       
                         border-radius: 9px;
-                        width: 98%;
+                        width: 98%; 
                         display: flex;
                         align-items: center;
                         justify-content: flex-start;
@@ -190,11 +193,34 @@
                         }
                       }
                       .student-info-container-body{
+                      height: auto;
+                    
                           display: flex;
+                          flex-direction: column;
+                          row-gap: 20px;
                           justify-content: center;
                           align-items: center;
                          padding: 5px;
+                         
                       }
+                      .btn{
+                        display:flex;
+                        justify-content: flex-end;
+                       margin-right: 10px;
+                    
+                        button{
+                            height: 54px;
+                width: 150px;
+                background-color: #009df1;
+                color: white;
+            font-weight: 600;
+            font-size: 1rem;
+                border-radius: 9px;
+                border: none;
+                cursor: pointer;
+                               
+                        }
+                     }
                       
                 }
 

@@ -126,12 +126,16 @@ const TeachersForm = () => {
                 {/* row one */}
 
 
-                <div className='teachers-info-section '>
-                <TextField sx={{ flex:1 }} label="Teacher Name" variant="outlined" 
-                onChange={(e)=>setName(e.target.value)}/>  
-                <TextField sx={{ flex:1 }} label="Mobile" variant="outlined" 
-                onChange={(e)=>setMobile(e.target.value)}/>               
+                <div className='teachers-info-section '> 
+                <TextField sx={{ flex:1 }} label="Teacher Name" 
+                required
+                variant="outlined" 
+                onChange={(e)=>setName(e.target.value)}/>
+                <TextField sx={{ flex:1 }}  label="Gender" variant="outlined" 
+                 required
+                onChange={(e)=>setGender(e.target.value)}/> 
                  <TextField sx={{ flex:1 }} label="Email" variant="outlined" 
+                  required
                 type="email"
                 onChange={(e)=>setEmail(e.target.value)}/>
              </div>
@@ -143,7 +147,7 @@ const TeachersForm = () => {
                
                  <TextField
                  sx={{ flex:1 }}
-                
+                 required
                  select
                  label="Subject"
  
@@ -161,19 +165,21 @@ const TeachersForm = () => {
               </TextField>
                  <TextField
                  sx={{ flex:1 }}
-               
+                 required
                  select
                  label="Medium"
                  onChange={(e)=>setMedium(e.target.value)}
                 
-                 helperText="Please select your currency">
+                 helperText="Select Medium">
                 {Medium.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
                ))}
               </TextField>
-              <TextField sx={{ flex:1 }} label="Work-Exp" variant="outlined" 
+              <TextField sx={{ flex:1 }}
+               required
+               label="Work-Exp" variant="outlined" 
                 onChange={(e)=>setWorkExp(e.target.value)}/>
         
                
@@ -185,14 +191,16 @@ const TeachersForm = () => {
                
                  <TextField
                  sx={{ flex:1 }}
-              
+                 required
                  select
                  label="Gender"
+                
                  onChange={(e)=>setGender(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Please select your currency">
+ 
+                 SelectProps={{
+                 native: true,
+                 }}
+                 helperText="Select Gender"> 
                 {Gender.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
@@ -201,10 +209,12 @@ const TeachersForm = () => {
               </TextField>
               <TextField sx={{ flex:1 }}label="Salary" variant="outlined" 
                 type="numner"
+                required
                 onChange={(e)=>setSalary(e.target.value)}/>
                 
                 <TextField sx={{ flex:1 }} label="City" variant="outlined" 
                 type="numner"
+                required
                 helperText="Enter City"
                 onChange={(e)=>setCity(e.target.value)}/>
                 
@@ -216,23 +226,25 @@ const TeachersForm = () => {
                 <div className='teachers-info-section '>
                   
                 <TextField sx={{ flex:1 }} label="Age" variant="outlined" 
+ 
                 type="number"
+ 
+                required 
                 helperText="Enter Age"
                 onChange={(e)=>setAge(e.target.value)}/>
                 
                 <TextField sx={{ flex:1 }} 
                 variant="outlined" 
                 type="date"
+                required
                 helperText="Enter StartDate"
                 onChange={(e)=>setDate(e.target.value)}/>
-                <TextField sx={{ flex:1 }} label="Addres" variant="outlined" 
-                type="text"
-                 helperText="Enter the Addres"
-                onChange={(e)=>setAddress(e.target.value)}/>
-              
-              
-      
-             
+ 
+                <TextField sx={{ flex:1 }} label="Address" variant="outlined" 
+                type="numner"
+                required
+                 helperText="Enter the Address" 
+                onChange={(e)=>setAddress(e.target.value)}/> 
               </div>
               </div>
                </div>
