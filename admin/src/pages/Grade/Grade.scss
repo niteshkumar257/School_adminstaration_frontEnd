@@ -92,3 +92,51 @@
         column-gap: 20px;
     }
 }
+
+
+// classes for modals
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    .heading{
+        span{
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: rgb(83, 83, 83);
+        }
+    }
+    .test_id_select{
+       display: grid;
+       grid-template-columns: 0.5fr;
+
+        width: 100%;
+       
+    }
+    .modal-subject-main-container{
+        display: grid;
+        grid-row-gap: 20px;
+    .modal-subject-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
+    }
+    .form-button-submit{
+        display: flex;
+      
+        justify-content: flex-end;
+        button{
+            height: 54px;
+            width: 150px;
+            background-color:#009df1;
+            color: white;
+        font-weight: 600;
+        font-size: 1rem;
+            border-radius: 9px;
+            border: none;
+        }
+    }
+}
+}

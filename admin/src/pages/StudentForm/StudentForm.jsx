@@ -10,6 +10,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from 'react';
+import Alert from '@mui/material/Alert';
+
 // select medium for the selecti list
 const Medium = [
   {
@@ -130,25 +132,14 @@ const StudentForm = () => {
   const [checked1,setchecked1]=useState(false);
   const [checked2,setchecked2]=useState(false);
   const [checked3,setchecked3]=useState(false);
-  const handleChange1=(e)=>
-  {
-       console.log(e.target.checked)
-        setchecked1(e.target.checked)
-  }
-  const handleChange2=(e)=>
-  {
-       console.log(e.target.checked)
-        setchecked2(e.target.checked)
-  }
-  const handleChange3=(e)=>
-  {
-       console.log(e.target.checked)
-        setchecked3(e.target.checked)
-  }
+  const handleChange1=(e)=> setchecked1(e.target.checked)
+  const handleChange2=(e)=> setchecked2(e.target.checked)
+  const handleChange3=(e)=> setchecked3(e.target.checked)
+  
   const [name, setName] = useState("");
   const [gender,setGender]=useState("");
   const [course,setCourse]=useState("");
-  const [medium,setmedium]=useState("");
+  const [medium,setMedium]=useState("");
   const [date,setDate]=useState("");
   const [Class,setClass]=useState("");
   const [email,setEmail]=useState("");
@@ -156,20 +147,110 @@ const StudentForm = () => {
   const [MotherName,setMotherName]=useState("");
   const [FatherProfession,setFatherProfession]=useState("");
   const [MotherProfession,setMotherProfession]=useState("");
-  const [addres,setAddres]=useState("");
+ 
   const [firstInstallment,setfirstInstallment]=useState(false);
   const [PrimaryNumber,setPrimaryNumber]=useState("");
   const [AlternateNumber,setAlternateNumber]=useState("");
   const [AadharNumber,setAadharNumber]=useState("");
+  const [Address,setAddress]=useState("");
+  const [board,setBoard]=useState("");
+
+
+
+  // error handler
+
+  const [nameError,setNameError]=useState(false);
+  const [mediumError,setMediumError]=useState(false);
+  const [courseError,setCourseError]=useState(false);
+  const [boardError,setBoardError]=useState(false);
+  const [classError,setClassError]=useState(false);
+  const [fatherNameError,setFahterNameError]=useState(false);
+  const [motherNameError,setMohterNameError]=useState(false);
+  const [fatherProfessionError,setFatherProfessionError]=useState(false);
+  const [motherProfessionError,setmotherProfessionError]=useState(false);
+  const [altNumberError,setAltNumberError]=useState(false);
+  const [emailError,setEmailError]=useState(false);
+  const [genderError,setGenderError]=useState(false);
+  const [primaryError,setPrimaryError]=useState(false);
+  const [dateError,setDateError]=useState(false);
+  const [aadhaError,setAadharError]=useState(false);
+  const [addressError,setAddressError]=useState(false);
+  const [oneError,setOneError]=useState(false);
+  const [twoError,setTwoError]=useState(false);
+  const [thirdError,setThirdError]=useState(false);
   
+
+
+  // fee detals
+  const [One,setOne]=useState("");
+  const [two,setTwo]=useState("");
+  const [Thrid,setThird]=useState("");
+
+  const [onedate,setOnedate]=useState("");
+  const [twodate,setTwodate]=useState("");
+  const [Thirddate,setThirddate]=useState("");
+  
+
+  
+
+  const [alertMessage,setAlertMessage]=useState(false);
+  const [sub,setSub]=useState(false);
   const submitHandler = (e) => {
-   
     e.preventDefault();
-    console.log("funtion called");
-  console.log(name);
-  console.log(gender);
-  console.log(course);
-  alert("All field are required");
+    setNameError(false);
+    setMediumError(false);
+    setAltNumberError(false);
+    setBoardError(false);
+    setClassError(false);
+    setCourseError(false);
+    setFahterNameError(false);
+    setMohterNameError(false);
+    setFatherProfessionError(false);
+    setmotherProfessionError(false);
+    setPrimaryError(false);
+    setAltNumberError(false);
+    setDateError(false);
+    setAddressError(false);
+    setOneError(false);
+    setTwoError(false);
+    setThirdError(false);
+    setGenderError(false);
+    setEmailError(false);
+  
+ 
+  
+  
+     if(name=='') setNameError(true); 
+     if(medium=='') setMediumError(true);
+     if(Class=='') setClassError(true);
+     if(course=='') setCourseError(true);
+     if(gender=='') setGenderError(true);
+     if(email=='') setEmailError(true);
+     if(Fathername=='') setFahterNameError(true);
+     if(MotherName=='') setMohterNameError(true);
+     if(FatherProfession=='') setFatherProfessionError(true);
+     if(MotherProfession=='') setmotherProfessionError(true);
+     if(AlternateNumber=='') setAltNumberError(true);
+     if(PrimaryNumber=='') setPrimaryError(true);
+     if(date=='') setDateError(true);
+     if(Address=='') setAddressError(true);
+     if(AadharNumber=='') setAadharError(true);
+     if(board=='') setBoardError(true);
+     if(One=='') setOneError(true);
+     if(two=='') setTwoError(true);
+     if(Thrid=='') setThirdError(true);
+
+     if(name && medium && Class && course && email && Fathername && MotherName && FatherProfession && MotherProfession && AlternateNumber && PrimaryNumber && date && Address && board && One && two && Thrid )
+     {
+      alertMessage("Submitted");
+         
+     }
+     
+   
+
+  
+  
+
   }
   // second funtion of 
   // first installment button handler funtion
@@ -194,7 +275,7 @@ const StudentForm = () => {
               {/* header container */}
               <span >Add Student</span>
             </div>
-            <form noValidate  onSubmit={submitHandler}>
+            <form  noValidate onSubmit={submitHandler}>
             <div className='student-info-detail-container'>
            
              <div className='student-info-detail-student-container'>
@@ -202,38 +283,22 @@ const StudentForm = () => {
                 <span>Student Details</span>
               </div>
               <div className='student-info-detail-student-container-textfield'>
-                <div className='student-info-section '>
+               
 
+                {/* row one info */}
 
-                <TextField sx={{ flex:1 }} label="Student Name" 
-                variant="outlined" 
-                required
-                helperText="Enter Student Name"
-                onChange={(e)=>setName(e.target.value)}/>
-               <TextField
-                 sx={{ flex:1 }}
+              <div className='student-info-section '>
+                <TextField  error={nameError}sx={{ flex:1 }} label="Student Name"  required helperText="Enter Student Name" onChange={(e)=>setName(e.targetvalue)}/>
+            <TextField sx={{ flex:1 }}  error={genderError}  select label="Gender" required    onChange={(e)=>setGender(e.target.value)}   helperText="Select Gender">
                 
-                 select
-                 label="Gender"
-                 required
-                 
-                 onChange={(e)=>setGender(e.target.value)}
-                  helperText="Select Gender">
-                {Gender.map((option) => (
+              {Gender.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
                ))}
               </TextField>
-                 <TextField
-                 sx={{ flex:1 }}
-                 id="outlined-select-currency"
-                 select
-                 label="Course"
-                 required
-                 onChange={(e)=>setCourse(e.target.value)}
-                  helperText="Select Course">
-                {Course.map((option) => (
+                 <TextField sx={{ flex:1 }}  error={courseError} select label="Course" required    onChange={(e)=>setCourse(e.target.value)}  helperText="Select Course">
+               {Course.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
@@ -241,41 +306,19 @@ const StudentForm = () => {
               </TextField>
         
                
-                </div>
+             </div>
+
+
                 <div className='student-info-section '>
-                <TextField
-                 sx={{ flex:1 }}  variant="outlined" 
-               helperText="Select Date Of Birth"
-                type="date"
-                onChange={(e)=>setName(e.target.value)}/>
-                 <TextField
-                 sx={{ flex:1 }}
-                select
-                 label="Class"
-                 required
-                 onChange={(e)=>setCourse(e.target.value)}
-               
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Select Class">
+                <TextField   sx={{ flex:1 }} error={dateError}variant="outlined"    helperText="Select Date Of Birth"  type="date"  onChange={(e)=>setDate(e.target.value)}/>
+                <TextField  sx={{ flex:1 }}  error={classError} select  label="Class"    required    onChange={(e)=>setClass(e.target.value)}  helperText="Select Class">
                 {Batch.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
                ))}
               </TextField>
-                 <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 helperText="Select Medium"
-                 label="Medium"
-                 onChange={(e)=>setmedium(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                >
+                 <TextField  sx={{ flex:1 }} error={mediumError}  required   select  helperText="Select Medium"  label="Medium"  onChange={(e)=>setMedium(e.target.value)}>
                 {Medium.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
@@ -286,32 +329,10 @@ const StudentForm = () => {
                
                 </div>
                 <div className='student-info-section '>
-                <TextField sx={{ flex:1 }}  variant="outlined" 
-               helperText="Enter Address"
-               label="Address"
-                type="text"
-                required
-               
-                onChange={(e)=>setName(e.target.value)}/>
-                 <TextField sx={{ flex:1 }}  variant="outlined" 
-               helperText="Enter Aadhar Number"
-               label="Aadhar Number"
-                type="text"
-                required
+                <TextField sx={{ flex:1 }}   error={addressError}   helperText="Enter Address" label="Address"  type="text"  required  onChange={(e)=>setAddress(e.target.value)}/>
+                <TextField sx={{ flex:1 }}  error={aadhaError}  label="Aadhar Number"      type="text"          helperText="Enter Aadhar Number"  required
                 onChange={(e)=>setAadharNumber(e.target.value)}/>
-                
-                 <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="Board"
-                 helperText="Select Board"
-                 onChange={(e)=>setCourse(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                //  helperText="Select Class"
-                 >
+                <TextField  sx={{ flex:1 }} error={boardError}  required    select  label="Board"  helperText="Select Board"    onChange={(e)=>setBoard(e.target.value)} >
                 {Board.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
@@ -330,48 +351,25 @@ const StudentForm = () => {
              </div>
               <div className='student-info-detail-parent-container-textfield'>
               <div className='parent-info-section '>
-                <TextField sx={{ flex:1 }} label="Father Name" variant="outlined" 
-                   required
-                   helperText="Father Name"
-                onChange={(e)=>setFatherName(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  label="Father profession" variant="outlined" 
-                helperText="Father Profession"
-                   required
-                onChange={(e)=>setFatherProfession(e.target.value)}/>
-                 <TextField sx={{ flex:1 }}  label="Primary Number" variant="outlined" 
-                    required
-                   helperText="Primary Number"
-                onChange={(e)=>setPrimaryNumber(e.target.value)}/>
-                
-        
-               
-                </div>
+                <TextField sx={{ flex:1 }} error={fatherNameError} label="Father Name"    required  helperText="Father Name"   onChange={(e)=>setFatherName(e.target.value)}/>
+                 <TextField sx={{ flex:1 }}  error={fatherProfessionError} label="Father profession"   helperText="Father Profession"   required  onChange={(e)=>setFatherProfession(e.target.value)}/>
+                <TextField sx={{ flex:1 }} error={primaryError}  label="Primary Number"  required helperText="Primary Number"   onChange={(e)=>setPrimaryNumber(e.target.value)}/>
+                  
+             </div>
+
+
                 <div className='parent-info-section '>
-                <TextField sx={{ flex:1 }} label="Mother Name" variant="outlined" 
-                   required
-                   helperText="Mohter Name"
-                onChange={(e)=>setMotherName(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  label="Mother profession" variant="outlined" 
-                helperText="Mother Profession"
-                   required
-                onChange={(e)=>setMotherProfession(e.target.value)}/>
-                 <TextField sx={{ flex:1 }}  label="Alternate Number" variant="outlined" 
-                    required
-                    helperText="Alternate Number"
-                onChange={(e)=>setAlternateNumber(e.target.value)}/>
-                
-        
-               
-                </div>
+                <TextField sx={{ flex:1 }}  error={motherNameError}label="Mother Name"   required  helperText="Mohter Name"    onChange={(e)=>setMotherName(e.target.value)}/>
+                <TextField sx={{ flex:1 }}  error={motherProfessionError} label="Mother profession"   helperText="Mother Profession"   required onChange={(e)=>setMotherProfession(e.target.value)}/>
+                <TextField sx={{ flex:1 }}  error={altNumberError} label="Alternate Number"  required  helperText="Alternate Number"  onChange={(e)=>setAlternateNumber(e.target.value)}/>
+                  
+                   
+              </div>
+
+
                 <div className='parent-info-section '>
-                <TextField sx={{ flex:0.317}} label="Email" variant="outlined" 
-                   required
-                type="email"
-                helperText="Enter Parent Email"
-                onChange={(e)=>setEmail(e.target.value)}/>
-                
-        
-               
+                <TextField sx={{ flex:0.317}}  error={emailError}label="Email"  required  type="email"   helperText="Enter Parent Email"  onChange={(e)=>setEmail(e.target.value)}/>
+                   
                 </div>
 
               </div>
@@ -387,6 +385,9 @@ const StudentForm = () => {
                 sx={{
                   height:"7vh"
                 }}
+                error={oneError}
+                required
+                onChange={(e)=>setOne(e.target.value)}
                 id="outlined-basic" label="1st InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox {...label}
@@ -401,6 +402,8 @@ const StudentForm = () => {
                   }}
                variant="outlined" 
                type="date"
+               required
+              
                 helperText="Select a Date"
                 onChange={(e)=>setName(e.target.value)}/>}
                 </div>
@@ -409,17 +412,21 @@ const StudentForm = () => {
                 </div>
                 <div className='fee-info-section-installment'>
                 <TextField
+               error={twoError}
                  sx={{
                   height:"7vh"
+                 
                 }}
+                onChange={(e)=>setTwo(e.target.value)}
                  id="outlined-basic" label="2nd 
                 
                 InstallMent"
-               
+               required
                  variant="outlined" />
                  <div className="fee-info-section-installment-checkbox-date">
                  <Checkbox {...label}
                  checked={checked2}
+                 required
                  onChange={handleChange2}
                  color="success"
 
@@ -433,6 +440,7 @@ const StudentForm = () => {
                   variant="outlined" 
                
                   type="date"
+                  required
                   helperText="Select a Date"
                   onChange={(e)=>setName(e.target)}/>}
                  </div>
@@ -441,9 +449,12 @@ const StudentForm = () => {
                 </div>
                 <div className='fee-info-section-installment'>
                 <TextField 
+                   error={thirdError}
                 sx={{
                   height:"7vh"
                 }}
+                onChange={(e)=>setThird(e.target.value)}
+                required
                 id="outlined-basic" label="3rd InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox  

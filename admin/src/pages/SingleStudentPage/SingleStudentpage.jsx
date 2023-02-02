@@ -8,89 +8,296 @@ import Table from "../../components/Table/TableFee"
 import { useParams } from 'react-router';
 import axios from "axios"
 import Chart from '../../components/Chart/Chart';
+import Performance from "../../assest/performance.png";
+import Fee from "../../assest/fee.png";
 
 // fee details column and row
+// Modification of testDetails data
 
+
+const value=[
+  {
+      "test_id":1,
+      "test_date":"2020-20-04",
+      "subject_name":[
+          "Maths",
+          "Physics",
+          "Chemistry"
+      ],
+      "mark-obtained":[
+          29,30,50
+      ],
+      "total_mark":[
+          30,50,90
+      ],
+      "percentage":90
+  },
+  {
+      "test_id":2,
+      "test_date":"2020-12-04",
+      "subject_name":[
+          "Maths",
+          "Physics",
+          "Chemistry"
+      ],
+      "mark-obtained":[
+          29,30,50
+      ],
+      "total_mark":[
+          30,50,90
+      ],
+      "percentage":90
+  }
+  ]
+  
+  
+  
+  
+  // row part
+  
+  let perFormanceColumn=[];
+  const columnValue=Object.entries(value[0])
+  
+  
+  columnValue.map((it,index)=>
+  {
+      
+     
+      if(it[0]==="subject_name")
+      {
+           it[1].map((it,index)=>
+           {
+               const data={
+                  field:it,
+                  headerName:it,
+                  width:"150px",
+                  align:"left",
+                  headerAlign:"left",
+                  sortable:false,
+                  flex:1
+  
+                  
+               }
+             
+               perFormanceColumn.push(data);
+           })
+      }
+    if(it[0]==="test_id" || it[0]==='test_date' || it[0]==='percentage')
+    {
+      const data={
+          field:it[0],
+          headerName:it[0].charAt(0).toUpperCase()+it[0].slice(1),   // str.charAt(0).toUpperCase() + str.slice(1)
+             width:"150px",
+          align:"left",
+          headerAlign:"left",
+          sortable:false,
+          flex:1
+  
+       }
+     
+       perFormanceColumn.push(data);
+    }
+  })
+  console.log(perFormanceColumn);
+  
+  
+  
+  
+  
+  
+
+// const value=[
+//   {
+//       "test_id":1,
+//       "test_date":"2020-20-04",
+//       "subject_name":[
+//           "Maths",
+//           "Physics",
+//           "Chemistry"
+//       ],
+//       "mark-obtained":[
+//           29,30,50
+//       ],
+//       "total_mark":[
+//           30,50,90
+//       ],
+//       "percentage":90
+//   },
+//   {
+//       "test_id":2,
+//       "test_date":"2020-12-04",
+//       "subject_name":[
+//           "Maths",
+//           "Physics",
+//           "Chemistry"
+//       ],
+//       "mark-obtained":[
+//           29,30,50
+//       ],
+//       "total_mark":[
+//           30,50,90
+//       ],
+//       "percentage":90
+//   }
+//   ]
+  let col;
+  const  array=[];
+  value.map((item,index)=>
+  {
+  let temp=Object.entries(item);
+  let row=[];
+  const subjectArray=[];
+  const markArray=[];
+  temp.map((item,index)=>
+  {
+  
+       if(item[0]==='subject_name') item[1].map((it,index)=> {subjectArray.push(it);})
+       if(item[0]==='total_mark')item[1].map((it,index)=> {markArray.push(it);})
+       
+  })
+  
+  const result={}
+  temp.map((item,index)=>{
+      if(item[0]==="test_id"|| item[0]==='test_date' || item[0]==='percentage') 
+    
+      if(item[0]==='test_id')
+      {
+       
+        result["id"]=item[1];
+      }
+      else  result[item[0]]=item[1];
+  })
+  
+  for(let i=0;i<markArray.length;i++) result[subjectArray[i]]=markArray[i];
+  temp.map((item,index)=>{ if(item[0]==="test_id"|| item[0]==='test_data' || item[0]==='percentage') result[item[0]]=item[1];})
+  array.push(result);
+  
+  })
+  console.log(array);
+  
+  
+
+
+
+/// modification of testDetails data
    
 const subjectlist=[
   {
     value:"Physics",
     lable:"Physics",
+    temp:"TotalMark",
     color:"#82ca9d",
-    array:[  { "Month": "Jan","Physics": 20,},
-      {"Month": "Feb", "Physics": 30,},
-      {"Month": "March","Physics": 30,},
-      {"Month": "April","Physics": 20,},
-      {"Month": "May","Physics": 45,},
-      {"Month": "June","Physics": 10,},
-      {"Month": "July","Physics": 30,}]
+    array:[  { "Month": "Jan","Physics": 20, "TotalMark": 100,},
+      {"Month": "Feb", "Physics": 30, "TotalMark": 100,},
+      {"Month": "March","Physics": 30, "TotalMark": 100,},
+      {"Month": "April","Physics": 20, "TotalMark": 100,},
+      {"Month": "May","Physics": 45, "TotalMark": 100,},
+      {"Month": "June","Physics": 10, "TotalMark": 100,},
+      {"Month": "July","Physics": 30, "TotalMark": 100,}]
  },
   {
     value:"Math",
     lable:"Math",
+    temp:"TotalMark",
     color:"#82ca9d",
     array:[
       {
 "Month": "Jan",
+"TotalMark": 100,
         "Math": 90,
       },
       {
         "Month": "Feb",
+        "TotalMark": 100,
         "Math": 20,
       },
       {
         "Month": "March",
-        "Math": 90,
+        "TotalMark": 100,
+        "Math": 100,
       },
       {
         "Month": "April",
+        "TotalMark": 100,
         "Math": 10,
       },
       {
         "Month": "May",
-        "Math": 60,
+        "TotalMark": 100,
+        "Math": 100,
      },
       {
         "Month": "June",
+        "TotalMark": 100,
         "Math": 80,
       },
       {
         "Month": "July",
-        "Math": 90, 
-      }
+        "TotalMark": 100,
+        "Math": 100, 
+      },
+    //   {
+    //     "Month": "Aug",
+    //     "pv": 100,
+    //     "Math": 10,
+    //   },
+    //   {
+    //     "Month": "Sep",
+    //     "pv": 100,
+    //     "Math": 60,
+    //  },
+    //   {
+    //     "Month": "Oct",
+    //     "pv": 100,
+    //     "Math": 80,
+    //   },
+    //   {
+    //     "Month": "Nov",
+    //     "pv": 100,
+    //     "Math": 90, 
+    //   }
     ]
   },
   {
     value:"Biology",
     lable:"Biology",
+    temp:"TotalMark",
     color:"#82ca9d",
+   
     array:[
       {
         "Month": "Jan",
+        "TotalMark":100,
         "Biology": 98,
       },
       {
         "Month": "Feb",
+        "TotalMark": 100,
         "Biology": 67,
       },
       {
         "Month": "March",
+        "TotalMark": 100,
         "Biology": 90,
       },
       {
         "Month": "April",
+        "Totalmark": 100,
         "Biology": 12,
       },
       {
         "Month": "May",
+        "TotalMark": 100,
         "Biology": 97,
      },
       {
         "Month": "June",
+        "Totalmark" :100,
         "Biology": 23,
       },
       {
         "Month": "July",
+        "TotalMark": 100,
         "Biology": 34, 
       }
     ]
@@ -112,8 +319,7 @@ const rows = [
 {id:1,total_fees:1000,LastDate:"12/10/23",Status:"paid"},
 {id:2,total_fees:4000,LastDate:"12/10/23",Status:"paid"},
 {id:3,total_fees:8000,LastDate:"12/10/23",Status:"paid"},
-{id:4,total_fees:4000,LastDate:"12/10/23",Status:"paid"},
-{id:5,total_fees:8000,LastDate:"12/10/23",Status:"paid"}
+
 
 
  
@@ -124,27 +330,33 @@ const rows = [
 
 /////
 ////////
-const performanceColumn = [
-  { field: 'id', headerName: 'Test_id', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
-  {field: 'Date',flex:1,headerName: 'Date',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
-  {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left", align:"left",sortable:false},
-  {field: 'Math',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
-  {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
-  {field: 'Percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false, align:"left"},
+// const performanceColumn = [
+//   { field: 'id', headerName: 'Test_id', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
+//   {field: 'test_date',flex:1,headerName: 'Date',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
+//   {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left", align:"left",sortable:false},
+//   {field: 'Maths',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
+//   {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
+//   {field: 'percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false, align:"left"},
 
  
-];
+// ];
 
-const  performanceRow= [
-{id:1,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-{id:2,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-{id:3,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-{id:4,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-{id:5,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// const  performanceRow= [
+// {id:1,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:2,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:3,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:4,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:5,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:6,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:7,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:8,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:9,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+// {id:10,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
+
 
  
  
-];
+// ];
 ///////
 ////
 
@@ -162,6 +374,9 @@ const SingleStudentpage = (props) => {
   const [board, setBoard] = useState("icse");
   const [Class, setClass] = useState("12th");
 
+
+ 
+
   // parent details
 
   const [fathername, setFathername] = useState("G NagaRaju Reddy");
@@ -172,6 +387,12 @@ const SingleStudentpage = (props) => {
   const [altNumber, setAltNumber] = useState("8767856873");
   const [primaryNumber, setPrimaryNumber] = useState("58383432");
   const [email, SetEmail] = useState("niteshredd257@gmail.com");
+
+ // Performance 
+   const [value,setValue]=useState([]);
+
+
+ //Performance
 
   // installMentupdateHandle Select funtion
 
@@ -210,6 +431,7 @@ const SingleStudentpage = (props) => {
   // ----
 
   // fee details
+  
   const [feeDetails, setFeeDetails] = useState([]);
 
   let student_id = params.student_id;
@@ -381,7 +603,7 @@ const SingleStudentpage = (props) => {
                       <h1>100000</h1>
                     </div>
                     <div className="feeIcon">
-                      <img src={StudentImage} alt='fee'></img>
+                      <img src={Fee} alt='fee'></img>
                     </div>
                   </div>
                   <div className="right"></div>
@@ -397,15 +619,21 @@ const SingleStudentpage = (props) => {
 
             {/* student performance details */}
             <div className='section perfomanceAnalytic-info'>
+              
               <div className="perfomanceAnalytic-heading">
                 <h1>Performance Analytic</h1>
                
+              </div>
+              <div className='performanceAnalytic-info-icon'>
+                <span>Performance</span>
+               <img src={Performance} alt="icon"></img>
               </div>
               <div className='PerformanceAnalytic-body'>
              
                <div className="performanceAnalytic-body-content">
                 <div className='perfomanceAnalytic-body-content-table'>
-                <Table rows={performanceRow} columns={performanceColumn}/> </div>
+                <Table rows={array} columns={perFormanceColumn}/> </div>
+           
              <div className="performanceAnalytic-body-content-charts">
               {subjectlist.map((item,index)=>(
                      <div className="container">
@@ -414,7 +642,7 @@ const SingleStudentpage = (props) => {
                         <span className='subhead'>Recent Test Results</span>
                       </div>
                       <div className='content'>
-                       <Chart  color={item.color} dataKey={item.value} data={item.array} />
+                       <Chart  color={item.color} temp={item.temp} dataKey={item.value} data={item.array} />
                       </div>
                     </div>    
               ))}

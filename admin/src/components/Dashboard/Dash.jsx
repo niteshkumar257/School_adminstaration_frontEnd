@@ -11,18 +11,18 @@ import s4 from "../../assest/school4.png";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 const data={
-    school_name:"Broad River Grammar public english meddium  School",
-    city_name:"Ambika pur",
-    email:"Admin123@gmail.com",
-    mobile:"8249829096",
-    admin_name:"Admin Name"
+    school_name:"GAANV Wala High School Academy, Jaipur",
+    city_name:"Jaipur",
+    email:"admin123@gaanvwala.com",
+    mobile:"82XXXXXXX96",
+    admin_name:"GW Head"
 }
 
 
 const Dashboard = () => {
     // const [data,setData]=useState({});
-    const [studentCount,setStudentCount] = useState(0);
-    const [teacherCount,setTeacherCount] = useState(0);
+    const [studentCount,setStudentCount] = useState(1250);
+    const [teacherCount,setTeacherCount] = useState(34);
     // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
     // let school_id = decodeToken.result.school_id;
     // useEffect(() => {
@@ -110,7 +110,7 @@ const Dashboard = () => {
                 Deapartment
             </div>
             <div className="count">
-                20+
+                3
             </div>
         </div>
         <div className="right">

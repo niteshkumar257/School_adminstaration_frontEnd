@@ -204,21 +204,18 @@
                          
                       }
                       .btn{
-                        display:flex;
+                        display: flex;
+      
                         justify-content: flex-end;
-                       margin-right: 10px;
-                    
                         button{
                             height: 54px;
-                width: 150px;
-                background-color: #009df1;
-                color: white;
-            font-weight: 600;
-            font-size: 1rem;
-                border-radius: 9px;
-                border: none;
-                cursor: pointer;
-                               
+                            width: 150px;
+                            background-color:#009df1;
+                            color: white;
+                        font-weight: 600;
+                        font-size: 1rem;
+                            border-radius: 9px;
+                            border: none;
                         }
                      }
                       

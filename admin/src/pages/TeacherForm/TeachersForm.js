@@ -8,7 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import {useState } from "react"
+import { useState } from "react"
 import "./TeachersForm.scss"
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -51,242 +51,220 @@ const Medium = [
 ];
 const Gender = [
   {
-    value: 'Physics',
-    label: 'Physics',
+    value: 'Male',
+    label: 'Male',
   },
   {
-    value: 'Math',
-    label: 'Math',
+    value: 'Female',
+    label: 'Female',
   },
   {
-    value: 'Chemistry',
-    label: 'Chemistry',
+    value: 'Binary',
+    label: 'Binary',
   },
   {
-    value: 'Biology',
-    label: 'Biology',
+    value: 'Not Disclose',
+    label: 'Not Disclose',
   },
-  {
-    value: 'Hindi',
-    label: 'English',
-  },
- 
+
 
 
 
 ]
 const TeachersForm = () => {
-  const [teacher_name,setName]=useState("");
-  const [age,setAge]=useState("");
-  const [mobile,setPhone]=useState("");
-  const [email,setEmail]=useState("");
-  const [gender,setGender]=useState("");
-  const [city,setCity]=useState("");
-  const [experience,setWorkExp]=useState("");
-  const [salary,setSalary]=useState("");
- const [medium,setMedium]=useState("");
- const [subject_id,setSubject]=useState("");
- const [address,setAddress]=useState("");
- const [date,setDate]=useState("");
- 
+  const [teacher_name, setName] = useState("");
+  const [age, setAge] = useState(0);
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [city, setCity] = useState("");
+  const [experience, setWorkExp] = useState("");
+  const [salary, setSalary] = useState("");
+  const [medium, setMedium] = useState("");
+  const [subject_id, setSubject] = useState("");
+  const [address, setAddress] = useState("");
+  const [date, setDate] = useState("");
+
+
+  const [teacher_nameError,setTeachernameError]=useState(false);
+  const [ageError,setAgeError]=useState(false);
+  const [mobileError,setMobileError]=useState(false);
+  const [emailError,setEmailError]=useState(false);
+  const [cityError,setCityError]=useState(false);
+  const [experienceError,setExperinecError]=useState(false);
+  const [salaryError,setSalaryError]=useState(false);
+  const [addresError,setAddressError]=useState(false);
+  const [dateError,setDateError]=useState(false);
+  const [mdeiumError,setMediumError]=useState(false);
+  const [genderError,setGenderError]=useState(false);
+  const [subjectError,setSubjectError]=useState(false);
+  
+
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
 
- useEffect(() => {
+  useEffect(() => {
     axios.get(`http://localhost:8080/school/${school_id}/allSubject`)
-    .then((data) => {
-      console.log(data.data);
-    }).catch((err) => {
-       console.log(err);
-    })
- },[])
+      .then((data) => {
+        console.log(data.data);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }, [])
 
-  const submitHandler=(e)=>
-  {
-        e.preventDefault();
-        axios.post('/user', {
-          teacher_name,
-          age,mobile,email,gender,gender,experience,salary,subject_id,city
-        })
-        .then( (res) => {
-          console.log(res);
-        })
-        .catch( (err) => {
-          console.log(err);
-        });
+ 
+  const submitHandler = (e) => {
+    e.preventDefault();
+     setTeachernameError(false);
+     setMobileError(false);
+     setDateError(false);
+     setSalaryError(false);
+     setCityError(false);
+     setAddressError(false);
+     setAgeError(false);
+     setCityError(false);
+     setEmailError(false);
+     setExperinecError(false);
+     setGenderError(false);
+     setSubjectError(false);
+     setMediumError(false);
+    
+    
+    if(address=='') setAddressError(true);
+    if(age==0) setAgeError(true);
+    if(city=='') setCityError(true);
+    if(teacher_name=='')
+    {
+      console.log("name is empty");
+      setTeachernameError(true);
+    }
+    if(mobile=='') setMobileError(true);
+    if(email=='') setEmailError(true);
+    if(subject_id=='') setSubjectError(true);
+    if(medium=='') setMediumError(true);
+    if(experience=='') setExperinecError(true);
+    if(gender=='') setGenderError(true);
+    if(salary=='') setSalaryError(true);
+    if(date=='') setDateError(true);
+
+    
+      
+    
+
+    if(teacher_name && address && age && city && mobile && medium && experience && gender && salary && date )
+    {
+    axios.post('/user', {
+      teacher_name,
+      age, mobile, email, gender, gender, experience, salary, subject_id, city
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   }
   return (
     <div className='teachers-container '>
-    <Sidebar/>
-    <div className='teachers'>
-        <Navbar/>
+      <Sidebar />
+      <div className='teachers'>
+        <Navbar />
         <div className='teachers-page page-container'>
-          
-        <div className="teacherForm-page-container">
+
+          <div className="teacherForm-page-container">
             <div className='teacherForm-page-container-heading'>
 
               {/* header container */}
               <span >Add Teacher</span>
             </div>
-            <form noValidate  onSubmit={submitHandler}>
-            <div className='teachers-info-detail-container'>
-           
-             <div className='teachers-info-detail-student-container'>
-              <div className='teachers-info-detail-student-container-subheading'>
-                <span>Teacher Details</span>
-              </div>
-              <div className='teachers-info-detail-student-container-textfield'>
-                
+            <form noValidate onSubmit={submitHandler}>
+              <div className='teachers-info-detail-container'>
 
-                {/* row one */}
+                <div className='teachers-info-detail-student-container'>
+                  <div className='teachers-info-detail-student-container-subheading'>
+                    <span>Teacher Details</span>
+                  </div>
+                  <div className='teachers-info-detail-student-container-textfield'>
 
 
-                <div className='teachers-info-section '>
-                <TextField sx={{ flex:1 }} label="Teacher Name" 
-                required
-                variant="outlined" 
-                onChange={(e)=>setName(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  label="Gender" variant="outlined" 
-                 required
-                onChange={(e)=>setGender(e.target.value)}/>
-                 <TextField sx={{ flex:1 }} label="Email" variant="outlined" 
-                  required
-                type="email"
-                onChange={(e)=>setEmail(e.target.value)}/>
-             </div>
+                    {/* row one */}
 
 
-                {/* row two */}
+                    <div className='teachers-info-section '>
+                      <TextField sx={{ flex: 1 }} label="Teacher Name"  error={teacher_nameError}required helperText="Enter Name" onChange={(e) => setName(e.target.value)} />
+                      <TextField sx={{ flex: 1 }} label="Mobile" error={mobileError}  required helperText="Enter Mobile" onChange={(e) => setMobile(e.target.value)} />
+                      <TextField sx={{ flex: 1 }} label="Email"  helperText="Enter Email" error ={emailError}required type="email" onChange={(e) => setEmail(e.target.value)} />
+                    </div>
 
-                <div className='teachers-info-section '>
-               
-                 <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="Subject"
-                 onChange={(e)=>setSubject(e.target.value)}
-               
-                 helperText="Select Subject">
-                {Subject.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
-               </MenuItem>
-               ))}
-              </TextField>
-                 <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="Medium"
-                 onChange={(e)=>setMedium(e.target.value)}
-                
-                 helperText="Select Medium">
-                {Medium.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
-               </MenuItem>
-               ))}
-              </TextField>
-              <TextField sx={{ flex:1 }}
-               required
-               label="Work-Exp" variant="outlined" 
-                onChange={(e)=>setWorkExp(e.target.value)}/>
-        
-               
+
+                    {/* row two */}
+
+                    <div className='teachers-info-section '>
+
+                      <TextField sx={{ flex: 1 }} error={subjectError} required select label="Subject" onChange={(e) => setSubject(e.target.value)} helperText="Select Subject">
+                        {Subject.map((option) =>
+                         (<MenuItem key={option.value}
+                          value={option.value}>
+                             {option.label} 
+                             </MenuItem>))}
+                               </TextField> 
+                       <TextField sx={{ flex: 1 }} required select label="Medium" error={mdeiumError} onChange={(e) => setMedium(e.target.value)} helperText="Select Medium">
+                        {Medium.map((option) => (<MenuItem key={option.value} value={option.value}>{option.label} </MenuItem>))}</TextField> 
+                      <TextField sx={{ flex: 1 }} error={experienceError} helperText="Enter Work-experience" required label="Work-Exp" onChange={(e) => setWorkExp(e.target.value)} /> 
+
+                    </div>
+
+
+                    {/* { third row} */}
+                    <div className='teachers-info-section '>
+
+                       <TextField sx={{ flex: 1 }} error={genderError} required select label="Gender" onChange={(e) => setGender(e.target.value)} helperText="Select Gender">
+                        {Gender.map((option) =>
+                         (<MenuItem key={option.value} 
+                         value={option.value}>
+                           {option.label}</MenuItem>))}
+                            </TextField>
+                       <TextField sx={{ flex: 1 }} error={salaryError}label="Salary" type="number" helperText="Enter Salary" required onChange={(e) => setSalary(e.target.value)} />
+                      <TextField sx={{ flex: 1 }} error={cityError} label="City"  required helperText="Enter City" onChange={(e) => setCity(e.target.value)} />  
+
+
+
+                    </div>
+
+                    {/* 4 th row */}
+                    <div className='teachers-info-section '>
+
+                      <TextField sx={{ flex: 1 }} error={ageError} label="Age" type="number" equired helperText="Enter Age" onChange={(e) => setAge(e.target.value)} />
+                      <TextField sx={{ flex: 1 }} error={dateError} type="date" required helperText="Enter StartDate" onChange={(e) => setDate(e.target.value)} />
+                      <TextField sx={{ flex: 1 }}  error={addresError}label="Address"  required helperText="Enter the Address" onChange={(e) => setAddress(e.target.value)} />
+                    </div>
+
+
+                  </div>
                 </div>
+                <div className='buttonSubmit'> <button>Submit</button>  </div>
 
 
-                {/* { third row} */}
-                <div className='teachers-info-section '>
-               
-                 <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="Gender"
-                
-                 onChange={(e)=>setGender(e.target.value)}
-                 SelectProps={{
-                 native: true,
-                 }}
-                 helperText="Select Gender">
-                {Gender.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
-               </MenuItem>
-               ))}
-              </TextField>
-              <TextField sx={{ flex:1 }}label="Salary" variant="outlined" 
-                type="numner"
-                required
-                onChange={(e)=>setSalary(e.target.value)}/>
-                
-                <TextField sx={{ flex:1 }} label="City" variant="outlined" 
-                type="numner"
-                required
-                helperText="Enter City"
-                onChange={(e)=>setCity(e.target.value)}/>
-                
-        
-               
-                </div>
-
-                {/* 4 th row */}
-                <div className='teachers-info-section '>
-                  
-                <TextField sx={{ flex:1 }} label="Age" variant="outlined" 
-                type="numner"
-                required
-                helperText="Enter Age"
-                onChange={(e)=>setSalary(e.target.value)}/>
-                
-                <TextField sx={{ flex:1 }} 
-                variant="outlined" 
-                type="date"
-                required
-                helperText="Enter StartDate"
-                onChange={(e)=>setDate(e.target.value)}/>
-                <TextField sx={{ flex:1 }} label="Address" variant="outlined" 
-                type="numner"
-                required
-                 helperText="Enter the Address"
-                onChange={(e)=>setAddress(e.target.value)}/>
-              
-              
-      
-             
               </div>
-              </div>
-               </div>
-           
+            </form>
 
-            
-             
-           
-               <div className='buttonSubmit'>
-               <button>Submit</button>
-                 </div>
-         
-           </div>
-             </form>
-               
-             
 
-          
+
+
 
 
           </div>
-       
-           
-           
-           
-          
+
+
+
+
+
         </div>
+      </div>
+
     </div>
 
-   </div>
-  
   )
 }
 

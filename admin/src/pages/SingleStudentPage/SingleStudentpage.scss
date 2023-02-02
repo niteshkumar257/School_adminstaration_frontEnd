@@ -279,12 +279,13 @@
                         padding: 0.5rem;
                         border-radius: 9px;
                         box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-                       flex: 1;
+                     
                        height: 100px;
                      
                        display: flex;
                        justify-content: space-around;
                        gap: 10px;
+                    width: 50vh;
                    
                     .fee-amount{
                         
@@ -292,13 +293,18 @@
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
+                      
                         span{
                             font-size: 1rem;
+                           
+                            color:#009df1;
         
                         }
                         h1{
                             font-size: 1.4rem;
                             font-weight: 600;
+                            
+                            color:#009df1;
         
                         }
                     }
@@ -350,6 +356,24 @@
                 box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                 width: 98%;
                 row-gap: 20px;
+                .performanceAnalytic-info-icon{
+                    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                    height: 20vh;
+                width: 50vh;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-radius: 9px;
+                padding: 0 10px;
+                span{
+                    font-size: 1.4rem;
+                    color:#009df1;
+                }
+                img{
+                    height: 70px;
+                    width: 70x;
+                }
+                }
                 .perfomanceAnalytic-heading{
                     width: 90%;
                     height: auto;
@@ -363,6 +387,9 @@
                 }
                 .performanceAnalytic-body-content{
                     width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 30px;
                     .performanceAnalytic-body-content-table{
                         display: flex;
                         row-gap: 30px;

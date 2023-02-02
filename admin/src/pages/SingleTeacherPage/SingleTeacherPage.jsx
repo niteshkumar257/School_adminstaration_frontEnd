@@ -11,6 +11,8 @@ import { FaBlackTie } from 'react-icons/fa';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { TextField ,Stack,MenuItem} from '@mui/material';
+import { gridColumnsTotalWidthSelector } from '@mui/x-data-grid';
+import Alert from '@mui/material/Alert';
 
 const Month = [
   {
@@ -119,14 +121,8 @@ const SingleTeacherPage = () => {
     console.log("button is cliekc");
     setOpen(true);
   } 
-  const handleClose = () => 
-  {
-    console.log("Submit button is clicked");
-    console.log(month);
-    console.log(year);
-    console.log(amount)
-    setOpen(false);
-  }
+  const handleClose = () => setOpen(false);
+  
   let params = useParams();
   const [name,setName]=useState("Nitesh Kumar Reddy");
   const [medium,setMedium]=useState("English");
@@ -145,6 +141,11 @@ const SingleTeacherPage = () => {
   const [year,setYear]=useState("");
   const [month,setMonth]=useState("");
   const [amount,setAmount]=useState("");
+
+  const [yearError,setYearError]=useState(false);
+  const [monthError,setMonthError]=useState(false);
+  const [amountError,setAmountError]=useState(false);
+
 
   // salary update useState variable
   let teacher_id = params.teacherId;
@@ -181,7 +182,57 @@ const salaryUpdate=(id)=>
   ]
 
 
+const submitHandler=(e)=>
+{
+  e.preventDefault();
+  setYearError(false);
+  setMonthError(false);
+  setAmountError(false)
+ 
+  // 
+ 
+  if(year =='') 
+  {
+    setYearError(true);
+  }
+  if(month=='')
+  { 
+    setMonthError(true);
+  }
+  if(amount=='') 
+  {
+    setAmountError(true);
+  }
+  if(year.length!=0 && month.length!=0 && amount.length!=0 ){
+    console.log(year);
+    console.log(month);
+    console.log(amount);
+    setAmount("")
+ setYear("");
+ setMonth("");
+ const answer = window.confirm("are you sure?");
+      
+    
+    console.log("form is submitted");
+    setOpen(false);
+ 
+  }
+ 
+  // if(year && month && amount)
+  // {
+  //   console.log("all filed are required");
+   
+  //   // update api will be called when all fileds given
+  //   console.log(year);
+  // console.log(month);
+  // console.log(amount);
+  // }
+  // else alert("All filed are not filled");
 
+ 
+  
+
+}
 
   // new column for update status
 
@@ -296,6 +347,9 @@ const salaryUpdate=(id)=>
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+        <form  noValidate onSubmit={submitHandler}>
+
+        
         <Box sx={style} >
             <div style={{
                 display:"flex",
@@ -307,53 +361,25 @@ const salaryUpdate=(id)=>
               <div>
                 <span>Salary update</span>
               </div>
-          <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="Month"
-                
-                 onChange={(e)=>setMonth(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Select Month">
-                {Month.map((option) => (
+          <TextField sx={{ flex:1 }} error={monthError}   required  select  label="Month"    onChange={(e)=>setMonth(e.target.value)}  helperText="Select Month">
+              {Month.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
                ))}
               </TextField>
-              <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="year"
-                
-                 onChange={(e)=>setYear(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Select year">
-                {Year.map((option) => (
+              <TextField  sx={{ flex:1 }}  error={yearError}  required   select  label="year"  onChange={(e)=>setYear(e.target.value)}  helperText="Select year">
+              {Year.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
                ))}
               </TextField>
-              <TextField
-                 sx={{ flex:1 }}
-                 required
+              <TextField sx={{ flex:1 }}  error={amountError}   required   label="Amount"   onChange={(e)=>setAmount(e.target.value)}  helperText="Enter Amount" />
+                 
+        
                
-                 label="Amount"
-                
-                 onChange={(e)=>setAmount(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Enter Amount">
-               
-              </TextField>
+            
 </Stack>
             </div>
         
@@ -362,7 +388,7 @@ const salaryUpdate=(id)=>
          justifyContent:"flex-end"
        }}>
         <button
-        onClick={()=>handleClose()}
+        // onClick={()=>handleClose()}
         // onClick={scoreHandler}
          style={{
          
@@ -379,7 +405,7 @@ const salaryUpdate=(id)=>
             </div>
            
         </Box>
-       
+        </form>
           
         
       </Modal>

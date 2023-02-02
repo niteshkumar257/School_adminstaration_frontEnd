@@ -55,12 +55,13 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 //     }
 //   ]
   
-const chart = ({color,dataKey,data}) => {
+const chart = ({color,temp,dataKey,data}) => {
+  console.log(temp);
   console.log(data);
   console.log(dataKey);
   return (
     <div>
-    <AreaChart width={470} height={200} data={data}
+    <AreaChart width={480} height={200} data={data}
      margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
  >
   <defs>
@@ -79,6 +80,7 @@ const chart = ({color,dataKey,data}) => {
   <Tooltip />
   {/* <Area type="monotone" dataKey="chemsitry" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" /> */}
   <Area type="monotone" dataKey={dataKey} stroke={color} fillOpacity={1} fill="url(#colorPv)" />
+  <Area type="monotone" dataKey={temp} stroke={"black"} fillOpacity={0} fill="url(#colorPv)" />
 </AreaChart>
     </div>
   )
