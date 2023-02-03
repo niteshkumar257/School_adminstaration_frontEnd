@@ -26,22 +26,23 @@ const Test = [
     value: '3',
     label: '3',
   },
-  
-] 
-
-const subjects=[
- {
-  value:"Physics",
-  lable:"Physics"
- },{
-  value:"Chesmistry",
-  lable:"chemistry"
- },{
-  value:"Math",
-  lable:"Math"
- }
-
 ]
+const subject_list=[
+  {
+    value:"Physics",
+    label:"physics"
+  },
+  {
+    value:"Chemistry",
+    label:"Chemistry"
+  },
+  {
+    value:"Biology",
+    label:"Biology"
+  },
+  
+]
+ 
 const style = {
   position: 'absolute',
   top: '50%',
@@ -143,6 +144,7 @@ const Grade = () => {
   },[])
 
   
+  
   const [open, setOpen] = useState(false);
   const [test, setTest] = useState([]);
   const [student_id, setStudentId] = useState();
@@ -170,12 +172,18 @@ const Grade = () => {
    obtained.push(mark);
   }
 
-  
-  const makrUploadHandler=()=>
+
+  // mark upload handler
+  const tempRow=[];
+  const markUploadHandler=(e)=>
   {
-    console.log("form is submited");
-    handleClose(true);
+    
+    setOpen(false);
+      e.preventDefault();
+      console.log(testid);
+     console.log(inputField);
   }
+
    
   const [subject_list, setSubjectList] = useState([]);
 
@@ -193,9 +201,37 @@ const Grade = () => {
       console.log(err);
     })
   }
-  
-  
- 
+
+  subject_list.map((item)=>
+  {
+       const data={
+        markObtained:" ",
+        TotalMark:" ",
+        Subject:item.value,
+        
+       }
+       tempRow.push(data);
+  })
+      const [inputField,setInputField]=useState(tempRow)
+      const changeHandler=(index,e)=>
+      {
+        console.log(index,e);
+      
+          let data=[...inputField];
+         
+          data[index][e.target.name]=e.target.value;
+       
+          setInputField(data);
+          
+        
+      }
+      
+
+
+
+
+  // mark upload handler
+   
   const UpdateColumn=[
     {
       field:"view",
@@ -218,168 +254,76 @@ const Grade = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         BackdropProps={{style: {backgroundColor: 'rgba(255, 255, 255, 0)'}}}
-        sx={{backdropFilter: "blur(.25px)"}}
-      >
-        <Box sx={style}
-         >
-          <form 
-          
-          style={{
-            display:"flex",
-            flexDirection:"column",
-            rowGap:"20px",
-            }}onSubmit={makrUploadHandler}>
-
-         
-          <div>
-            <span 
-             style={{
-               fontSize:"1.3rem",
-               color:"black",
-               fontWeight:"600",
-               marginBottom:"20px"
-              }}
-            >Upload Mark</span>
-          </div>
-        <div
-        style={{
-        display:"flex",
-        flexDirection:"column",
-        rowGap:"20px"
-        }}
-        > 
-          <div>
-          <TextField
-                 sx={{ width:"18.7vw" }}
-                
-                 select
+        sx={{backdropFilter: "blur(.25px)"}}>
+        <form  onSubmit={markUploadHandler}>
+        <Box sx={style}>
+        
+          <div className='form-container'>
+            <div className='heading'>
+              <span>Mark Upload</span>
+            </div>
+            <div className='test_id_select'>
+            <TextField
+                 sx={{flex:1}}
+                  select
                  label="Test ID"
-                 onChange={(e)=>{
-                  setTestid(e.target.value);
-                  getSubjects(e.target.value);
-                 }}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-              >
-                {test.map((option) => (
-                <MenuItem key={option.test_id} value={option.test_id}>
-               {option.test_id}
+ 
+                 required
+                 onChange={(e)=>setTestid(e.target.value)}>
+                {Test.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+               {option.label}
                </MenuItem>
                ))}
               </TextField>
+            </div>
+            <div className='modal-subject-main-container'>
+            {
+        subject_list.map((item,index)=>(
+          <div key={index} className='modal-subject-container'  >
+           <div className='container'>
+            <span>{item.label}:</span>
+           </div>
+           <div>
+           <TextField
+           name="markObtained"
+           value={tempRow[index].name}
+           onChange={(e)=>changeHandler(index,e)}
+             required label="Mark Obtained" variant="outlined" />
+            </div>   
+            <div>
+            <TextField 
+            name="TotalMark"
+            
+            value={tempRow[index].name}
+            onChange={(e)=>changeHandler(index,e)}
+             required  label="Total Mark" variant="outlined" />
+            </div>         
+    
+                      
+    
+    
+    
+    
+
+     </div>
+        ))
+       }
+       <div className='form-button-submit'>
+        <button>Submit</button> 
+       </div>
+            </div>
           </div>
-       
-       <div 
-        style={{
-          display:"flex",
-          flexDirection:"column",
-          rowGap:"20px"
-          }}
-
-       >            <div
-       style={{
-        display:"flex",
-        flexDirection:"row",
-        columnGap:"20px"
-        
-       }}
-       >
-       <div   style={{
-                        flex:1.6,
-                        display:"flex",
-                        columnGap:"20px",
-                     
-                        alignItems:"center"
-                      
-                      }}>
-                        <div style={{flex:1}}>
-                        <span>Physcis:</span>
-                        </div>
-      
-                        <TextField sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
-       </div>
-       <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
-      
-      
-
-       </div>
-                    <div 
-                     style={{
-                      display:"flex",
-                      flexDirection:"row",
-                      columnGap:"20px",
-                      flex:1
-                      
-                     }}
-                    >
-                      <div 
-                      style={{
-                        flex:1.6,
-                        display:"flex",
-                        columnGap:"20px",
-                         
-                          alignItems:"center"
-                      
-                      }}
-                      >
-                        <div style={{flex:1}}>
-                        <span>Chemistry:</span>
-                        </div>
-                       
-                        <TextField sx={{ flex:1.5 }}  label="Mark Obtained" variant="outlined" />
-                      </div>
-                   
-                    <TextField sx={{ flex:1 }}  label="Total Mark" variant="outlined" />
-                   
-                    </div>
-                   
-                 <div
-                  style={{
-                    display:"flex",
-                    flexDirection:"row",
-                    columnGap:"20px",
-                    
-                    
-                   }}
-                 >
-                 <div 
-                  style={{
-                    flex:1.6,
-                    display:"flex",
-                    columnGap:"20px",
-                 
-                    alignItems:"center"
-                  
-                  }}
-                 >
-                  <div style={{flex:1}}>
-                  <span>Biology:</span>
-                  </div>
-                
-                  <TextField sx={{ flex:1.5 }}   label="Mark Obtained" variant="outlined"/>
-                 </div>
-              
-                 <TextField sx={{ flex:1}}  label="Total Mark" variant="outlined" />
-              
-                 </div>
-               
-       </div>
-             
-        </div>
+         
+         
+         
+    
      
-        <div 
-         style={{
-          display:"flex",
-        justifyContent:"flex-end"
-          }}>
-
-          <button className='Updatebutton' >Submit</button>
-        </div>
-        </form>
+     
+      
         </Box>
        
-          
+        </form>
         
       </Modal>
     </div>

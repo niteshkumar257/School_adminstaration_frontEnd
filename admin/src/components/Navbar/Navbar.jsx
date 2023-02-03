@@ -19,7 +19,7 @@ const Navbar = () => {
          <div className='navbar-items'>
             <div className="navbar-items-item">
               <img src={AdminProfile}></img>
-                <span>Admin Name</span>
+                <span>GW Head</span>
             </div>
          </div>
      </div>

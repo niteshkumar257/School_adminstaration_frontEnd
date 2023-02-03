@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import "./SingleTeacherPage.scss"
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
@@ -10,7 +10,9 @@ import { ConstructionOutlined, SocialDistance } from '@mui/icons-material';
 import { FaBlackTie } from 'react-icons/fa';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { TextField ,Stack,MenuItem} from '@mui/material';
+import { TextField, Stack, MenuItem } from '@mui/material';
+import { gridColumnsTotalWidthSelector } from '@mui/x-data-grid';
+import Alert from '@mui/material/Alert';
 
 const Month = [
   {
@@ -57,44 +59,60 @@ const Month = [
     value: 'Dec',
     label: 'Dec',
   },
-  
+
 
 
 ];
-const Year=[
- { value:"2020",
-  label:"2020"},
-  { value:"2021",
-  label:"2021"},
-  { value:"2022",
-  label:"2022"},
-  { value:"2023",
-  label:"2023"},
-  { value:"2024",
-  label:"2024"}
+const Year = [
+  {
+    value: "2020",
+    label: "2020"
+  },
+  {
+    value: "2021",
+    label: "2021"
+  },
+  {
+    value: "2022",
+    label: "2022"
+  },
+  {
+    value: "2023",
+    label: "2023"
+  },
+  {
+    value: "2024",
+    label: "2024"
+  }
 ]
 
 
 const columns = [
-  { field: 'id', headerName: 'SI.No', width: 150, headerAlign:"left", align:"left",flex:1,sortable:false },
-  {field: 'month',headerName: 'Month',width: 150,editable:false,headerAlign:"left",align:"left",
-  sortable:false,flex:1},
-  {field: 'year',headerName: 'Year',type: 'number',width: 150,editable:false,headerAlign:"left",
-  sortable:false,flex:1,
-  align:"left"},
-  {field: 'amount',headerName: 'Amount',type: 'number',width: 150,editable:false,headerAlign:"left",
-  sortable:false,flex:1,
-  align:"left"},
- 
- 
+  { field: 'id', headerName: 'SI.No', width: 150, headerAlign: "left", align: "left", flex: 1, sortable: false },
+  {
+    field: 'month', headerName: 'Month', width: 150, editable: false, headerAlign: "left", align: "left",
+    sortable: false, flex: 1
+  },
+  {
+    field: 'year', headerName: 'Year', type: 'number', width: 150, editable: false, headerAlign: "left",
+    sortable: false, flex: 1,
+    align: "left"
+  },
+  {
+    field: 'amount', headerName: 'Amount', type: 'number', width: 150, editable: false, headerAlign: "left",
+    sortable: false, flex: 1,
+    align: "left"
+  },
+
+
 ];
 
 const rows = [
-  { id: 1, Month: 'Jan',Year:"2002",Amount:1000 },
-  { id: 2, Month: 'March',Year:"2004" ,Amount:2000},
-  { id: 3, Month: 'Feb',Year:"2006" ,Amount:3000},
- 
- 
+  { id: 1, Month: 'Jan', Year: "2002", Amount: 1000 },
+  { id: 2, Month: 'March', Year: "2004", Amount: 2000 },
+  { id: 3, Month: 'Feb', Year: "2006", Amount: 3000 },
+
+
 ];
 
 const SingleTeacherPage = () => {
@@ -104,69 +122,72 @@ const SingleTeacherPage = () => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 500,
-    height:400,
+    height: 400,
     bgcolor: 'background.paper',
     border: 'none',
-    
+
     borderRadius: 3,
     boxShadow: 24,
     p: 4,
-  
+
   };
   const [open, setOpen] = useState(false);
-  const handleOpen = () =>
-  {
+  const handleOpen = () => {
     console.log("button is cliekc");
     setOpen(true);
-  } 
+  }
   const handleClose = () => setOpen(false);
-  
+
   let params = useParams();
-  const [name,setName]=useState("Nitesh Kumar Reddy");
-  const [medium,setMedium]=useState("English");
-  const [email,SetEmail]=useState("niteshredd257@gmail.com");
-  const [age,setAge]=useState(23);
-  const [salary,setSalary]=useState(10000);
-  const [City,setCity]=useState("Ambikar Pur");
-  const [workExp,setWorkExp]=useState(10);
-  const [AadharCard,setAadharCard]=useState("1989300192");
-  const [date,setDate]=useState("");
-  const [gender,setGender]=useState("Male");
+  const [name, setName] = useState("Nitesh Kumar Reddy");
+  const [medium, setMedium] = useState("English");
+  const [email, SetEmail] = useState("niteshredd257@gmail.com");
+  const [age, setAge] = useState(23);
+  const [salary, setSalary] = useState(10000);
+  const [City, setCity] = useState("Ambikar Pur");
+  const [workExp, setWorkExp] = useState(10);
+  const [AadharCard, setAadharCard] = useState("1989300192");
+  const [date, setDate] = useState("");
+  const [gender, setGender] = useState("Male");
 
 
 
   // salary update useState variable
-  const [year,setYear]=useState("");
-  const [month,setMonth]=useState("");
-  const [amount,setAmount]=useState("");
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [amount, setAmount] = useState("");
+
+  const [yearError, setYearError] = useState(false);
+  const [monthError, setMonthError] = useState(false);
+  const [amountError, setAmountError] = useState(false);
+
 
   // salary update useState variable
   let teacher_id = params.TeacherId;
-   
+
   /// new column for update status
 
 
-const salaryUpdate=(id)=>
-{
+  const salaryUpdate = (id) => {
     console.log(id);
-}
-  const updateColumn=[
+  }
+  const updateColumn = [
     {
-      field:"view",
-      headerName:"Update",
-      width:200,
-      editable:false,
-      sortable:false,
-    align:"left",
-    headerAlign:"left",
-    flex:1,
+      field: "view",
+      headerName: "Update",
+      width: 200,
+      editable: false,
+      sortable: false,
+      align: "left",
+      headerAlign: "left",
+      flex: 1,
       renderCell: (params) => {
         return (
           <div className="viewButton">
             {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
-             <button  onClick={() => salaryUpdate(params.row.id)}  >Update</button>
+            <button onClick={() => salaryUpdate(params.row.id)}  >Update</button>
             {/* </Link> */}
-           
+
           </div>
         );
       },
@@ -174,255 +195,273 @@ const salaryUpdate=(id)=>
   ]
 
   const [rows, setRows] = useState([]);
-const renderSalary = () => {
-  axios.get(`http://localhost:8080/teacher/${teacher_id}/paymentdetails`)
-  .then((data) => {
-     console.log(data.data);
-     let allSalary = data.data.teacherDetails;
-     let salary = [];
+  const renderSalary = () => {
+    axios.get(`http://localhost:8080/teacher/${teacher_id}/paymentdetails`)
+      .then((data) => {
+        console.log(data.data);
+        let allSalary = data.data.teacherDetails;
+        let salary = [];
 
-     for(let i = 0; i < allSalary.length; i++){
-        salary.push({id: i+1, amount: allSalary[i].amount, year: allSalary[i].year, month: allSalary[i].month});
-     }
-     setRows(salary);
-  }).catch((err) => {
-    console.log(err);
-  })
-}
-const submitHandler=()=>
-{
-  setOpen(false);  
-  console.log("form submited");
-  axios.post(`http://localhost:8080/teacher/${teacher_id}/updatepayment`, {
-    amount, month, year
-  })
-  .then((data) => {
-    console.log(data);
-    renderSalary();
-  }).catch((err) => {
-    console.log(err);
-  })
-}
-
-  // new column for update status
-
-  useEffect(() => {
-    console.log(teacher_id)
-    axios.get(`http://localhost:8080/teacher/${teacher_id}`)
-    .then((data) => { 
-      console.log(data.data)
-      setName(data.data.teacherDetails[0].teacher_name);
-      SetEmail(data.data.teacherDetails[0].email);
-      setAge(data.data.teacherDetails[0].age);
-      setSalary(data.data.teacherDetails[0].salary);
-      setCity(data.data.teacherDetails[0].city);
-      setAadharCard(data.data.teacherDetails[0].aadhar_no);
-      setDate(data.data.teacherDetails[0].date_of_joining.slice(0,10))
-      setWorkExp(data.data.teacherDetails[0].experience);
-      setGender(data.data.teacherDetails[0].gender);
-      setMedium(data.data.teacherDetails[0].medium)
-    }).catch((err) => {
-      console.log(err);
+        for (let i = 0; i < allSalary.length; i++) {
+          salary.push({ id: i + 1, amount: allSalary[i].amount, year: allSalary[i].year, month: allSalary[i].month });
+        }
+        setRows(salary);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    console.log("form submited");
+    axios.post(`http://localhost:8080/teacher/${teacher_id}/updatepayment`, {
+      amount, month, year
     })
-    renderSalary();
-  },[])
-  return (
-    <div className='SingleTeacherPage-container '>
-    <Sidebar/>
-    <div className='SingleTeacher'>
-        <Navbar/>
-        <div className='SingleTeacher-page page-container'>
-        <div className='student-info-main-container'>
-    <div className='student-info-heading'>
-      <h1> Teachers Details</h1>
-    </div>
-    <div className="section basic-info">
-    
-   
-    <div className="basic-info-right">
-      <div className='student-Name'>
-        <span >{name}</span>
-      </div>
-      <div className='other-info-container'>
-        <div className='other-detail-info-container page-container'>
-          <div className='student'>
-           
-            <span className='label'
-            style={{color:"#1378c09a", fontSize: ".9rem"}}
-            > Medium :</span>
-            <span>{medium}</span>
-          </div>
-          <div className='student'>
-            <span className='lable'> Email :</span>
-            <span>{email}</span>
-          </div>
-          <div className='student'>
-            <span className='lable'> Work-Experinece :</span>
-            <span>{workExp}</span>
-          </div>
-        
-        </div>
-        <div className='other-detail-info-container'>
-        <div className='student'>
-            <span className='lable'>
-              Age :
-            </span>
-            <span>{age}</span>
-          </div>
-          <div className='student'>
-            <span className='lable'>Gender :</span>
-            <span>{gender}</span>
-          </div>
-          <div className='student'>
-            <span className='lable'>Salary :</span>
-            <span>{salary}</span>
-          </div>
-         
-        </div>
-        <div className='other-detail-info-container'>
-        <div className='student'>
-            <span className='lable'>
-              Start Date :
-            </span>
-            <span>{date}</span>
-          </div>
-          <div className='student'>
-            <span className='lable'>City :</span>
-            <span>{City}</span>
-          </div>
-          <div className='student'>
-            <span className='lable'>Aadhar Number :</span>
-            <span>{AadharCard}</span>
-          </div>
-         
-        </div>
-      </div>
-    </div>
-   </div>
-   <div 
-   className='student-salary-container'
-   style={{
-    width:"98%",
-   }}
-   >
-    <div className='student-salary-container-heading'>
-      <h1>Salary Details</h1>
-     
-    
-       </div>
-       <div className='student-info-container-body'> 
-       <Table  rows={rows} columns={columns}/>
-        
-       </div>
-       <div  className='btn'>
-       <button onClick={handleOpen}>Update Salary</button>
-       <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <form onSubmit={() => submitHandler()}>
-        <Box sx={style} >
-            <div style={{
-                display:"flex",
-                flexDirection:"column",
-                rowGap:20
-            }}>
-            <div>
-            <Stack    spacing={3}>
-              <div>
-                <span>Salary update</span>
-              </div>
-          <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="Month"
-                
-                 onChange={(e)=>setMonth(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Select Month">
-                {Month.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
-               </MenuItem>
-               ))}
-              </TextField>
-              <TextField
-                 sx={{ flex:1 }}
-                 required
-                 select
-                 label="year"
-                
-                 onChange={(e)=>setYear(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Select year">
-                {Year.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
-               </MenuItem>
-               ))}
-              </TextField>
-              <TextField
-                 sx={{ flex:1 }}
-                 required
-               
-                 label="Amount"
-                
-                 onChange={(e)=>setAmount(e.target.value)}
-                //  SelectProps={{
-                //  native: true,
-                //  }}
-                 helperText="Enter Amount">
-               
-              </TextField>
-</Stack>
-            </div>
-        
-            <div style={{
-         display:"flex",
-         justifyContent:"flex-end"
-       }}>
-        <button
-    //    onClick={handleClose}
-        // onClick={scoreHandler}
-         style={{
-         
-            width:100,
-            height:30,
-            backgroundColor:"#08B3F3",
-            border:"none",
-            borderRadius:9,
-            color:"white",
-            fontSize:"1rem",
-            cursor:"pointer"
-        }}>Submit</button>
-       </div>
-            </div>
-           
-        </Box>
-        </form>
-       
-          
-        
-      </Modal>
-       </div>
-     
-      
-
-   </div>
-    </div>
-    </div>
-    
+      .then((data) => {
+        console.log(data);
+        renderSalary();
+      }).catch((err) => {
+        console.log(err);
+      })
   
-    </div>
-   </div>
-  )
-}
+    
+      setYearError(false);
+      setMonthError(false);
+      setAmountError(false)
 
-export default SingleTeacherPage
+      // 
+
+      if (year == '') {
+        setYearError(true);
+      }
+      if (month == '') {
+        setMonthError(true);
+      }
+      if (amount == '') {
+        setAmountError(true);
+      }
+      if (year.length != 0 && month.length != 0 && amount.length != 0) {
+        console.log(year);
+        console.log(month);
+        console.log(amount);
+        setAmount("")
+        setYear("");
+        setMonth("");
+        const answer = window.confirm("are you sure?");
+
+
+        console.log("form is submitted");
+        setOpen(false);
+
+      }
+
+      // if(year && month && amount)
+      // {
+      //   console.log("all filed are required");
+
+      //   // update api will be called when all fileds given
+      //   console.log(year);
+      // console.log(month);
+      // console.log(amount);
+      // }
+      // else alert("All filed are not filled");
+
+
+
+    }
+
+    // new column for update status
+
+    useEffect(() => {
+      console.log(teacher_id)
+      axios.get(`http://localhost:8080/teacher/${teacher_id}`)
+        .then((data) => {
+          console.log(data.data)
+          setName(data.data.teacherDetails[0].teacher_name);
+          SetEmail(data.data.teacherDetails[0].email);
+          setAge(data.data.teacherDetails[0].age);
+          setSalary(data.data.teacherDetails[0].salary);
+          setCity(data.data.teacherDetails[0].city);
+          setAadharCard(data.data.teacherDetails[0].aadhar_no);
+          setDate(data.data.teacherDetails[0].date_of_joining.slice(0, 10))
+          setWorkExp(data.data.teacherDetails[0].experience);
+          setGender(data.data.teacherDetails[0].gender);
+          setMedium(data.data.teacherDetails[0].medium)
+        }).catch((err) => {
+          console.log(err);
+        })
+      renderSalary();
+    }, [])
+    return (
+      <div className='SingleTeacherPage-container '>
+        <Sidebar />
+        <div className='SingleTeacher'>
+          <Navbar />
+          <div className='SingleTeacher-page page-container'>
+            <div className='student-info-main-container'>
+              <div className='student-info-heading'>
+                <h1> Teachers Details</h1>
+              </div>
+              <div className="section basic-info">
+
+
+                <div className="basic-info-right">
+                  <div className='student-Name'>
+                    <span >{name}</span>
+                  </div>
+                  <div className='other-info-container'>
+                    <div className='other-detail-info-container page-container'>
+                      <div className='student'>
+
+                        <span className='label'
+                          style={{ color: "#1378c09a", fontSize: ".9rem" }}
+                        > Medium :</span>
+                        <span>{medium}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'> Email :</span>
+                        <span>{email}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'> Work-Experinece :</span>
+                        <span>{workExp}</span>
+                      </div>
+
+                    </div>
+                    <div className='other-detail-info-container'>
+                      <div className='student'>
+                        <span className='lable'>
+                          Age :
+                        </span>
+                        <span>{age}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'>Gender :</span>
+                        <span>{gender}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'>Salary :</span>
+                        <span>{salary}</span>
+                      </div>
+
+                    </div>
+                    <div className='other-detail-info-container'>
+                      <div className='student'>
+                        <span className='lable'>
+                          Start Date :
+                        </span>
+                        <span>{date}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'>City :</span>
+                        <span>{City}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'>Aadhar Number :</span>
+                        <span>{AadharCard}</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className='student-salary-container'
+                style={{
+                  width: "98%",
+                }}
+              >
+                <div className='student-salary-container-heading'>
+                  <h1>Salary Details</h1>
+
+
+                </div>
+                <div className='student-info-container-body'>
+                  <Table rows={rows} columns={columns} />
+
+                </div>
+                <div className='btn'>
+                  <button onClick={handleOpen}>Update Salary</button>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <form onSubmit={submitHandler}>
+
+                      <Box sx={style} >
+                        <div style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          rowGap: 20
+                        }}>
+                          <div>
+                            <Stack spacing={3}>
+                              <div>
+                                <span>Salary update</span>
+                              </div>
+                              <TextField sx={{ flex: 1 }} error={monthError} required select label="Month" onChange={(e) => setMonth(e.target.value)} helperText="Select Month">
+                                {Month.map((option) => (
+                                  <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                  </MenuItem>
+                                ))}
+                              </TextField>
+                              <TextField sx={{ flex: 1 }} error={yearError} required select label="year" onChange={(e) => setYear(e.target.value)} helperText="Select year">
+                                {Year.map((option) => (
+                                  <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                  </MenuItem>
+                                ))}
+                              </TextField>
+                              <TextField sx={{ flex: 1 }} error={amountError} required label="Amount" onChange={(e) => setAmount(e.target.value)} helperText="Enter Amount" />
+
+
+
+
+                            </Stack>
+                          </div>
+
+                          <div style={{
+                            display: "flex",
+                            justifyContent: "flex-end"
+                          }}>
+                            <button
+
+                              // onClick={scoreHandler}
+                              style={{
+
+                                width: 100,
+                                height: 30,
+                                backgroundColor: "#08B3F3",
+                                border: "none",
+                                borderRadius: 9,
+                                color: "white",
+                                fontSize: "1rem",
+                                cursor: "pointer"
+                              }}>Submit</button>
+                          </div>
+                        </div>
+
+                      </Box>
+                    </form>
+
+
+
+                  </Modal>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    )
+  }
+
+export default SingleTeacherPage;
