@@ -129,6 +129,15 @@ const Gender = [
 ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const StudentForm = () => {
+
+  let objectDate=new Date();
+  let day=objectDate.getDate();
+  let month=objectDate.getMonth();
+  month=month.toString();
+  if(month.length==1) month ="0"+month;
+  if(day.length==1) day="0"+day;
+  let year=objectDate.getFullYear();
+  let format=year+"-"+month+"-"+day;
  const [firstInsallMentEta,setFirstInstallMentEta]=useState("");
  const [secondInsallMentEta,setSecondInstallMentEta]=useState("");
  const [thirdInsallMentEta,setThirdInstallMentEta]=useState("");

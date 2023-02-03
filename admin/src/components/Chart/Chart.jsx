@@ -56,9 +56,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 //   ]
   
 const chart = ({color,temp,dataKey,data}) => {
-  console.log(temp);
-  console.log(data);
-  console.log(dataKey);
+
   return (
     <div>
     <AreaChart width={480} height={200} data={data}

@@ -16,60 +16,13 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 const Subject = [
-  {
-    value: 'Physics',
-    label: 'Physics',
-  },
-  {
-    value: 'Math',
-    label: 'Math',
-  },
-  {
-    value: 'Chemistry',
-    label: 'Chemistry',
-  },
-  {
-    value: 'Biology',
-    label: 'Biology',
-  },
-  {
-    value: 'Hindi',
-    label: 'English',
-  },
-
-];
+  {value: 'Physics', label: 'Physics',}, { value: 'Math', label: 'Math',},{ value: 'Chemistry',label: 'Chemistry',},{ value: 'Biology',label: 'Biology',},
+ ];
 const Medium = [
-  {
-    value: 'English',
-    label: 'English',
-  },
-  {
-    value: 'Hindi',
-    label: 'Hindi',
-  },
-
+  { value: 'English',label: 'English',},  {  value: 'Hindi',  label: 'Hindi',},
 ];
 const Gender = [
-  {
-    value: 'Male',
-    label: 'Male',
-  },
-  {
-    value: 'Female',
-    label: 'Female',
-  },
-  {
-    value: 'Binary',
-    label: 'Binary',
-  },
-  {
-    value: 'Not Disclose',
-    label: 'Not Disclose',
-  },
-
-
-
-
+  {value: 'Male',label: 'Male',},{value: 'Female',label: 'Female',}, {value: 'Binary',abel: 'Binary',},{value: 'Not Disclose',label: 'Not Disclose',},
 ]
 const TeachersForm = () => {
   const [teacher_name, setName] = useState("");
@@ -103,14 +56,14 @@ const TeachersForm = () => {
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
 
-  useEffect(() => {
-    axios.get(`http://localhost:8080/school/${school_id}/allSubject`)
-      .then((data) => {
-        console.log(data.data);
-      }).catch((err) => {
-        console.log(err);
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8080/school/${school_id}/allSubject`)
+  //     .then((data) => {
+  //       console.log(data.data);
+  //     }).catch((err) => {
+  //       console.log(err);
+  //     })
+  // }, [])
 
  
   const submitHandler = (e) => {
@@ -133,12 +86,8 @@ const TeachersForm = () => {
     if(address=='') setAddressError(true);
     if(age==0) setAgeError(true);
     if(city=='') setCityError(true);
-    if(teacher_name=='')
-    {
-      console.log("name is empty");
-      setTeachernameError(true);
-    }
-    if(mobile=='') setMobileError(true);
+    if(teacher_name=='') setTeachernameError(true);
+   if(mobile=='') setMobileError(true);
     if(email=='') setEmailError(true);
     if(subject_id=='') setSubjectError(true);
     if(medium=='') setMediumError(true);
@@ -151,7 +100,7 @@ const TeachersForm = () => {
       
     
 
-    if(teacher_name && address && age && city && mobile && medium && experience && gender && salary && date )
+    if(teacher_name && address && age && city && mobile && medium && experience && gender && salary && date  && subject_id)
     {
     axios.post('/user', {
       teacher_name,

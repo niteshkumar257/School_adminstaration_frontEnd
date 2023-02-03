@@ -32,22 +32,8 @@ const value = [
     ],
     "percentage": 90
   },
-  {
-    "test_id": 2,
-    "test_date": "2020-12-04",
-    "subject_name": [
-      "Maths",
-      "Physics",
-      "Chemistry"
-    ],
-    "mark-obtained": [
-      29, 30, 50
-    ],
-    "total_mark": [
-      30, 50, 90
-    ],
-    "percentage": 90
-  }
+  
+  
 ]
 
 
@@ -274,6 +260,8 @@ const rows = [
 
 
 const SingleStudentpage = (props) => {
+
+ 
 
 
   // props from the app.js
