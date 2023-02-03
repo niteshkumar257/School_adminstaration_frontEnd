@@ -98,21 +98,23 @@ const columns = [
    
   },
 ];
-const subject_list=[
-  {
-    value:"p",
-    lable:"p"
-  },
-  {
-    value:"chem",
-    lable:"chem"
-  },
-  {
-    value:"bio",
-    lable:"bio"
-  },
+
+// const subject_list=[
+//   {
+//     value:"p",
+//     lable:"p"
+//   },
+//   {
+//     value:"chem",
+//     lable:"chem"
+//   },
+//   {
+//     value:"bio",
+//     lable:"bio"
+//   },
   
-]
+// ]
+
 // const rows = [
 //   { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
 //   { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },

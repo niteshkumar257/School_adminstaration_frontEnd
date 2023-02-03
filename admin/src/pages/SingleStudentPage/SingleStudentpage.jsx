@@ -282,7 +282,7 @@ const SingleStudentpage = (props) => {
         parent_id = data.data.studentDetails[0].parent_id;
         // axios request for parent details
         axios.get(`http://localhost:8080/parents/${parent_id}`)
-          .then((data) => { 
+          .then((data) => {  
             setPrimaryNumber(data.data.parentDetails.whatsapp_no);
             SetEmail(data.data.parentDetails.email);
             setMotherProfessin(data.data.parentDetails.mother_profession);
@@ -290,6 +290,7 @@ const SingleStudentpage = (props) => {
             setFathername(data.data.parentDetails.father_name);
             setFatherProfession(data.data.parentDetails.father_profession);
             setAltNumber(data.data.parentDetails.alternative_mobile);
+            setChildrenCount(data.data.parentDetails.children);
             // function for request for fee details             
             renderFees();
           }).catch((err) => {

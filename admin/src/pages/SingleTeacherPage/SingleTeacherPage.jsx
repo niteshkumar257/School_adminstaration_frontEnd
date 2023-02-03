@@ -46,16 +46,16 @@ const Month = [
     label: 'Sep',
   },
   {
-    value: 'October',
-    label: 'October',
+    value: 'Oct',
+    label: 'Oct',
   },
   {
-    value: 'November',
-    label: 'November',
+    value: 'Nov',
+    label: 'Nov',
   },
   {
-    value: 'December',
-    label: 'December',
+    value: 'Dec',
+    label: 'Dec',
   },
   
 
@@ -77,12 +77,12 @@ const Year=[
 
 const columns = [
   { field: 'id', headerName: 'SI.No', width: 150, headerAlign:"left", align:"left",flex:1,sortable:false },
-  {field: 'Month',headerName: 'Month',width: 150,editable:false,headerAlign:"left",align:"left",
+  {field: 'month',headerName: 'Month',width: 150,editable:false,headerAlign:"left",align:"left",
   sortable:false,flex:1},
-  {field: 'Year',headerName: 'Year',type: 'number',width: 150,editable:false,headerAlign:"left",
+  {field: 'year',headerName: 'Year',type: 'number',width: 150,editable:false,headerAlign:"left",
   sortable:false,flex:1,
   align:"left"},
-  {field: 'Amount',headerName: 'Amount',type: 'number',width: 150,editable:false,headerAlign:"left",
+  {field: 'amount',headerName: 'Amount',type: 'number',width: 150,editable:false,headerAlign:"left",
   sortable:false,flex:1,
   align:"left"},
  
@@ -119,14 +119,8 @@ const SingleTeacherPage = () => {
     console.log("button is cliekc");
     setOpen(true);
   } 
-  const handleClose = () => 
-  {
-    console.log("Submit button is clicked");
-    console.log(month);
-    console.log(year);
-    console.log(amount)
-    setOpen(false);
-  }
+  const handleClose = () => setOpen(false);
+  
   let params = useParams();
   const [name,setName]=useState("Nitesh Kumar Reddy");
   const [medium,setMedium]=useState("English");
@@ -136,7 +130,7 @@ const SingleTeacherPage = () => {
   const [City,setCity]=useState("Ambikar Pur");
   const [workExp,setWorkExp]=useState(10);
   const [AadharCard,setAadharCard]=useState("1989300192");
-  const [date,setDate]=useState("12/10/23");
+  const [date,setDate]=useState("");
   const [gender,setGender]=useState("Male");
 
 
@@ -147,9 +141,8 @@ const SingleTeacherPage = () => {
   const [amount,setAmount]=useState("");
 
   // salary update useState variable
-  let teacher_id = params.teacherId;
-  
-
+  let teacher_id = params.TeacherId;
+   
   /// new column for update status
 
 
@@ -180,26 +173,58 @@ const salaryUpdate=(id)=>
     }
   ]
 
+  const [rows, setRows] = useState([]);
+const renderSalary = () => {
+  axios.get(`http://localhost:8080/teacher/${teacher_id}/paymentdetails`)
+  .then((data) => {
+     console.log(data.data);
+     let allSalary = data.data.teacherDetails;
+     let salary = [];
 
-
+     for(let i = 0; i < allSalary.length; i++){
+        salary.push({id: i+1, amount: allSalary[i].amount, year: allSalary[i].year, month: allSalary[i].month});
+     }
+     setRows(salary);
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+const submitHandler=()=>
+{
+  setOpen(false);  
+  console.log("form submited");
+  axios.post(`http://localhost:8080/teacher/${teacher_id}/updatepayment`, {
+    amount, month, year
+  })
+  .then((data) => {
+    console.log(data);
+    renderSalary();
+  }).catch((err) => {
+    console.log(err);
+  })
+}
 
   // new column for update status
 
   useEffect(() => {
+    console.log(teacher_id)
     axios.get(`http://localhost:8080/teacher/${teacher_id}`)
-    .then((data) => {
-      console.log(data.data.teacherDetails);
+    .then((data) => { 
+      console.log(data.data)
       setName(data.data.teacherDetails[0].teacher_name);
       SetEmail(data.data.teacherDetails[0].email);
       setAge(data.data.teacherDetails[0].age);
       setSalary(data.data.teacherDetails[0].salary);
       setCity(data.data.teacherDetails[0].city);
-      setDate(data.data.teacherDetails[0].date_of_join.slice(0,10))
+      setAadharCard(data.data.teacherDetails[0].aadhar_no);
+      setDate(data.data.teacherDetails[0].date_of_joining.slice(0,10))
       setWorkExp(data.data.teacherDetails[0].experience);
       setGender(data.data.teacherDetails[0].gender);
+      setMedium(data.data.teacherDetails[0].medium)
     }).catch((err) => {
       console.log(err);
     })
+    renderSalary();
   },[])
   return (
     <div className='SingleTeacherPage-container '>
@@ -297,6 +322,7 @@ const salaryUpdate=(id)=>
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+        <form onSubmit={() => submitHandler()}>
         <Box sx={style} >
             <div style={{
                 display:"flex",
@@ -363,13 +389,13 @@ const salaryUpdate=(id)=>
          justifyContent:"flex-end"
        }}>
         <button
-        onClick={()=>handleClose()}
+    //    onClick={handleClose}
         // onClick={scoreHandler}
          style={{
          
             width:100,
             height:30,
-            backgroundColor:"#08B3F3 ",
+            backgroundColor:"#08B3F3",
             border:"none",
             borderRadius:9,
             color:"white",
@@ -380,6 +406,7 @@ const salaryUpdate=(id)=>
             </div>
            
         </Box>
+        </form>
        
           
         

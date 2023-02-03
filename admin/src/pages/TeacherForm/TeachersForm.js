@@ -90,7 +90,7 @@ const TeachersForm = () => {
   {
         e.preventDefault();
         axios.post(`http://localhost:8080/schools/${school_id}/addtecher`, {
-          teacher_name, subject_id, mobile,date, age, gender, email,city,experience, salary
+          teacher_name, subject_id, mobile,date, age, gender, email,city,experience, salary, medium
         })
         .then( (res) => {
           console.log(res);
