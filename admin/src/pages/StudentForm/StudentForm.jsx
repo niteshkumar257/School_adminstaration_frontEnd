@@ -129,12 +129,20 @@ const Gender = [
 ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const StudentForm = () => {
-  const [checked1,setchecked1]=useState(false);
-  const [checked2,setchecked2]=useState(false);
-  const [checked3,setchecked3]=useState(false);
-  const handleChange1=(e)=> setchecked1(e.target.checked)
-  const handleChange2=(e)=> setchecked2(e.target.checked)
-  const handleChange3=(e)=> setchecked3(e.target.checked)
+ const [firstInsallMentEta,setFirstInstallMentEta]=useState("");
+ const [secondInsallMentEta,setSecondInstallMentEta]=useState("");
+ const [thirdInsallMentEta,setThirdInstallMentEta]=useState("");
+
+ const [firstInstallMentStatus,setFirstInstallMentStatus]=useState(0);
+ const [secondInstallMentStatus,setSecondInstallMentStatus]=useState(0);
+ const [thirdInstallMentStatus,setThirdInstallMentStatus]=useState(0);
+
+ const [firstInstallMentAmount,setFirstInstallMentAmount]=useState("");
+ const [secondInstallMentAmount,setSecondInstallMentAmount]=useState("");
+ const [thirdInstallMentAmount,setThirdInstallMentAmount]=useState("");
+
+
+  
   
   const [name, setName] = useState("");
   const [gender,setGender]=useState("");
@@ -182,19 +190,34 @@ const StudentForm = () => {
 
 
   // fee detals
-  const [One,setOne]=useState("");
-  const [two,setTwo]=useState("");
-  const [Thrid,setThird]=useState("");
+ 
+ const handleChange1=(e)=>
+ {
+     setFirstInstallMentEta(format);
+     if(e.target.value===false) setFirstInstallMentStatus(0)
+     else setFirstInstallMentStatus(1)
+ }
+ const handleChange2=(e)=>
+ {   
+  setSecondInstallMentEta(format);
+  if(e.target.value===false) setSecondInstallMentStatus(0)
+  else setSecondInstallMentStatus(1)
+    
+ }
+ const handleChange3=(e)=>
+ {
+  setThirdInstallMentEta(format);
+  if(e.target.value===false) setThirdInstallMentStatus(0)
+  else setThirdInstallMentStatus(1)
+ }
 
-  const [onedate,setOnedate]=useState("");
-  const [twodate,setTwodate]=useState("");
-  const [Thirddate,setThirddate]=useState("");
+  
   
 
   
 
   const [alertMessage,setAlertMessage]=useState(false);
-  const [sub,setSub]=useState(false);
+  
   const submitHandler = (e) => {
     e.preventDefault();
     setNameError(false);
@@ -236,11 +259,11 @@ const StudentForm = () => {
      if(Address=='') setAddressError(true);
      if(AadharNumber=='') setAadharError(true);
      if(board=='') setBoardError(true);
-     if(One=='') setOneError(true);
-     if(two=='') setTwoError(true);
-     if(Thrid=='') setThirdError(true);
+     if(firstInstallMentAmount=='') setOneError(true);
+     if(secondInstallMentAmount=='') setTwoError(true);
+     if(thirdInstallMentAmount=='') setThirdError(true);
 
-     if(name && medium && Class && course && email && Fathername && MotherName && FatherProfession && MotherProfession && AlternateNumber && PrimaryNumber && date && Address && board && One && two && Thrid )
+     if(name && medium && Class && course && email && Fathername && MotherName && FatherProfession && MotherProfession && AlternateNumber && PrimaryNumber && date && Address && board && firstInstallMentAmount && secondInstallMentAmount && thirdInstallMentAmount )
      {
       alertMessage("Submitted");
          
@@ -387,15 +410,15 @@ const StudentForm = () => {
                 }}
                 error={oneError}
                 required
-                onChange={(e)=>setOne(e.target.value)}
+                onChange={(e)=>setFirstInstallMentAmount(e.target.value)}
                 id="outlined-basic" label="1st InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox {...label}
-                 checked={checked1}
-                 onChange={handleChange1}
+                 checked={firstInstallMentStatus}
+                 onChange={()=>handleChange1()}
                  color="success"
                  />
-                 {!checked1 &&   
+                 {!firstInstallMentStatus &&   
                   <TextField 
                   sx={{
                     height:"5vh"
@@ -405,7 +428,7 @@ const StudentForm = () => {
                required
               
                 helperText="Select a Date"
-                onChange={(e)=>setName(e.target.value)}/>}
+                onChange={(e)=>setFirstInstallMentEta(e.target.value)}/>}
                 </div>
                 
               
@@ -417,7 +440,7 @@ const StudentForm = () => {
                   height:"7vh"
                  
                 }}
-                onChange={(e)=>setTwo(e.target.value)}
+                onChange={(e)=>setSecondInstallMentAmount(e.target.value)}
                  id="outlined-basic" label="2nd 
                 
                 InstallMent"
@@ -425,13 +448,13 @@ const StudentForm = () => {
                  variant="outlined" />
                  <div className="fee-info-section-installment-checkbox-date">
                  <Checkbox {...label}
-                 checked={checked2}
+                 checked={setSecondInstallMentStatus}
                  required
-                 onChange={handleChange2}
+                 onChange={()=>handleChange2()}
                  color="success"
 
                  />
-                 {!checked2 &&
+                 {!secondInstallMentStatus &&
                  
                  <TextField  
                  sx={{
@@ -442,7 +465,7 @@ const StudentForm = () => {
                   type="date"
                   required
                   helperText="Select a Date"
-                  onChange={(e)=>setName(e.target)}/>}
+                  onChange={(e)=>setSecondInstallMentEta(e.target)}/>}
                  </div>
                
               
@@ -453,26 +476,26 @@ const StudentForm = () => {
                 sx={{
                   height:"7vh"
                 }}
-                onChange={(e)=>setThird(e.target.value)}
+                onChange={(e)=>setThirdInstallMentAmount(e.target.value)}
                 required
                 id="outlined-basic" label="3rd InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
                 <Checkbox  
-                     checked={checked3}
-                     onChange={handleChange3}
+                     checked={thirdInstallMentStatus}
+                     onChange={()=>handleChange3()}
                      color="success"
                   
                
                 {...label} 
                  inputProps={{ 'aria-label': 'controlled' }}
                  />
-                 {!checked3 &&
+                 {!thirdInstallMentStatus &&
                  
                  <TextField  variant="outlined" 
              
                   type="date"
                   helperText="Select a Date"
-                  onChange={(e)=>setName(e.target.value)}/>}
+                  onChange={(e)=>setThirdInstallMentEta(e.target.value)}/>}
                 </div>
                
               

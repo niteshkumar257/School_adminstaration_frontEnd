@@ -2,7 +2,7 @@ import React from 'react'
 import "./Notifications.scss"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
-import SingleStudentpage from '../SingleStudentPage/SingleStudentpage'
+
 const Notification = (props) => {
   
   

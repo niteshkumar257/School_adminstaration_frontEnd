@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import "./SingleTeacherPage.scss"
+import "./TeacherPage.scss"
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import StudentImage from "../../assest/s1.png";
