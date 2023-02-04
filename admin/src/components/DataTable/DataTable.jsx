@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -7,6 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 
 const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
+  const [wid,setWidth]=useState(1);
   return (
   <>
   <Box>
@@ -20,7 +21,7 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
             outline: "none !important",
          },
       
-        height:"100vh",width: '99%',
+        height:"100vh",width:wid==1 ? "80vw":"90vw",
         '.MuiDataGrid-columnSeparator': {
           display: 'none',
         },

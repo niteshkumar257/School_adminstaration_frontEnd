@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import "./Studentpage.scss";
-import StudentImage from "../../assest/s1.png";
+import StudentImage from "../../assest/StudentImage.png";
 import { useState } from "react"
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
@@ -9,35 +9,145 @@ import { useParams } from 'react-router';
 import axios from "axios"
 import Chart from '../../components/Chart/Chart';
 import Performance from "../../assest/performance.png";
-import Fee from "../../assest/fee.png";
+import Fee from "../../assest/SchoolFee.png";
 
-// fee details column and row
-// Modification of testDetails data
-
-
+let MonthArray=["Jan","Feb","March","April","Jan","June","July","Aug","Sep","Oct","Nov","Dec"]
 const value = [
   {
     "test_id": 1,
-    "test_date": "2020-20-04",
+    "test_date": "2020-12-04",
     "subject_name": [
       "Maths",
       "Physics",
       "Chemistry"
     ],
     "mark-obtained": [
-      29, 30, 50
+      92, 78, 50
     ],
     "total_mark": [
-      30, 50, 90
+      100, 100, 100
     ],
     "percentage": 90
   },
-  
-  
+  {
+    "test_id": 2,
+    "test_date": "2020-11-04",
+    "subject_name": [
+      "Maths",
+      "Physics",
+      "Chemistry"
+    ],
+    "mark-obtained": [
+      29, 92, 50
+    ],
+    "total_mark": [
+      100, 100, 100
+    ],
+    "percentage": 90
+  }
+  , {
+    "test_id": 3,
+    "test_date": "2020-02-04",
+    "subject_name": [
+      "Maths",
+      "Physics",
+      "Chemistry"
+    ],
+    "mark-obtained": [
+      90, 35, 65
+    ],
+    "total_mark": [
+      100, 100, 100
+    ],
+    "percentage": 90
+  },
+  , {
+    "test_id": 3,
+    "test_date": "2020-06-04",
+    "subject_name": [
+      "Maths",
+      "Physics",
+      "Chemistry"
+    ],
+    "mark-obtained": [
+      90, 35, 65
+    ],
+    "total_mark": [
+      100, 100, 100
+    ],
+    "percentage": 90
+  }
 ]
+const subjectWisemark=[];
+const Array=Object.entries(value)
+let Array2=[]
+Array.map((item,index)=>
+{
+  let it=Object.entries(item[1])
+  Array2.push(it)
+   
+})
+const numberOfTest=Array2.length;
+const Months=[];
+let subjects=[];
+let TotalMark=[];
+let MarkObtained=[];
+
+Array2.map((item,index)=>
+{ item.map((it,index)=>
+   {
+  if(it[0]=='test_date')
+         {
+          let result = it[1].slice(5, 7);
+       
+          Months.push(result)
+         }
+        if(it[0]=='subject_name') subjects=(it[1]);
+        if(it[0]=='total_mark')   TotalMark.push(it[1]);
+        if(it[0]=='mark-obtained') MarkObtained.push(it[1]);
+        
+   })
+
+})
+Months.sort();
+
+for(let i=0;i<subjects.length;i++)
+{
+     let data={
+      value:subjects[i],
+      lable:subjects[i],
+      temp:"TotalMark",
+      color:"#82ca9d",
+      arr:[]
+     }
+   let array;
+   
+for(let j=i;j<=i;j++)
+{
+  let mon=0;
+   for(let k=0;k<Months.length;k++ )
+   {
+      array={
+        Month:MonthArray[Months[mon]-1],
+        "Mark_obtained":MarkObtained[k][j],
+        "Total_mark":TotalMark[k][j],
+        "Virtual_totalmark":100,
+      }
+      mon++;
+   
+      data.arr.push(array);
+   }
+  
+}
 
 
 
+subjectWisemark.push(data);
+
+  
+  
+   
+}
 
 // row part
 
@@ -68,7 +178,7 @@ columnValue.map((it, index) => {
   if (it[0] === "test_id" || it[0] === 'test_date' || it[0] === 'percentage') {
     const data = {
       field: it[0],
-      headerName: it[0].charAt(0).toUpperCase() + it[0].slice(1),   // str.charAt(0).toUpperCase() + str.slice(1)
+      headerName: it[0].replace(/_/g," ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),   // str.charAt(0).toUpperCase() + str.slice(1)
       width: "150px",
       align: "left",
       headerAlign: "left",
@@ -79,49 +189,9 @@ columnValue.map((it, index) => {
 
     perFormanceColumn.push(data);
   }
+
 })
-console.log(perFormanceColumn);
 
-
-
-
-
-
-
-// const value=[
-//   {
-//       "test_id":1,
-//       "test_date":"2020-20-04",
-//       "subject_name":[
-//           "Maths",
-//           "Physics",
-//           "Chemistry"
-//       ],
-//       "mark-obtained":[
-//           29,30,50
-//       ],
-//       "total_mark":[
-//           30,50,90
-//       ],
-//       "percentage":90
-//   },
-//   {
-//       "test_id":2,
-//       "test_date":"2020-12-04",
-//       "subject_name":[
-//           "Maths",
-//           "Physics",
-//           "Chemistry"
-//       ],
-//       "mark-obtained":[
-//           29,30,50
-//       ],
-//       "total_mark":[
-//           30,50,90
-//       ],
-//       "percentage":90
-//   }
-//   ]
 let col;
 const array = [];
 value.map((item, index) => {
@@ -139,20 +209,25 @@ value.map((item, index) => {
   const result = {}
   temp.map((item, index) => {
     if (item[0] === "test_id" || item[0] === 'test_date' || item[0] === 'percentage')
+    result[item[0]] = item[1];
 
       if (item[0] === 'test_id') {
 
         result["id"] = item[1];
       }
-      else result[item[0]] = item[1];
+       if(item[0]==='percentage')
+      {
+        result[item[0]]=item[1]+"%"
+      }
+      
   })
 
   for (let i = 0; i < markArray.length; i++) result[subjectArray[i]] = markArray[i];
-  temp.map((item, index) => { if (item[0] === "test_id" || item[0] === 'test_data' || item[0] === 'percentage') result[item[0]] = item[1]; })
+  // temp.map((item, index) => { if (item[0] === "test_id" || item[0] === 'test_data' || item[0] === 'percentage') result[item[0]] = item[1]; })
   array.push(result);
 
 })
-console.log(array);
+
 
 
 
@@ -160,49 +235,12 @@ console.log(array);
 
 /// modification of testDetails data
 
-const subjectlist = [
-  {
-    value: "Physics", lable: "Physics", temp: "TotalMark", color: "#82ca9d",
-    array: [{ "Month": "Jan", "Physics": 20, "TotalMark": 100, },
-    { "Month": "Feb", "Physics": 30, "TotalMark": 100, },
-    { "Month": "March", "Physics": 30, "TotalMark": 100, },
-    { "Month": "April", "Physics": 20, "TotalMark": 100, },
-    { "Month": "May", "Physics": 45, "TotalMark": 100, },
-    { "Month": "June", "Physics": 10, "TotalMark": 100, },
-    { "Month": "July", "Physics": 30, "TotalMark": 100, }]
-  },
-  {
-    value: "Math", lable: "Math", temp: "TotalMark", color: "#82ca9d",
-    array: [
-      { "Month": "Jan", "TotalMark": 100, "Math": 90, },
-      { "Month": "Feb", "TotalMark": 100, "Math": 20, },
-      { "Month": "March", "TotalMark": 100, "Math": 100, },
-      { "Month": "April", "TotalMark": 100, "Math": 10, },
-      { "Month": "May", "TotalMark": 100, "Math": 100, },
-      { "Month": "June", "TotalMark": 100, "Math": 80, },
-      { "Month": "July", "TotalMark": 100, "Math": 100, },
 
-    ]
-  },
-  {
-    value: "Biology", lable: "Biology", temp: "TotalMark", color: "#82ca9d",
-    array: [
-      { "Month": "Jan", "TotalMark": 100, "Biology": 98, },
-      { "Month": "Feb", "TotalMark": 100, "Biology": 67, },
-      { "Month": "March", "TotalMark": 100, "Biology": 90, },
-      { "Month": "April", "Totalmark": 100, "Biology": 12, },
-      { "Month": "May", "TotalMark": 100, "Biology": 97, },
-      { "Month": "June", "Totalmark": 100, "Biology": 23, },
-      { "Month": "July", "TotalMark": 100, "Biology": 34, }
-    ]
-  },
-
-]
 const columns = [
-  { field: 'id', headerName: 'InstallMent No.', width: 150, flex: 1, headerAlign: "left", align: "left", flex: 1, sortable: false },
+  { field: 'id', headerName: 'Installment No', width: 150, flex: 1, headerAlign: "left", align: "left", flex: 1, sortable: false },
   { field: 'total_fees', flex: 1, headerName: 'Amount', width: 150, editable: false, headerAlign: "left", align: "left", sortable: false },
   {
-    field: 'LastDate', headerName: 'Last_Date', width: 150, flex: 1, editable: false, headerAlign: "left",
+    field: 'LastDate', headerName: 'Last Date', width: 150, flex: 1, editable: false, headerAlign: "left",
     align: "left", sortable: false
   },
   {
@@ -270,8 +308,8 @@ const SingleStudentpage = (props) => {
 
   const [name, setName] = useState("Nitesh Kumar Reeddy");
   const [medium, setMedium] = useState("English");
-  const [course, setCourse] = useState("Jee");
-  const [board, setBoard] = useState("icse");
+  const [course, setCourse] = useState("JEE");
+  const [board, setBoard] = useState("ICSE");
   const [Class, setClass] = useState("12th");
 
 
@@ -324,6 +362,7 @@ const SingleStudentpage = (props) => {
   // fee details
 
   const [feeDetails, setFeeDetails] = useState([]);
+ 
 
   let student_id = params.student_id;
 
@@ -376,6 +415,7 @@ const SingleStudentpage = (props) => {
 
   ];
   const installMentRows = FeeDetails.filter((item) => item.total_fees != 0);
+
   return (
     <>
       <div className="SingleStudent-container">
@@ -523,17 +563,20 @@ const SingleStudentpage = (props) => {
 
                 <div className="performanceAnalytic-body-content">
                   <div className='perfomanceAnalytic-body-content-table'>
-                    <Table rows={array} columns={perFormanceColumn} /> </div>
+                    <Table rows={array}  columns={perFormanceColumn} /> </div>
 
                   <div className="performanceAnalytic-body-content-charts">
-                    {subjectlist.map((item, index) => (
-                      <div className="container">
+                    {subjectWisemark.map((item, index) => (
+                    
+
+                      <div  key={index }className="container">
+                        
                         <div className='heading'>
                           <span className='head'>{item.value}</span>
                           <span className='subhead'>Recent Test Results</span>
                         </div>
                         <div className='content'>
-                          <Chart color={item.color} temp={item.temp} dataKey={item.value} data={item.array} />
+                          <Chart color={item.color} temp={item.temp} total_mark={"Total_mark"} Mark_obtained={"Mark_obtained"} data={item.arr} />
                         </div>
                       </div>
                     ))}

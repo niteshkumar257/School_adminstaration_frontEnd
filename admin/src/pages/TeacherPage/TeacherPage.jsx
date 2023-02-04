@@ -17,7 +17,7 @@ import Alert from '@mui/material/Alert';
 const Month = [
   {
     value: 'Jan',
-    label: 'jan',
+    label: 'Jan',
   },
   {
     value: 'Feb',
@@ -48,16 +48,16 @@ const Month = [
     label: 'Sep',
   },
   {
-    value: 'October',
-    label: 'October',
+    value: 'Oct',
+    label: 'Oct',
   },
   {
-    value: 'November',
-    label: 'November',
+    value: 'Nov',
+    label: 'Nov',
   },
   {
-    value: 'December',
-    label: 'December',
+    value: 'Dec',
+    label: 'Dec',
   },
   
 
@@ -259,7 +259,7 @@ const submitHandler=(e)=>
         <div className='SingleTeacher-page page-container'>
         <div className='student-info-main-container'>
     <div className='student-info-heading'>
-      <h1> Teachers Details</h1>
+      <h1> Teacher Details</h1>
     </div>
     <div className="section basic-info">
     
@@ -392,13 +392,14 @@ const submitHandler=(e)=>
         // onClick={scoreHandler}
          style={{
          
-            width:100,
-            height:30,
+            width:150,
+            height:54,
             backgroundColor:"#08B3F3 ",
             border:"none",
             borderRadius:9,
             color:"white",
             fontSize:"1rem",
+          fontWeight:600,
             cursor:"pointer"
         }}>Submit</button>
        </div>

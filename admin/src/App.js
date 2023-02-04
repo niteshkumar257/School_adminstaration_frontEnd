@@ -20,8 +20,18 @@ const App=()=>
     // gettinh student id from the student list page 
     // for showing student inforamtion in the SingleStudentapage
     // funtion for getting data from studentList page which is child of the app.js file
+    
+
+  
   const [studentId,setStudentid]=useState(0);
   const [teacherId,setTeacherid]=useState(0);
+  const [isExpand,setIsExpand]=useState(false);
+  
+
+  const isExapnedHandler=(value)=>
+  {
+      setIsExpand(value);
+  }
 
   // getting TeacherId from TecherList Page 
   const getTeacherId=(id)=>
@@ -41,8 +51,8 @@ const App=()=>
         <Route path='/' element={<DashBoard/>}/>
 
 
-          <Route path="login" element={<Login/>}/>
-          <Route path='dashBoard' element={<DashBoard/>}/>
+          <Route  path="login" element={<Login/>}/>
+          <Route  path='dashBoard' element={<DashBoard/>}/>
           <Route path='Student' >
           <Route index element={<StudentList getStudentId={getStudentId} />} />
               <Route path=":student_id" element={<StudentePage />} />

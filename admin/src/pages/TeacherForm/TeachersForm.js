@@ -113,6 +113,19 @@ const TeachersForm = () => {
         console.log(err);
       });
     }
+    setName("");
+  setAge("");
+  setGender("");
+  setAddress("");
+  setCity("");
+  setEmail("");
+  setSalary("");
+  setSubject("");
+  setDate("");
+  setMedium("");
+  setWorkExp("");
+  setAddress("");
+  setMobile("");
   }
   return (
     <div className='teachers-container '>
@@ -141,9 +154,9 @@ const TeachersForm = () => {
 
 
                     <div className='teachers-info-section '>
-                      <TextField sx={{ flex: 1 }} label="Teacher Name"  error={teacher_nameError}required helperText="Enter Name" onChange={(e) => setName(e.target.value)} />
-                      <TextField sx={{ flex: 1 }} label="Mobile" error={mobileError}  required helperText="Enter Mobile" onChange={(e) => setMobile(e.target.value)} />
-                      <TextField sx={{ flex: 1 }} label="Email"  helperText="Enter Email" error ={emailError}required type="email" onChange={(e) => setEmail(e.target.value)} />
+                      <TextField  value={teacher_name}sx={{ flex: 1 }} label="Teacher Name"  error={teacher_nameError}required helperText="Enter Name" onChange={(e) => setName(e.target.value)} />
+                      <TextField  value={mobile}sx={{ flex: 1 }} label="Mobile" error={mobileError}  required helperText="Enter Mobile" onChange={(e) => setMobile(e.target.value)} />
+                      <TextField  value={email}sx={{ flex: 1 }} label="Email"  helperText="Enter Email" error ={emailError}required type="email" onChange={(e) => setEmail(e.target.value)} />
                     </div>
 
 
@@ -151,16 +164,16 @@ const TeachersForm = () => {
 
                     <div className='teachers-info-section '>
 
-                      <TextField sx={{ flex: 1 }} error={subjectError} required select label="Subject" onChange={(e) => setSubject(e.target.value)} helperText="Select Subject">
+                      <TextField value={subject_id} sx={{ flex: 1 }} error={subjectError} required select label="Subject" onChange={(e) => setSubject(e.target.value)} helperText="Select Subject">
                         {Subject.map((option) =>
                          (<MenuItem key={option.value}
                           value={option.value}>
                              {option.label} 
                              </MenuItem>))}
                                </TextField> 
-                       <TextField sx={{ flex: 1 }} required select label="Medium" error={mdeiumError} onChange={(e) => setMedium(e.target.value)} helperText="Select Medium">
+                       <TextField  value={medium} sx={{ flex: 1 }} required select label="Medium" error={mdeiumError} onChange={(e) => setMedium(e.target.value)} helperText="Select Medium">
                         {Medium.map((option) => (<MenuItem key={option.value} value={option.value}>{option.label} </MenuItem>))}</TextField> 
-                      <TextField sx={{ flex: 1 }} error={experienceError} helperText="Enter Work-experience" required label="Work-Exp" onChange={(e) => setWorkExp(e.target.value)} /> 
+                      <TextField  value={experience}sx={{ flex: 1 }} error={experienceError} helperText="Enter Work-experience" required label="Work-Exp" onChange={(e) => setWorkExp(e.target.value)} /> 
 
                     </div>
 
@@ -168,14 +181,14 @@ const TeachersForm = () => {
                     {/* { third row} */}
                     <div className='teachers-info-section '>
 
-                       <TextField sx={{ flex: 1 }} error={genderError} required select label="Gender" onChange={(e) => setGender(e.target.value)} helperText="Select Gender">
+                       <TextField value={gender} sx={{ flex: 1 }} error={genderError} required select label="Gender" onChange={(e) => setGender(e.target.value)} helperText="Select Gender">
                         {Gender.map((option) =>
                          (<MenuItem key={option.value} 
                          value={option.value}>
                            {option.label}</MenuItem>))}
                             </TextField>
-                       <TextField sx={{ flex: 1 }} error={salaryError}label="Salary" type="number" helperText="Enter Salary" required onChange={(e) => setSalary(e.target.value)} />
-                      <TextField sx={{ flex: 1 }} error={cityError} label="City"  required helperText="Enter City" onChange={(e) => setCity(e.target.value)} />  
+                       <TextField  value={salary}sx={{ flex: 1 }} error={salaryError}label="Salary" type="number" helperText="Enter Salary" required onChange={(e) => setSalary(e.target.value)} />
+                      <TextField value={city} sx={{ flex: 1 }} error={cityError} label="City"  required helperText="Enter City" onChange={(e) => setCity(e.target.value)} />  
 
 
 
@@ -184,9 +197,9 @@ const TeachersForm = () => {
                     {/* 4 th row */}
                     <div className='teachers-info-section '>
 
-                      <TextField sx={{ flex: 1 }} error={ageError} label="Age" type="number" equired helperText="Enter Age" onChange={(e) => setAge(e.target.value)} />
-                      <TextField sx={{ flex: 1 }} error={dateError} type="date" required helperText="Enter StartDate" onChange={(e) => setDate(e.target.value)} />
-                      <TextField sx={{ flex: 1 }}  error={addresError}label="Address"  required helperText="Enter the Address" onChange={(e) => setAddress(e.target.value)} />
+                      <TextField value={age} sx={{ flex: 1 }} error={ageError} label="Age" type="number" equired helperText="Enter Age" onChange={(e) => setAge(e.target.value)} />
+                      <TextField  value={date} sx={{ flex: 1 }} error={dateError} type="date" required helperText="Enter StartDate" onChange={(e) => setDate(e.target.value)} />
+                      <TextField value={address} sx={{ flex: 1 }}  error={addresError}label="Address"  required helperText="Enter the Address" onChange={(e) => setAddress(e.target.value)} />
                     </div>
 
 

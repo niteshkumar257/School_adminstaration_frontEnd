@@ -10,7 +10,7 @@ import widgest from '../Widgest/widgest';
 import s4 from "../../assest/school4.png";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-const data={
+const info={
     school_name:"GAANV Wala High School Academy, Jaipur",
     city_name:"Jaipur",
     email:"admin123@gaanvwala.com",
@@ -19,20 +19,25 @@ const data={
 }
 
 
-const Dashboard = () => {
-    // const [data,setData]=useState({});
+const Dashboard = (props) => {
+
+    
+  
+    props.AdminNameHandler("Nitesh Kumar");
+     const [data,setData]=useState(info);
     const [studentCount,setStudentCount] = useState(1250);
     const [teacherCount,setTeacherCount] = useState(34);
-    // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
-    // let school_id = decodeToken.result.school_id;
-    // useEffect(() => {
-    //    axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
-    //    //  console.log(res)
-    //      setData(res.data.schoolDetail);
-    //      setStudentCount(res.data.totalStudent);
-    //      setTeacherCount(res.data.totalTeacher);
-    //    }) 
-    // }, []);
+    let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
+    let school_id = decodeToken.result.school_id;
+    useEffect(() => {
+       axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
+       //  console.log(res)
+         setData(res.data.schoolDetail);
+         setStudentCount(res.data.totalStudent);
+         setTeacherCount(res.data.totalTeacher);
+         props.AdminNameHandler("Nitesh Kumar");
+       }) 
+    }, []);
   
   return (
   
@@ -69,13 +74,13 @@ const Dashboard = () => {
          <div className='basic-info-container-components'>
          <div className="info-container">
          <li>
-          <label>Owner Email</label>
-          <span>: {data.email}</span>
+          <label>Owner Email :</label>
+          <span>{data.email}</span>
             </li>
           </div>
           <div className="info-container">
           <li>
-            <lable>Phone : </lable>
+            <label>Phone : </label>
             <span>{data.mobile}</span>
             </li>
           </div>

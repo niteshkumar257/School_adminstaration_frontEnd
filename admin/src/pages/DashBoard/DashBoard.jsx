@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState}from 'react'
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
 import "./DashBoard.scss"
@@ -9,19 +9,20 @@ import axios from "axios";
 import { useEffect } from 'react'
 
 const DashBoard = () => {
-  // let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
-  // let school_id = decodeToken.result.school_id;
-  // useEffect(() => {
-  //    axios.get(`http://localhost:8080/schools/${school_id}`,{headers: { 'Content-Type': 'application/json'}}).then((res) => {
-  //      console.log(res)
-  //    }) 
-  // }, []);
+  
+  const [adminName,setAdminName]=useState("");
+ const adminNamehandler=(name)=>
+ {
+   console.log(name);
+    setAdminName(name);
+ }
   return (
    
+  
     <div className='dashboard-container '>
     <Sidebar/>
     <div className='dashboard'>
-      <Navbar/>
+      <Navbar  adminName={adminName}/>
       <div className='dashboard-page page-container'>
         <div 
         style={{
@@ -29,7 +30,7 @@ const DashBoard = () => {
           height:"100vh"
         }}
         >
-        <Dashboard/>
+        <Dashboard AdminNameHandler={adminNamehandler}/>
         </div>
      
       </div>
