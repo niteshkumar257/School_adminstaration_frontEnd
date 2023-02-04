@@ -5,12 +5,12 @@ import DashBoard from './pages/DashBoard/DashBoard';
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Grade from "./pages/Grade/Grade"
 import StudentList from "./pages/StudentsList/Student";
-import TeacherList from "./pages/TeacherList/Teachers"
+import TeacherList from "./pages/TeachersList/Teachers"
 import StudentForm from "./pages/StudentForm/StudentForm"
 import TeacherForm from "./pages/TeacherForm/TeachersForm";
 import Notification from "./pages/Notification/Notification";
-import StudentePage from "./pages/SingleStudentPage/SingleStudentpage"
-import TeacherPage from "./pages/SingleTeacherPage/SingleTeacherPage"
+import StudentePage from "./pages/StudentPage/Studentpage"
+import TeacherPage from "./pages/TeacherPage/TeacherPage"
 
 
 

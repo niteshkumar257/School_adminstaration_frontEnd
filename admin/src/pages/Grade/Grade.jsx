@@ -150,45 +150,45 @@ const Grade = () => {
   const [student_id, setStudentId] = useState();
   const handleOpen = (student_id) => {
     setOpen(true);  
+    console.log(student_id)
     setStudentId(student_id);
     axios.get(`http://localhost:8080/schools/${school_id}/tests`)
-    .then((data) => { 
+    .then((data) => {  
       setTest(data.data.testDetails);
     }).catch((err) => {
       console.log(err);
     })
-  }
+  } 
   const handleClose = () =>{
     setOpen(false);
     setSubjectList([]);
+    setTestid(0);
   } 
   const [testid,setTestid]=useState(0);
   let [obtained,setObtained] = useState([]);
   const [mark,setMark]=useState(0);
-  const markHandler=(e)=>
-  {
-    console.log(e.target.value)
-   setMark(mark);
-   obtained.push(mark);
-  }
-
-
+  
   // mark upload handler
-  const tempRow=[];
+  const [tempRow, setTempRow] = useState([]);
   const markUploadHandler=(e)=>
   {
     
     setOpen(false);
       e.preventDefault();
-      console.log(testid);
-     console.log(inputField);
+      pushMarks(testid);
   }
 
    
   const [subject_list, setSubjectList] = useState([]);
 
-  const pushMarks = (test_id) => {
-    axios.post(`http://localhost:8080/students/${student_id}/tests/${test_id}/uploadmarks`)
+  const pushMarks = (test_id) => {   
+      axios.post(`http://localhost:8080/students/${student_id}/tests/${test_id}/uploadmarks`, {
+        inputField
+      }).then((data) => {
+        alert("Marks uploaded successfully");
+      }).catch((err) => {
+        console.log(err);
+      })
   }
   
   const getSubjects = (test_id) =>{
@@ -196,26 +196,25 @@ const Grade = () => {
     axios.get(`http://localhost:8080/student/${student_id}/getSubjects`)
     .then((data) => { 
       setSubjectList(data.data.allSubjects);
-      pushMarks(test_id);
+      data.data.allSubjects.map((item)=>
+      { 
+           const data={
+            mark_obtained:"",
+            total_marks:"", 
+            subject_id:item.subject_id
+           }
+           tempRow.push(data);             
+      }) 
     }).catch((err) => {
       console.log(err);
     })
   }
-
-  subject_list.map((item)=>
-  {
-       const data={
-        markObtained:" ",
-        TotalMark:" ",
-        Subject:item.value,
-        
-       }
-       tempRow.push(data);
-  })
-      const [inputField,setInputField]=useState(tempRow)
+  // console.log(subject_list)
+  const [inputField,setInputField]=useState(tempRow)
+  
       const changeHandler=(index,e)=>
       {
-        console.log(index,e);
+       // console.log(e.target.value);
       
           let data=[...inputField];
          
@@ -225,11 +224,8 @@ const Grade = () => {
           
         
       }
-      
-
-
-
-
+       
+  console.log(inputField)
   // mark upload handler
    
   const UpdateColumn=[
@@ -269,10 +265,10 @@ const Grade = () => {
                  label="Test ID"
  
                  required
-                 onChange={(e)=>setTestid(e.target.value)}>
-                {Test.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-               {option.label}
+                 onChange={(e)=>{setTestid(e.target.value); getSubjects(testid)}}>
+                {test.map((option) => (
+                <MenuItem key={option.test_id} value={option.test_id}>
+               {option.test_id}
                </MenuItem>
                ))}
               </TextField>
@@ -282,18 +278,18 @@ const Grade = () => {
         subject_list.map((item,index)=>(
           <div key={index} className='modal-subject-container'  >
            <div className='container'>
-            <span>{item.label}:</span>
+            <span>{item.subject_name}:</span>
            </div>
            <div>
            <TextField
-           name="markObtained"
+           name="mark_obtained"
            value={tempRow[index].name}
            onChange={(e)=>changeHandler(index,e)}
              required label="Mark Obtained" variant="outlined" />
             </div>   
             <div>
             <TextField 
-            name="TotalMark"
+            name="total_marks"
             
             value={tempRow[index].name}
             onChange={(e)=>changeHandler(index,e)}
