@@ -14,7 +14,7 @@ import "./Sidebar.scss"
 import { useState, useEffect } from 'react';
 
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const menuItem = [
     {
       path: "/dashBoard",
@@ -92,8 +92,8 @@ const Sidebar = () => {
                 menuItem.map((item, index) => {
                   return (
                   
-                      <NavLink  activeClassName="active" className='items' style={{ textDecoration: "none" }} to={item.path}>
-                     <div  activeClassName="active" key={index} className={isExpanded ? "item" :  "item-toggle"} >
+                      <NavLink  key={index} activeclassname="active" className='items' style={{ textDecoration: "none" }} to={item.path}>
+                     <div  activeclassname="active" key={index} className={isExpanded ? "item" :  "item-toggle"} >
                         <div className="icon"> {item.icon}</div>
                         {
                           isExpanded && (

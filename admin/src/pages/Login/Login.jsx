@@ -17,7 +17,8 @@ const Login = () => {
       localStorage.setItem("auth_token", res.data.token);
       return navigate("/");
     }).catch((err) => {
-      console.log(err.response.data.error);
+      alert("Invalid Credentials", err.response.data.error)
+      console.log(err);
     })
   }
   return (
@@ -47,7 +48,7 @@ const Login = () => {
                 </div>
                 <form onSubmit={loginHandler}>
                     <div className="input-container">
-                    <label>Email</label>
+                    <label>Admin Id</label>
                      <input type='number' placeholder='enter Your id...' onChange={(e)=>setEmail(e.target.value)}></input>
                     </div>
                    <div className="input-container">

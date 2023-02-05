@@ -5,7 +5,8 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import { Person2Outlined } from '@mui/icons-material';
 import AdminProfile from "../../assest/Admin.jpg";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  console.log(props);
   return (
     <div className='navbar gradient curve-box'>
      <div className='wrapper'>
@@ -19,7 +20,7 @@ const Navbar = () => {
          <div className='navbar-items'>
             <div className="navbar-items-item">
               <img src={AdminProfile}></img>
-                <span>GW Head</span>
+                <span>{props.adminName}</span>
             </div>
          </div>
      </div>

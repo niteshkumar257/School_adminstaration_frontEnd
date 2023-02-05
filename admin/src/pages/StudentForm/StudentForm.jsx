@@ -233,7 +233,9 @@ const StudentForm = () => {
   
   
 
-console.log(firstInsallMentEta);
+
+
+
 
   const [alertMessage,setAlertMessage]=useState(false);
   
@@ -259,6 +261,7 @@ console.log(firstInsallMentEta);
     setThirdError(false);
     setGenderError(false);
     setEmailError(false);
+    setAadharError(false);
   
  
   
@@ -282,15 +285,23 @@ console.log(firstInsallMentEta);
      if(firstInstallMentAmount=='') setOneError(true);
      if(secondInstallMentAmount=='') setTwoError(true);
      if(thirdInstallMentAmount=='') setThirdError(true);
+
      if(firstInsallMentEta=='') setFirstInstallMentEta(true);
      if(secondInsallMentEta=='') setSecondInstallMentEta(true);
      if(thirdInsallMentEta=='') setThirdInstallMentEta(true);
+
+     if(firstInsallMentEta=='') setFirstInstallMentError(true);
+     if(secondInsallMentEta=='') setSecondInstallMentError(true);
+     if(thirdInsallMentEta=='') setThirdInstallMentError(true);
+    
+
 
      console.log(name,medium,Class,course,email,Fathername,FatherProfession,MotherName,MotherProfession,AlternateNumber,PrimaryNumber,date,Address,board,AadharNumber,firstInstallMentAmount,secondInstallMentAmount,thirdInstallMentAmount)
      if(name.length!=0  && medium.length!=0  && Class.length!=0 && course.length!=0  && email.length!=0 && Fathername.length!=0 && MotherName.length!=0 && FatherProfession.length!=0 && MotherProfession.length!=0 && AlternateNumber.length!=0 && PrimaryNumber.length!=0 && date.length!=0 && Address.length!=0 && board.length!=0  &&
       firstInstallMentAmount.length!=0 && secondInstallMentAmount.length!=0 && thirdInstallMentAmount.length!=0   )
      {
          // api call
+
          let totalFees = parseInt(firstInstallMentAmount) + parseInt(secondInstallMentAmount) + parseInt(thirdInstallMentAmount);
          //student_name, gender, dob, address, class_id, course_name, medium, board, father_name, 
          //father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, 
@@ -325,6 +336,41 @@ console.log(firstInsallMentEta);
          
      }
      else  console.log("All filed are needed"); 
+
+     
+         
+     
+     
+   setName("");
+   setEmail("");
+   setGender("");
+   setAddress("");
+   setClass("");
+   setCourse("");
+   setMedium("");
+   setBoard("");
+   setAadharNumber("");
+   setFatherName("");
+   setMotherName("");
+   setFatherProfession("");
+   setMotherProfession("");
+   setPrimaryNumber("");
+   setAlternateNumber("");
+   setDate("");
+   setFirstInstallMentAmount("");
+   setSecondInstallMentAmount("");
+   setThirdInstallMentAmount("");
+   setFirstInstallMentEta("");
+   setSecondInstallMentEta("");
+   setThirdInstallMentEta("");
+  //  setFirstInstallMentStatus(0);
+  //  setSecondInstallMentStatus(0);
+  //  setThirdInstallMentStatus(0);
+
+  
+  
+
+
   }
   // second funtion of 
   // first installment button handler funtion
@@ -356,8 +402,12 @@ console.log(firstInsallMentEta);
                 {/* row one info */}
 
               <div className='student-info-section '>
-                <TextField  error={nameError}sx={{ flex:1 }} label="Student Name"  required helperText="Enter Student Name" onChange={(e)=>setName(e.target.value)}/>
-            <TextField sx={{ flex:1 }}  error={genderError}  select label="Gender" required    onChange={(e)=>setGender(e.target.value)}   helperText="Select Gender">
+
+              
+
+                <TextField   value={name} error={nameError}sx={{ flex:1 }} label="Student Name"  required helperText="Enter Student Name" onChange={(e)=>setName(e.target.value)}/>
+            <TextField value={gender} sx={{ flex:1 }}  error={genderError}  select label="Gender" required    onChange={(e)=>setGender(e.target.value)}   helperText="Select Gender">
+
                 
               {Gender.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -365,7 +415,7 @@ console.log(firstInsallMentEta);
                </MenuItem>
                ))}
               </TextField>
-                 <TextField sx={{ flex:1 }}  error={courseError} select label="Course" required    onChange={(e)=>setCourse(e.target.value)}  helperText="Select Course">
+                 <TextField  value={course} sx={{ flex:1 }}  error={courseError} select label="Course" required    onChange={(e)=>setCourse(e.target.value)}  helperText="Select Course">
                {Course.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
@@ -378,15 +428,15 @@ console.log(firstInsallMentEta);
 
 
                 <div className='student-info-section '>
-                <TextField   sx={{ flex:1 }} error={dateError}variant="outlined"    helperText="Select Date Of Birth"  type="date"  onChange={(e)=>setDate(e.target.value)}/>
-                <TextField  sx={{ flex:1 }}  error={classError} select  label="Class"    required    onChange={(e)=>setClass(e.target.value)}  helperText="Select Class">
+                <TextField   value={date} sx={{ flex:1 }} error={dateError}variant="outlined"    helperText="Select Date Of Birth"  type="date"  onChange={(e)=>setDate(e.target.value)}/>
+                <TextField  value={Class} sx={{ flex:1 }}  error={classError} select  label="Class"    required    onChange={(e)=>setClass(e.target.value)}  helperText="Select Class">
                 {Batch.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
                </MenuItem>
                ))}
               </TextField>
-                 <TextField  sx={{ flex:1 }} error={mediumError}  required   select  helperText="Select Medium"  label="Medium"  onChange={(e)=>setMedium(e.target.value)}>
+                 <TextField  value={medium} sx={{ flex:1 }} error={mediumError}  required   select  helperText="Select Medium"  label="Medium"  onChange={(e)=>setMedium(e.target.value)}>
                 {Medium.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
@@ -397,10 +447,10 @@ console.log(firstInsallMentEta);
                
                 </div>
                 <div className='student-info-section '>
-                <TextField sx={{ flex:1 }}   error={addressError}   helperText="Enter Address" label="Address"  type="text"  required  onChange={(e)=>setAddress(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  error={aadhaError}  label="Aadhar Number"      type="text"          helperText="Enter Aadhar Number"  required
+                <TextField  value={Address} sx={{ flex:1 }}   error={addressError}   helperText="Enter Address" label="Address"  type="text"  required  onChange={(e)=>setAddress(e.target.value)}/>
+                <TextField  value={AadharNumber}sx={{ flex:1 }}  error={aadhaError}  label="Aadhar Number"      type="text"          helperText="Enter Aadhar Number"  required
                 onChange={(e)=>setAadharNumber(e.target.value)}/>
-                <TextField  sx={{ flex:1 }} error={boardError}  required    select  label="Board"  helperText="Select Board"    onChange={(e)=>setBoard(e.target.value)} >
+                <TextField  value={board} sx={{ flex:1 }} error={boardError}  required    select  label="Board"  helperText="Select Board"    onChange={(e)=>setBoard(e.target.value)} >
                 {Board.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                {option.label}
@@ -419,24 +469,24 @@ console.log(firstInsallMentEta);
              </div>
               <div className='student-info-detail-parent-container-textfield'>
               <div className='parent-info-section '>
-                <TextField sx={{ flex:1 }} error={fatherNameError} label="Father Name"    required  helperText="Father Name"   onChange={(e)=>setFatherName(e.target.value)}/>
-                 <TextField sx={{ flex:1 }}  error={fatherProfessionError} label="Father profession"   helperText="Father Profession"   required  onChange={(e)=>setFatherProfession(e.target.value)}/>
-                <TextField sx={{ flex:1 }} error={primaryError}  label="Primary Number"  required helperText="Primary Number"   onChange={(e)=>setPrimaryNumber(e.target.value)}/>
+                <TextField  value={Fathername}sx={{ flex:1 }} error={fatherNameError} label="Father Name"    required  helperText="Father Name"   onChange={(e)=>setFatherName(e.target.value)}/>
+                 <TextField value={FatherProfession} sx={{ flex:1 }}  error={fatherProfessionError} label="Father profession"   helperText="Father Profession"   required  onChange={(e)=>setFatherProfession(e.target.value)}/>
+                <TextField  value={PrimaryNumber}sx={{ flex:1 }} error={primaryError}  label="Primary Number"  required helperText="Primary Number"   onChange={(e)=>setPrimaryNumber(e.target.value)}/>
                   
              </div>
 
 
                 <div className='parent-info-section '>
-                <TextField sx={{ flex:1 }}  error={motherNameError}label="Mother Name"   required  helperText="Mohter Name"    onChange={(e)=>setMotherName(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  error={motherProfessionError} label="Mother profession"   helperText="Mother Profession"   required onChange={(e)=>setMotherProfession(e.target.value)}/>
-                <TextField sx={{ flex:1 }}  error={altNumberError} label="Alternate Number"  required  helperText="Alternate Number"  onChange={(e)=>setAlternateNumber(e.target.value)}/>
+                <TextField value={MotherName} sx={{ flex:1 }}  error={motherNameError}label="Mother Name"   required  helperText="Mohter Name"    onChange={(e)=>setMotherName(e.target.value)}/>
+                <TextField value={MotherProfession} sx={{ flex:1 }}  error={motherProfessionError} label="Mother profession"   helperText="Mother Profession"   required onChange={(e)=>setMotherProfession(e.target.value)}/>
+                <TextField value={AlternateNumber} sx={{ flex:1 }}  error={altNumberError} label="Alternate Number"  required  helperText="Alternate Number"  onChange={(e)=>setAlternateNumber(e.target.value)}/>
                   
                    
               </div>
 
 
                 <div className='parent-info-section '>
-                <TextField sx={{ flex:0.317}}  error={emailError}label="Email"  required  type="email"   helperText="Enter Parent Email"  onChange={(e)=>setEmail(e.target.value)}/>
+                <TextField value={email} sx={{ flex:0.317}}  error={emailError}label="Email"  required  type="email"   helperText="Enter Parent Email"  onChange={(e)=>setEmail(e.target.value)}/>
                    
                 </div>
 
@@ -450,6 +500,7 @@ console.log(firstInsallMentEta);
               <div className='fee-info-section section'>
                 <div className='fee-info-section-installment'>
                 <TextField 
+                value={firstInstallMentAmount}
                 sx={{
                   height:"7vh"
                 }}
@@ -458,7 +509,7 @@ console.log(firstInsallMentEta);
                 onChange={(e)=>setFirstInstallMentAmount(e.target.value)}
                 id="outlined-basic" label="1st InstallMent" variant="outlined" />
                 <div className="fee-info-section-installment-checkbox-date">
-                <Checkbox {...label}
+                <Checkbox 
                  checked={firstInstallMentStatus}
                  onChange={(e)=>handleChange1(e)}
                  color="success"
@@ -471,8 +522,9 @@ console.log(firstInsallMentEta);
                variant="outlined" 
                type="date"
                required
-              
+              value={firstInsallMentEta}
                 helperText="Select a Date"
+                error={firstInstallMentError}
                 onChange={(e)=>setFirstInstallMentEta(e.target.value)}/>}
                 </div>
                 
@@ -485,6 +537,8 @@ console.log(firstInsallMentEta);
                   height:"7vh"
                  
                 }}
+                value={secondInstallMentAmount}
+              
                 onChange={(e)=>setSecondInstallMentAmount(e.target.value)}
                  id="outlined-basic" label="2nd 
                 
@@ -492,7 +546,11 @@ console.log(firstInsallMentEta);
                required
                  variant="outlined" />
                  <div className="fee-info-section-installment-checkbox-date">
-                 <Checkbox {...label}
+
+
+                 <Checkbox 
+                
+
                  checked={secondInstallMentStatus}
                  required
                  onChange={(e)=>handleChange2(e)}
@@ -506,10 +564,14 @@ console.log(firstInsallMentEta);
                   height:"5vh"
                 }}
                   variant="outlined" 
-               
+                value={secondInsallMentEta}
                   type="date"
                   required
                   helperText="Select a Date"
+
+
+                error={secondInstallMentError}
+
                   onChange={(e)=>setSecondInstallMentEta(e.target.value)}/>}
                  </div>
                
@@ -521,6 +583,7 @@ console.log(firstInsallMentEta);
                 sx={{
                   height:"7vh"
                 }}
+                value={thirdInstallMentAmount}
                 onChange={(e)=>setThirdInstallMentAmount(e.target.value)}
                 required
                 id="outlined-basic" label="3rd InstallMent" variant="outlined" />
@@ -537,8 +600,9 @@ console.log(firstInsallMentEta);
                  {!thirdInstallMentStatus &&
                  
                  <TextField  variant="outlined" 
-             
+               value={thirdInsallMentEta}
                   type="date"
+                  error={thirdInstallMentError}
                   helperText="Select a Date"
                   onChange={(e)=>setThirdInstallMentEta(e.target.value)}/>}
                 </div>

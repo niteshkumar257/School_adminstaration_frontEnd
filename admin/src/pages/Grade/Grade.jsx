@@ -62,17 +62,17 @@ const style = {
 
 };
 const columns = [
-  { field: 'id', headerName: 'SI.No', width: 150,
-  flex:1,
-   },
+  { field: 'id', headerName: 'SI.No',
+  //  width: 150,
+   flex:1,align:"left",headerAlign:"left"},
   {
     field: 'student_name',
     headerName: 'Name',
-    maxwidth: 150,
+    // width: 150,
     editable:false,
     flex:1,
-    // headerAlign:"center",
-    // align:"center",
+    headerAlign:"left",
+    align:"left",
     // disableColumnMenu:true,
     // sortable:false
   },
@@ -81,7 +81,7 @@ const columns = [
     field: 'class_id',
     headerName: 'Class',
     type: 'number',
-    maxwidth: 150,
+    // width: 150,
     editable: false,
     flex:1,
     headerAlign:"left",
@@ -91,14 +91,16 @@ const columns = [
     field: 'medium',
     headerName: 'Medium',
     editable:false,
-    // sortable: false,
-    maxwidth: 150,
+   align:"left",
+   headerAlign:"left",
+    // width: 150,
     flex:1,
     // headerAlign:"center",
     // align:"center",
    
   },
 ];
+
 
 // const subject_list=[
 //   {
@@ -125,8 +127,19 @@ const columns = [
 //   { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
 //   { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
 //   { id: 8, student_name: 'Nitesh', class_id:7, medium: "English"},
+
+const rows = [
+  { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
+  { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
+  // { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
+  // { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
+  // { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
+  // { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
+  // { id: 8, student_name: 'Nitesh', class_id:7, medium: "English"},
+
  
-// ];
+];
 const Grade = () => {
   const [rows, setRows] = useState([]);
   let decode = jwt_decode(localStorage.getItem("auth_token"));
@@ -165,16 +178,23 @@ const Grade = () => {
     setTestid(0);
   } 
   const [testid,setTestid]=useState(0);
+
   let [obtained,setObtained] = useState([]);
   const [mark,setMark]=useState(0);
   
+
+
+ 
+
+
   // mark upload handler
   const [tempRow, setTempRow] = useState([]);
   const markUploadHandler=(e)=>
   {
     
-    setOpen(false);
+  
       e.preventDefault();
+
       pushMarks(testid);
   }
 
@@ -185,6 +205,7 @@ const Grade = () => {
       axios.post(`http://localhost:8080/students/${student_id}/tests/${test_id}/uploadmarks`, {
         inputField
       }).then((data) => {
+      setOpen(false)
         alert("Marks uploaded successfully");
       }).catch((err) => {
         console.log(err);
@@ -215,11 +236,12 @@ const Grade = () => {
       const changeHandler=(index,e)=>
       {
        // console.log(e.target.value);
+
       
           let data=[...inputField];
-         
+          console.log(e.target.name);
           data[index][e.target.name]=e.target.value;
-       
+       console.log(data);
           setInputField(data);
           
         

@@ -18,7 +18,7 @@ import Alert from '@mui/material/Alert';
 const Month = [
   {
     value: 'Jan',
-    label: 'jan',
+    label: 'Jan',
   },
   {
     value: 'Feb',
@@ -218,12 +218,16 @@ const SingleTeacherPage = () => {
     axios.post(`http://localhost:8080/teacher/${teacher_id}/updatepayment`, {
       amount, month, year
     })
+
       .then((data) => {
         console.log(data);
         renderSalary();
       }).catch((err) => {
         console.log(err);
       })
+
+
+
   
     
       setYearError(false);
@@ -358,8 +362,8 @@ const SingleTeacherPage = () => {
                         <span>{City}</span>
                       </div>
                       <div className='student'>
-                        <span className='lable'>Aadhar Number :</span>
-                        <span>{AadharCard}</span>
+                        {/* <span className='lable'>Aadhar Number :</span>
+                        <span>{AadharCard}</span> */}
                       </div>
 
                     </div>
