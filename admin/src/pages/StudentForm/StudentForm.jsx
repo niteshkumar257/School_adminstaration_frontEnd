@@ -1,4 +1,3 @@
-
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from "../../components/Navbar/Navbar"
 import "./Studentform.scss";
@@ -13,6 +12,8 @@ import { useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // select medium for the selecti list
 const Medium = [
@@ -130,7 +131,7 @@ const Gender = [
 
 ]
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-const StudentForm = () => {
+const StudentForm = (props) => {
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
 
@@ -211,7 +212,7 @@ const StudentForm = () => {
  
  const handleChange1=(e)=>
  {
-    console.log(format)
+    
      setFirstInstallMentEta(format);
      if(firstInstallMentStatus==0) setFirstInstallMentStatus(1);
      else setFirstInstallMentStatus(0)
@@ -237,9 +238,9 @@ const StudentForm = () => {
 
 
 
-  const [alertMessage,setAlertMessage]=useState(false);
+ 
   
-  const submitHandler = (e) => {
+  const AddStudentHandler = (e) => {
     e.preventDefault();
  
     setNameError(false);
@@ -296,17 +297,14 @@ const StudentForm = () => {
     
 
 
-     console.log(name,medium,Class,course,email,Fathername,FatherProfession,MotherName,MotherProfession,AlternateNumber,PrimaryNumber,date,Address,board,AadharNumber,firstInstallMentAmount,secondInstallMentAmount,thirdInstallMentAmount)
+    
      if(name.length!=0  && medium.length!=0  && Class.length!=0 && course.length!=0  && email.length!=0 && Fathername.length!=0 && MotherName.length!=0 && FatherProfession.length!=0 && MotherProfession.length!=0 && AlternateNumber.length!=0 && PrimaryNumber.length!=0 && date.length!=0 && Address.length!=0 && board.length!=0  &&
       firstInstallMentAmount.length!=0 && secondInstallMentAmount.length!=0 && thirdInstallMentAmount.length!=0   )
      {
-         // api call
+        
 
          let totalFees = parseInt(firstInstallMentAmount) + parseInt(secondInstallMentAmount) + parseInt(thirdInstallMentAmount);
-         //student_name, gender, dob, address, class_id, course_name, medium, board, father_name, 
-         //father_profession, mother_name, mother_profession, whatsapp_no, alternative_mobile, email, 
-         //total_fees, first_installment, first_installment_eta, first_installment_status, second_installment, second_installment_eta,
-         // second_installment_status, third_installment, third_installment_eta, third_installment_status, aadhar_no
+        
          let formData = ({student_name:name,gender, dob:date, address:Address, class_id:Class, course_name:course,
           medium, board, father_name:Fathername,father_profession:FatherProfession, mother_name:MotherName,
            mother_profession:MotherProfession, whatsapp_no:PrimaryNumber, alternative_mobile:AlternateNumber,
@@ -316,8 +314,7 @@ const StudentForm = () => {
                second_installment_status:secondInstallMentStatus,
                third_installment:thirdInstallMentAmount, third_installment_eta:thirdInsallMentEta,
                third_installment_status:thirdInstallMentStatus, aadhar_no:AadharNumber});
-          //let data = JSON.parse(JSON.stringify(formData));
-          console.log(formData)
+        
          axios.post(`http://localhost:8080/schools/${school_id}/addStudent`, {
           student_name:name,gender, dob:date, address:Address, class_id:Class, course_name:course,
            medium, board, father_name:Fathername,father_profession:FatherProfession, mother_name:MotherName,
@@ -329,13 +326,35 @@ const StudentForm = () => {
                 third_installment:thirdInstallMentAmount, third_installment_eta:thirdInsallMentEta,
                 third_installment_status:thirdInstallMentStatus, aadhar_no:AadharNumber
          }).then((data) => {
-            alert("Student Added Successfully");
+          toast.success('Teacher Added SuccesFully', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+  
          }).catch((err) => {
           console.log(err);
          })
          
      }
-     else  console.log("All filed are needed"); 
+     else 
+     {
+      toast.error('All Field are Required', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+     } 
 
      
          
@@ -363,9 +382,9 @@ const StudentForm = () => {
    setFirstInstallMentEta("");
    setSecondInstallMentEta("");
    setThirdInstallMentEta("");
-  //  setFirstInstallMentStatus(0);
-  //  setSecondInstallMentStatus(0);
-  //  setThirdInstallMentStatus(0);
+   setFirstInstallMentStatus(0);
+   setSecondInstallMentStatus(0);
+   setThirdInstallMentStatus(0);
 
   
   
@@ -374,14 +393,18 @@ const StudentForm = () => {
   }
   // second funtion of 
   // first installment button handler funtion
-  
+  const [isExpanded,setExpanded]=useState(false);
+  const isExpandedHandler=(value)=>
+  {
+        setExpanded(value);
+  }
 
   return (
     <div className='studentForm-container '>
-      <Sidebar />
+      <Sidebar  isExpandedHandler={isExpandedHandler}/>
 
       <div className='studentForm'>
-        <Navbar />
+      <Navbar adminName={props.AdminName} />
         <div className='studentForm-page page-container'>
           <div className="studentForm-page-container">
             <div className='student-page-container-heading'>
@@ -389,7 +412,7 @@ const StudentForm = () => {
               {/* header container */}
               <span >Add Student</span>
             </div>
-            <form  noValidate onSubmit={submitHandler}>
+            <form  noValidate onSubmit={AddStudentHandler}>
             <div className='student-info-detail-container'>
            
              <div className='student-info-detail-student-container'>
@@ -629,7 +652,9 @@ const StudentForm = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
+    
 
 
   )

@@ -60,6 +60,7 @@ const Sidebar = (props) => {
   ]
   const [isExpanded, setExpendState] = useState(true);
 
+  props.isExpandedHandler(isExpanded)
 
 
 

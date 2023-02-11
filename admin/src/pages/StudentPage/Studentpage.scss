@@ -69,7 +69,7 @@
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            background-color: rgba(199, 244, 255, 0.297);
+                            
                             height: 150px;
                             width: 150px;
                             border-radius: 9px;
@@ -374,7 +374,7 @@
                     width: 70x;
                 }
                 }
-                .perfomanceAnalytic-heading{
+                .performanceAnalytic-heading{
                     width: 90%;
                     height: auto;
                   
@@ -384,6 +384,19 @@
                       color: rgb(83, 83, 83);
               
                       }
+                }
+                .performanceAnalytic-toggle-button{
+                    button{
+                     height: 54px;
+                     width: 100px;
+                     background-color:#009df1;
+                            color: white;
+                        font-weight: 600;
+                        font-size: 1rem;
+                            border-radius: 9px;
+                            border: none;
+                            text-decoration: none;
+                    }
                 }
                 .performanceAnalytic-body-content{
                     width: 100%;

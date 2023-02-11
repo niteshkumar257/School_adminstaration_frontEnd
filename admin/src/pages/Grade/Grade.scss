@@ -116,9 +116,29 @@
         span{
             font-size: 1.5rem;
             font-weight: 600;
-            color: rgb(83, 83, 83);
+            color: rgb(38, 38, 38);
         }
     }
+    .student-info{
+        display: flex;
+        column-gap: 30px;
+
+.student-info-modal{
+    display: flex;
+     column-gap: 10px;
+        label{
+ font-size: 1rem;
+            font-weight: 600;
+            color: rgb(83, 83, 83); 
+        }
+        span{
+              font-size: 1rem;
+            font-weight: 600;
+            color: rgb(40, 40, 40); 
+        }
+        
+    }
+}
     .test_id_select{
        display: grid;
        grid-template-columns: 0.5fr;

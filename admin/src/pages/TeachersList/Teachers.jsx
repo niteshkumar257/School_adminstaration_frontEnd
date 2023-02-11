@@ -18,7 +18,7 @@ flex:1,editable:false,align:"left",headerAlign:"left" },
 // Width:150,
 flex:1,editable:false,headerAlign:"left",align:"left"},
 {field: 'subject_id',headerName: 'Subject',
-// width: 150,
+
 editable:true,flex:1,editable:false ,headerAlign:"left",align:"left"},
 { field: 'mobile',headerName: 'Mobile Number',
 // width: 150,
@@ -26,23 +26,10 @@ editable:true,flex:1,editable:false ,headerAlign:"left",align:"left"},
 ];
 
 
-// dummy rows of the teacherTable
-const rows = [
-{id:1,teacher_name:"Nitesh Kumar",subject_id:"Physics",mobile:"87456874",},
-{id:2,teacher_name:"Ravi Kumar",subject_id:"Mathematics",mobile:"87456874",},
-{id:3,teacher_name:"Kumar Panda",subject_id:"Biology",mobile:"87456874",},
-{id:4,teacher_name:"Lokesh Kumar",subject_id:"chemistry",mobile:"87456874",},
-{id:5,teacher_name:"Prabhu Kumar",subject_id:"History",mobile:"87456874",},
-{id:6,teacher_name:"Nitesh Kumar",subject_id:"Physics",mobile:"87456874",},
-{id:7,teacher_name:"Ravi Kumar",subject_id:"Mathematics",mobile:"87456874",},
-{id:8,teacher_name:"Kumar Panda",subject_id:"Biology",mobile:"87456874",},
-{id:9,teacher_name:"Lokesh Kumar",subject_id:"chemistry",mobile:"87456874",},
-{id:10,teacher_name:"Prabhu Kumar",subject_id:"History",mobile:"87456874",}
 
 
-];
 
-const Teachers = () => {
+const Teachers = (props) => {
   const [rows, setRows] = useState([]);
   let decode = jwt_decode(localStorage.getItem("auth_token"));
   let school_id = decode.result.school_id;
@@ -91,12 +78,16 @@ flex:1,
   ]
 
 
-
+  const [isExpanded,setExpanded]=useState(false);
+const isExpandedHandler=(value)=>
+{
+      setExpanded(value);
+}
   return (
    <div className='teachers-container '>
-    <Sidebar/>
+    <Sidebar  isExpandedHandler={isExpandedHandler}/>
     <div className='teachers'>
-        <Navbar/>
+    <Navbar adminName={props.AdminName} />
         <div className='teachers-page page-container'>
            <div className='teacher-detail-heading'>
             <span>Teachers Details</span>
@@ -112,7 +103,7 @@ flex:1,
             </div>
            </div>
            <Box>
-           <DataTable  rows={rows} columns={columns.concat(viewColumn)}/>
+           <DataTable  expandHandler={isExpanded} rows={rows} columns={columns.concat(viewColumn)}/>
            </Box>
            
            <div className='newButton'> 

@@ -9,99 +9,36 @@ import { useParams } from 'react-router';
 import axios from "axios"
 import Chart from '../../components/Chart/Chart';
 import Performance from "../../assest/performance.png";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import CheckIcon from '@mui/icons-material/Check';
+
 
 import Fee from "../../assest/SchoolFee.png";
 
 let MonthArray = ["Jan", "Feb", "March", "April", "Jan", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
-
-
-// row part
-
-
-/// modification of testDetails data
-
-
 const columns = [
   { field: 'id', headerName: 'Installment No', width: 150, flex: 1, headerAlign: "left", align: "left", flex: 1, sortable: false },
   { field: 'amount', flex: 1, headerName: 'Amount', width: 150, editable: false, headerAlign: "left", align: "left", sortable: false },
-  {
-    field: 'lastDate', headerName: 'Last Date', width: 150, flex: 1, editable: false, headerAlign: "left",
-    align: "left", sortable: false
-  },
-  {
-    field: 'status', headerName: 'Status', type: 'date', width: 150, flex: 1, editable: false, headerAlign: "left", sortable: false,
-    align: "left"
-  },
-
+  { field: 'lastDate', headerName: 'Last Date', width: 150, flex: 1, editable: false, headerAlign: "left", align: "left", sortable: false},
+  { field: 'status', headerName: 'Status', type: 'date', width: 150, flex: 1, editable: false, headerAlign: "left", sortable: false,align: "left"},
 ];
 
-
-const rows = [
-  { id: 1, amount: 1000, lastDate: "12/10/23", Status: "paid" },
-  { id: 2, total_fees: 4000, LastDate: "12/10/23", Status: "paid" },
-  { id: 3, total_fees: 8000, LastDate: "12/10/23", Status: "paid" },
-
-]
-
-
-
-// ];
-
-// fee details column and row 
-
-
-/////
-////////
-// const performanceColumn = [
-//   { field: 'id', headerName: 'Test_id', width: 150, flex:1,headerAlign:"left", align:"left",flex:1,sortable:false },
-//   {field: 'test_date',flex:1,headerName: 'Date',width: 150,editable:false,headerAlign:"left",align:"left",sortable:false},
-//   {field: 'Physics',headerName: 'Physics',width: 150,flex:1,editable:false,type:"number",headerAlign:"left", align:"left",sortable:false},
-//   {field: 'Maths',headerName: 'Math',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
-//   {field: 'Chemistry',headerName: 'Chemistry',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false,align:"left"},
-//   {field: 'percentage',headerName: 'Percentage',type: 'date',width: 150,flex:1,editable:false,headerAlign:"left",sortable:false, align:"left"},
-
-
-// ];
-
-// const  performanceRow= [
-// {id:1,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:2,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:3,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:4,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:5,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:6,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:7,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:8,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:9,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-// {id:10,Date:"12/10/23",Physics:89,Chemistry:67,Math:91,Percentage:"98%"},
-
-
-
-
-// ];
-///////
-////
-
-
 const SingleStudentpage = (props) => {
-  // props from the app.js
-  // it gives id of the selected studentPage for showing student information
+  
   const params = useParams();
-
   let student_id = params.student_id;
-
   const [name, setName] = useState("Nitesh Kumar Reeddy");
   const [medium, setMedium] = useState("English");
   const [course, setCourse] = useState("JEE");
   const [board, setBoard] = useState("ICSE");
   const [Class, setClass] = useState("12th");
-
-
-
-
-  // parent details
-
   const [fathername, setFathername] = useState("G NagaRaju Reddy");
   const [mothername, setMotherrname] = useState("G Laxmi Reddy");
   const [fatherProfession, setFatherProfession] = useState("Worker");
@@ -110,64 +47,32 @@ const SingleStudentpage = (props) => {
   const [altNumber, setAltNumber] = useState("8767856873");
   const [primaryNumber, setPrimaryNumber] = useState("58383432");
   const [email, SetEmail] = useState("niteshredd257@gmail.com");
-
-
   const [total_fees, setTotalFees] = useState("");
-
-
   const [first_installment_status, setFirstInstallment] = useState(0);
   const [second_installment_status, setSecondInstallment] = useState(0);
   const [third_installment_status, setThirdInstallment] = useState(0);
+  const [testDetail, setTestDetail] = useState([{}]);
 
-  // Performance 
-  const [value, setValue] = useState([{}]);
-console.log(value)
-  let perFormanceColumn = [];
-  const columnValue = Object.entries(value[0])
-  
-  
-  columnValue.map((it, index) => {
-  
+  let TestTableColumn = [];
+  const columnValue = Object.entries(testDetail[0])
+   columnValue.map((it, index) => {
   
     if (it[0] === "subject_name") {
       it[1].map((it, index) => {
-        const data = {
-          field: it,
-          headerName: it,
-          width: "150px",
-          align: "left",
-          headerAlign: "left",
-          sortable: false,
-          flex: 1
-  
-  
-        }
-  
-        perFormanceColumn.push(data);
-      })
-    }
+        const data = {field: it,headerName: it,width: "150px",align: "left",headerAlign: "left",sortable: false,flex: 1}
+            TestTableColumn.push(data)})}
     if (it[0] === "test_id" || it[0] === 'test_date' || it[0] === 'percentage') {
-      const data = {
-        field: it[0],
-        headerName: it[0].replace(/_/g, " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),   // str.charAt(0).toUpperCase() + str.slice(1)
-        width: "150px",
-        align: "left",
-        headerAlign: "left",
-        sortable: false,
-        flex: 1
-  
-      }
-  
-      perFormanceColumn.push(data);
+      const data = {field: it[0],
+        headerName: it[0].replace(/_/g, " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()),  width: "150px",align: "left",headerAlign:"left",sortable: false,flex: 1}
+             TestTableColumn.push(data);
     }
   
   })
   
-  let col;
-  const array = [];
-  value.map((item, index) => {
+  
+  let TestTableRow = [];
+  testDetail.map((item, index) => {
     let temp = Object.entries(item);
-    let row = [];
     const subjectArray = [];
     const markArray = [];
     temp.map((item, index) => {
@@ -198,12 +103,11 @@ console.log(value)
   
     for (let i = 0; i < markArray.length; i++) result[subjectArray[i]] = markArray[i];
     // temp.map((item, index) => { if (item[0] === "test_id" || item[0] === 'test_data' || item[0] === 'percentage') result[item[0]] = item[1]; })
-    array.push(result);
+    TestTableRow.push(result);
   
   })
   const subjectWisemark = [];
-const Array = Object.entries(value)
-console.log(Array)
+const Array = Object.entries(testDetail)
 let Array2 = []
 Array.map((item, index) => {
   let it = Object.entries(item[1])
@@ -257,26 +161,20 @@ for (let i = 0; i < subjects.length; i++) {
     }
 
   }
-
-
-
-  subjectWisemark.push(data);
-
-
-
+ subjectWisemark.push(data);
 
 }
-  
+  // data for showing student details
   useEffect(() => {
     axios.get(`http://localhost:8080/students/${student_id}/performance`)
       .then((data) => {
-        setValue(data.data.allmarksDetail);
+        setTestDetail(data.data.allmarksDetail);
 
       }).catch((err) => {
         console.log(err);
       })
   }, [])
-  // installMentupdateHandle Select funtion
+  
    
   const [feeDetails, setFeeDetails] = useState([]);
   const renderFees = () => {
@@ -284,15 +182,16 @@ for (let i = 0; i < subjects.length; i++) {
       .then((data) => {
         let tot = parseInt(data.data.studentFees[0].first_installment) + parseInt(data.data.studentFees[0].second_installment) + parseInt(data.data.studentFees[0].third_installment);
         setTotalFees(tot);
+       
         let newFeeDetails = [];
-        let arr1 = { id: 1, amount: data.data.studentFees[0].first_installment, lastDate: data.data.studentFees[0].first_installment_eta.slice(0, 10), status: data.data.studentFees[0].first_installment_status };
-        let arr2 = { id: 2, amount: data.data.studentFees[0].second_installment, lastDate: data.data.studentFees[0].second_installment_eta.slice(0, 10), status: data.data.studentFees[0].second_installment_status };
-        let arr3 = { id: 3, amount: data.data.studentFees[0].third_installment, lastDate: data.data.studentFees[0].third_installment_eta.slice(0, 10), status: data.data.studentFees[0].third_installment_status };
+        let arr1 = { id: 1, amount: data.data.studentFees[0].first_installment, lastDate: data.data.studentFees[0].first_installment_eta.slice(0, 10), status: (data.data.studentFees[0].first_installment_status).charAt(0).toUpperCase()+(data.data.studentFees[0].first_installment_status).slice(1) };
+        let arr2 = { id: 2, amount: data.data.studentFees[0].second_installment, lastDate: data.data.studentFees[0].second_installment_eta.slice(0, 10), status: (data.data.studentFees[0].second_installment_status).charAt(0).toUpperCase()+(data.data.studentFees[0].second_installment_status).slice(1)};
+        let arr3 = { id: 3, amount: data.data.studentFees[0].third_installment, lastDate: data.data.studentFees[0].third_installment_eta.slice(0, 10), status:(data.data.studentFees[0].third_installment_status).charAt(0).toUpperCase()+(data.data.studentFees[0].third_installment_status).slice(1)};
         newFeeDetails.push(arr1);
         newFeeDetails.push(arr2);
         newFeeDetails.push(arr3);
         setFeeDetails(newFeeDetails);
-
+        
         setFirstInstallment(arr1.status);
         setSecondInstallment(arr2.status);
         setThirdInstallment(arr3.status);
@@ -303,62 +202,39 @@ for (let i = 0; i < subjects.length; i++) {
       })
   }
 
-console.log(feeDetails)
+
   const updatePayment = (first_installment_status, second_installment_status, third_installment_status) => {
     axios.put(`http://localhost:8080/students/${student_id}/updatepaymentstatus`, {
       first_installment_status,
       second_installment_status,
       third_installment_status
     }).then((data) => {
-      // console.log(data);
+      toast.success(data.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       renderFees();
     }).catch((err) => {
       alert("Something went wrong");
       console.log(err);
+      toast.error(err.error, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     })
   }
-
-  const InstallmentUpdateHandler = async (id) => {
-    console.log(id);
-    if (id == 1) {
-      setFirstInstallment("paid");
-      updatePayment("paid", second_installment_status, third_installment_status);
-    } else if (id == 2) {
-      setSecondInstallment("paid");
-      updatePayment(first_installment_status, "paid", third_installment_status);
-    } else {
-      setThirdInstallment(1);
-      updatePayment(first_installment_status, second_installment_status, "paid");
-    }
-  }
-
-  // new row  
-
-  const viewColumn = [
-    {
-      field: "view", headerName: "Update", width: 200, editable: false, sortable: false, align: "left", headerAlign: "left", flex: 1,
-      renderCell: (params) => {
-
-        return (
-          <div className="InstallmentUpdateHandler">
-            {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
-
-
-            {params.row.status == "unpaid" && <button onClick={() => InstallmentUpdateHandler(params.row.id)}  >Update</button>
-            }
-
-          </div>
-        );
-      },
-    }
-  ]
-
-
-  // ----
-
-  // fee details
-
-
 
   useEffect(() => {
     let parent_id;
@@ -394,28 +270,152 @@ console.log(feeDetails)
   }, [])
 
 
-  // this data will come for database like this
-  // const FeeDetails = [
-  //   { id: 1, total_fees: 7677, LastDate: "12/4/22", Status: "Paid", UpdateStatus: "Action" },
-  //   { id: 2, total_fees: 0, LastDate: "12/4/22", Status: "Paid", UpdateStatus: "Action" },
-  //   { id: 3, total_fees: 88745, LastDate: "12/4/22", Status: "Unpaid", UpdateStatus: "Action" },
+const [openDialog, setOpenDialog] = useState(false); 
+const [installmentId, setInstallmentId] = useState(0);
+
+const handleDialogClose = () => {
+  setOpenDialog(false);
+};
+ const handleDialogDisagree = () => {
+  setOpenDialog(false);
+  setInstallmentId(0);  
+};
+const handleDialogAgree = () => {   
+  if (installmentId == 1) {      
+    setFirstInstallment("paid");
+    updatePayment("paid", second_installment_status, third_installment_status);
+  } else if (installmentId == 2) {   
+    setSecondInstallment("paid");
+    updatePayment(first_installment_status, "paid", third_installment_status);
+  } else {   
+    setThirdInstallment("paid");
+    updatePayment(first_installment_status, second_installment_status, "paid");
+  } 
+  setInstallmentId(0); 
+  setOpenDialog(false);  
+ 
+
+};
+  const InstallmentUpdateHandler = (id) => {
+    
+    setOpenDialog(true); 
+    setInstallmentId(id);  
+  } 
+
+  // Dynamic button InstallMent Status update
+  const viewColumn = [
+    {
+      field: "view", headerName: "Update", width: 200, editable: false, sortable: false, align: "left", headerAlign: "left", flex: 1,
+      renderCell: (params) => {
+
+        return (
+          <div className="InstallmentUpdateHandler">
+            {/* <Link   to= {`/Student/${studentId}`} style={{ textDecoration: "none" }}> */}
+
+            {(params.row.status === "Unpaid" ) ? <button onClick={() => InstallmentUpdateHandler(params.row.id)}  >Update</button>  :
+            <div 
+            style={{
+
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center",
+              color:"green",
+              marginLeft:"1rem",
+            
+            }}
+            >
+              <CheckIcon sx={{  fontSize:"1.5rem",
+            fontWeight:"300"}}/>
+            </div>
+
+            
+            }
+            <Dialog
+           sx={{
+            "& .MuiDialog-container": {
+              justifyContent: "center",
+              alignItems:"flex-start"
+             
+            }
+          }}
+            PaperProps={{ sx: { width: "25%", height: "20%",
+          justifyContent:"center",
+          alignItems:"center"
+           
+           } }}
+        open={openDialog}
+        onClose={handleDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {" InstallMent Updated  ?"}
+        </DialogTitle>
+      
+        <DialogActions>
+          <Button
+          style={{
+            backgroundColor:"green",
+            color:"white",
+            fontSize:"0.7rem"
+          }}
+           onClick={handleDialogAgree}>Confirm</Button>
+          <Button 
+          style={{
+            backgroundColor:"red",
+            color:"white",
+            fontSize:"0.7rem"
+          }}
+          onClick={handleDialogDisagree} autoFocus>
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+          </div>
+        );
+      },
+    }
+  ]
+
+ // Sidebar toggle Handler
+  const [isExpanded,setExpanded]=useState(false);
+  const isExpandedHandler=(value)=>
+  {
+        setExpanded(value);
+  }
 
 
-  // const installMentRows = FeeDetails.filter((item) => item.total_fees != 0);
-
+ const [showPerformance,setShowPerformance]=useState(0);
+ const [buttonValue,setButtonValue]=useState("Show");
+ const perFormanceHandler=(e)=>
+ {
+  e.preventDefault();
+  if(showPerformance==0)
+  {
+    setShowPerformance(1);
+    setButtonValue("Hide");
+  }
+ 
+  else
+  {
+    setShowPerformance(0);
+    setButtonValue("Show");
+  } 
+ }
   return (
     <>
       <div className="SingleStudent-container">
-        <Sidebar />
+      <Sidebar  isExpandedHandler={isExpandedHandler}/>
         <div className="singleStudent">
 
-          <Navbar />
+        <Navbar adminName={props.AdminName} />
           {/* main contaiener */}
           <div className="singleStudentPage-container page-container">
 
             {/* student Details container  */}
             <div className='student-info-main-container'>
-              <div className='student-info-heading'>
+              <div className='student-info-heading'>   
                 <h1>Student Details</h1>
               </div>
               <div className="section basic-info">
@@ -443,6 +443,7 @@ console.log(feeDetails)
                         <span className='lable'> Class:</span>
                         <span>{Class}</span>
                       </div>
+                     
                     </div>
                     <div className='other-detail-info-container'>
                       <div className='student'>
@@ -452,6 +453,17 @@ console.log(feeDetails)
                       <div className='student'>
                         <span className='lable'>Board:</span>
                         <span>{board}</span>
+                      </div>
+                    </div>
+                    <div className='other-detail-info-container'>
+                     
+                    <div className='student'>
+                        <span className='lable'>Student Id:</span>
+                        <span>{student_id}</span>
+                      </div>
+                      <div className='student'>
+                        <span className='lable'></span>
+                        <span></span>
                       </div>
                     </div>
                   </div>
@@ -537,18 +549,35 @@ console.log(feeDetails)
             {/* student performance details */}
             <div className='section perfomanceAnalytic-info'>
 
-              <div className="perfomanceAnalytic-heading">
+              <div className="performanceAnalytic-heading">
                 <h1>Performance Analytic</h1>
 
               </div>
-              <div className='performanceAnalytic-info-icon'>
+              <div className='performanceAnalytic-toggle-button' >
+                <button onClick={perFormanceHandler}>{buttonValue}</button>
+              </div>
+              {/* <div className='performanceAnalytic-info-icon'>
                 <span>Performance</span>
                 <img src={Performance} alt="icon"></img>
-              </div>
+              </div> */}
+              {
+                showPerformance==1 &&
+              
               <div className='PerformanceAnalytic-body'>
                 <div className="performanceAnalytic-body-content">
                   <div className='perfomanceAnalytic-body-content-table'>
-                    {perFormanceColumn.length > 0 && <Table rows={array} columns={perFormanceColumn} />}
+                    {TestTableColumn.length > 0 ? <Table rows={TestTableRow} columns={TestTableColumn} /> :
+                    <div style={{
+                      display:"flex",
+                      justifyContent:"center",
+                      alignContent:"center",
+                      
+                    }}>
+                            <p  style={{
+                              color:"red"
+                            }}>No Test Given</p>
+                      </div>
+                   }
                   </div>
 
                   <div className="performanceAnalytic-body-content-charts">
@@ -573,10 +602,12 @@ console.log(feeDetails)
 
 
                         </div>
+}
                       </div>
           
           </div>
                 </div>
+                <ToastContainer />
               </div>
 
             </>

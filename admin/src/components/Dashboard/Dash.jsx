@@ -20,8 +20,8 @@ const info = {
 
 const Dashboard = (props) => { 
     const [data, setData] = useState(info);
-    const [studentCount, setStudentCount] = useState(1250);
-    const [teacherCount, setTeacherCount] = useState(34);
+    const [studentCount, setStudentCount] = useState(0);
+    const [teacherCount, setTeacherCount] = useState(0);
 
     let decodeToken = jwt_decode(localStorage.getItem("auth_token"));
     let school_id = decodeToken.result.school_id;
@@ -58,13 +58,13 @@ const Dashboard = (props) => {
                                 <div className="info-container">
                                     <li>
                                         <label>Owner Name : </label>
-                                        <span> {data.admin_name}</span>
+                                        <span> { data.admin_name &&((data.admin_name).replace(/_/g," ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
                                     </li>
                                 </div>
                                 <div className="info-container">
                                     <li>
                                         <label>City : </label>
-                                        <span>{data.city_name}</span>
+                                        <span>{ data.city_name  && ((data.city_name).replace(/_/g," ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
                                     </li>
                                 </div>
                             </div>

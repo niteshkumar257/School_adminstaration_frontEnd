@@ -4,9 +4,11 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import { Person2Outlined } from '@mui/icons-material';
 import AdminProfile from "../../assest/Admin.jpg";
+import { useState,useEffect} from 'react';
 
 const Navbar = (props) => {
-  console.log(props);
+
+ 
   return (
     <div className='navbar gradient curve-box'>
      <div className='wrapper'>
@@ -19,8 +21,8 @@ const Navbar = (props) => {
          </div>
          <div className='navbar-items'>
             <div className="navbar-items-item">
-              <img src={AdminProfile}></img>
-                <span>{props.adminName}</span>
+             
+                <span>{props.adminName && "Hi, "+((props.adminName).replace(/_/g," ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
             </div>
          </div>
      </div>

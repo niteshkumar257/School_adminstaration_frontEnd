@@ -2,11 +2,15 @@ import React from 'react'
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 
 
-const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
+
+const DataTable = ({rows,columns,rowsPerPageOption,h,expandHandler}) => {
+
+console.log(expandHandler);
   const [wid,setWidth]=useState(1);
   return (
   <>
@@ -21,7 +25,7 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
             outline: "none !important",
          },
       
-        height:"100vh",width:wid==1 ? "80vw":"90vw",
+        height:"100vh",width :"82.5vw",
         '.MuiDataGrid-columnSeparator': {
           display: 'none',
         },
@@ -59,14 +63,16 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
         // },
       
         "& .MuiDataGrid-footerContainer": {
+          color:"white",
           borderTop: "none",
-          backgroundColor:"#c7c7c7",
+          backgroundColor:"#009df1",
         },
       
         "& .MuiDataGrid-columnHeaders": {
           // color:"#009df1;",
          
-          backgroundColor: "#c7c7c7",
+          backgroundColor:"#009df1",
+          color:"white",
            
           fontSize:"17px",
           // fontWeight:900
@@ -78,7 +84,11 @@ const DataTable = ({rows,columns,rowsPerPageOption,h}) => {
         rows={rows}
         columns={columns}
         pageSize={8}
-        rowsPerPageOptions={[20]}
+        rowsPerPageOptions={[10]}
+        components={{
+          LoadingOverlay: LinearProgress,
+        }}
+       
       // disableColumnMenu
         autoHeight={true}
         autoPageSize={true}

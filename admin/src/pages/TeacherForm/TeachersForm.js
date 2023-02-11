@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Navbar from '../../components/Navbar/Navbar'
 import TextField from '@mui/material/TextField';
-
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -13,6 +12,8 @@ import "./TeachersForm.scss"
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import MenuItem from '@mui/material/MenuItem';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const Subject = [
   { value: '1', label: 'Physics'} 
 ];
@@ -24,9 +25,9 @@ const Gender = [
 ]
 
 
-const TeachersForm = () => {
+const TeachersForm = (props) => {
   const [teacher_name, setName] = useState("");
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
@@ -77,7 +78,7 @@ const TeachersForm = () => {
   }, [])
  
 
-  const submitHandler = (e) => {
+  const AddTeacherHandler = (e) => {
     e.preventDefault();
     setTeachernameError(false);
     setMobileError(false);
@@ -118,32 +119,61 @@ const TeachersForm = () => {
         age, mobile, email, gender, medium, date, experience, salary, subject_id, city
       })
         .then((res) => {
-          alert('Data submitted Successfully!');           
+          alert('Teacher Added Successfully!');           
         })
         .catch((err) => {
           console.log(err);
         });
-    }
-    setName("");
-  setAge("");
-  setGender("");
-  setAddress("");
-  setCity("");
-  setEmail("");
-  setSalary("");
-  setSubject("");
-  setDate("");
-  setMedium("");
-  setWorkExp("");
-  setAddress("");
-  setMobile("");
-  }
 
+        setName("");
+        setAge("");
+        setGender("");
+        setAddress("");
+        setCity("");
+        setEmail("");
+        setSalary("");
+        setSubject("");
+        setDate("");
+        setMedium("");
+        setWorkExp("");
+        setAddress("");
+        setMobile("");
+        toast.success('Teacher Added SuccesFully', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+
+    }
+    else {
+      toast.error('All Field Are Required', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
+   
+  }
+  const [isExpanded,setExpanded]=useState(false);
+  const isExpandedHandler=(value)=>
+  {
+        setExpanded(value);
+  }
   return (
     <div className='teachers-container '>
-      <Sidebar />
+       <Sidebar  isExpandedHandler={isExpandedHandler}/>
       <div className='teachers'>
-        <Navbar />
+      <Navbar adminName={props.AdminName} />
         <div className='teachers-page page-container'>
 
           <div className="teacherForm-page-container">
@@ -152,7 +182,7 @@ const TeachersForm = () => {
               {/* header container */}
               <span >Add Teacher</span>
             </div>
-            <form noValidate onSubmit={submitHandler}>
+            <form noValidate onSubmit={AddTeacherHandler}>
               <div className='teachers-info-detail-container'>
 
                 <div className='teachers-info-detail-student-container'>
@@ -239,7 +269,7 @@ const TeachersForm = () => {
           </div>
         </div>
       </div>
-
+      <ToastContainer />
     </div>
 
   )

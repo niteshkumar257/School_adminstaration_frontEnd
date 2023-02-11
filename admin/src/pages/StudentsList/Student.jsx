@@ -15,17 +15,7 @@ const columns = [
   {field: 'medium',headerName: 'Medium',editable:false,width: 150,flex:1,headerAlign:"left",align:"left"},
 ];
 
-// const rows = [
-//   { id: 1, student_name: 'Nitesh', class_id:7, medium: "English" },
-//   { id: 2, student_name: 'Nitesh', class_id:7, medium: "English" },
-//   { id: 3, student_name: 'Nitesh', class_id:7, medium: "English"},
-//   { id: 4, student_name: 'Nitesh', class_id:7, medium: "English"},
-//   { id: 5, student_name: 'Nitesh', class_id:7, medium: "English" },
-//   { id: 6, student_name: 'Nitesh', class_id:7,medium: "English" },
-//   { id: 7, student_name: 'Nitesh', class_id:7, medium: "English"},
-//   { id: 101, student_name: 'Nitesh', class_id:7, medium: "English"},
- 
-// ];
+
 
 const Student = (props) => {
   const [studentId,setStudentId]=useState(0);
@@ -76,11 +66,17 @@ const Student = (props) => {
       },
     }
   ]
+  console.log(props);
+  const [isExpanded,setExpanded]=useState(false);
+  const isExpandedHandler=(value)=>
+  {
+        setExpanded(value);
+  }
   return (
    <div className='student-container '>
-    <Sidebar/>
+     <Sidebar  isExpandedHandler={isExpandedHandler}/>
     <div className='student'>
-        <Navbar/>
+    <Navbar adminName={props.AdminName} />
         <div className='student-page page-container'>
           <div className="student-detail-heading">
             <span>Student Details</span>
@@ -93,11 +89,8 @@ const Student = (props) => {
           </div>
           <Box>
           <DataTable
-         sx={{
-          '& .MuiDataGrid-cell:focus': {
-            outline: 'none',
-            },
-         }}
+            expandHandler={isExpanded}
+       
              rows={rows} columns={columns.concat(viewColumn)}/>
           </Box>
          

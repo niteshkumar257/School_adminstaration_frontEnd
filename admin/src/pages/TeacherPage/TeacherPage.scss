@@ -11,13 +11,14 @@
             align-items: center;
             gap: 20px;
            
+           
             .student-info-main-container{
              
                   display: flex;
                   flex-direction: column;
                   justify-content: center;
                   align-items: center;
-                  width: 100%;
+                  width: 98%;
                 row-gap: 20px; 
                  
                 
@@ -165,8 +166,12 @@
                     // border: 2px solid black;
                     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                       width: 98%;
-                      height: 70vh;
+                      height:auto;
                       border-radius: 9px;
+                    padding-bottom: 20px;
+                    padding-top: 10px;
+                    padding-left: 5px;
+                    padding-right: 5px;
                    
                      
                    
