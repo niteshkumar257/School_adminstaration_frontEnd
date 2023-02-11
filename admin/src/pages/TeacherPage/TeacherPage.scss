@@ -1,3 +1,4 @@
+$main-color:#1377C0;
 .SingleTeacherPage-container
 {
     display: flex;
@@ -111,7 +112,7 @@
                                    .lable{
                                     font-size: 1rem;
                                     font-weight: 500;
-                                    color: #1378c09a;
+                                    color: $main-color;
                                 }
                                 span{
                                     font-size: 1rem;
@@ -215,7 +216,7 @@
                         button{
                             height: 54px;
                             width: 150px;
-                            background-color:#009df1;
+                            background-color:$main-color;
                             color: white;
                         font-weight: 600;
                         font-size: 1rem;

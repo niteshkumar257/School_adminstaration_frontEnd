@@ -463,14 +463,14 @@ const handleAgree=()=>
         <DialogActions>
           <Button  
            style={{
-            backgroundColor:"green",
+            backgroundColor:"#1377C0",
             color:"white",
             fontSize:"0.7rem"
           }}
            onClick={handleAgree}>confirm</Button>
           <Button 
            style={{
-            backgroundColor:"red",
+            backgroundColor:"grey",
             color:"white",
             fontSize:"0.7rem"
           }}

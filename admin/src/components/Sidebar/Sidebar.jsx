@@ -2,6 +2,7 @@ import React from 'react'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import logo from "../../assest/Img1.png"
 import { Link ,NavLink} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
@@ -10,11 +11,13 @@ import { FaChalkboardTeacher } from 'react-icons/fa'
 import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddIcon from '@mui/icons-material/Add';
+
 import "./Sidebar.scss"
 import { useState, useEffect } from 'react';
 
 
 const Sidebar = (props) => {
+  const location = useLocation();
   const menuItem = [
     {
       path: "/dashBoard",
@@ -67,13 +70,13 @@ const Sidebar = (props) => {
   return (
 
     <>
-      <div className={isExpanded ? "sidebar  " : "sidebar sidebar-toggle"}  >
+      <div className={isExpanded ? "sidebar " : "sidebar sidebar-toggle"}  >
         <div className="sidebar-container">
           <div className="logo-container">
             {isExpanded && (
               <div className="logo-container-heading">
                 <img src={logo}></img>
-                <span >GW Techies</span>
+                <span className='title' >GW Techies</span>
               </div>)
 
             }
@@ -93,17 +96,24 @@ const Sidebar = (props) => {
                 menuItem.map((item, index) => {
                   return (
                   
-                      <NavLink  key={index} activeclassname="active" className='items' style={{ textDecoration: "none" }} to={item.path}>
-                     <div  activeclassname="active" key={index} className={isExpanded ? "item" :  "item-toggle"} >
-                        <div className="icon"> {item.icon}</div>
-                        {
-                          isExpanded && (
-                            <span className="link-text">{item.name}</span>
-                          )
-                        }
-
-                     </div>
-                      </NavLink>
+                    <NavLink
+                    key={index}
+                    activeClassName="active"
+                    className="items"
+                    style={{ textDecoration: "none", color: "white" }}
+                    to={item.path}
+                  >
+                    <div key={index} className={isExpanded ? "item" : "item-toggle"}>
+                      <div className="icon" activeClassName="acive-icon">
+                        {item.icon}
+                      </div>
+                      {isExpanded && (
+                        <span className={`link-text`}>
+                          {item.name}
+                        </span>
+                      )}
+                    </div>
+                  </NavLink>
                    
 
 

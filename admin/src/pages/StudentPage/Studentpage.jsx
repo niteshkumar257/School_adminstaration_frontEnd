@@ -165,15 +165,8 @@ for (let i = 0; i < subjects.length; i++) {
 
 }
   // data for showing student details
-  useEffect(() => {
-    axios.get(`http://localhost:8080/students/${student_id}/performance`)
-      .then((data) => {
-        setTestDetail(data.data.allmarksDetail);
 
-      }).catch((err) => {
-        console.log(err);
-      })
-  }, [])
+   
   
    
   const [feeDetails, setFeeDetails] = useState([]);
@@ -355,14 +348,14 @@ const handleDialogAgree = () => {
         <DialogActions>
           <Button
           style={{
-            backgroundColor:"green",
+            backgroundColor:"#1377C0",
             color:"white",
             fontSize:"0.7rem"
           }}
            onClick={handleDialogAgree}>Confirm</Button>
           <Button 
           style={{
-            backgroundColor:"red",
+            backgroundColor:"grey",
             color:"white",
             fontSize:"0.7rem"
           }}
@@ -391,6 +384,14 @@ const handleDialogAgree = () => {
  const perFormanceHandler=(e)=>
  {
   e.preventDefault();
+  axios.get(`http://localhost:8080/students/${student_id}/performance`)
+  .then((data) => {
+    setTestDetail(data.data.allmarksDetail);
+
+  }).catch((err) => {
+    console.log(err);
+  })
+
   if(showPerformance==0)
   {
     setShowPerformance(1);
@@ -403,6 +404,8 @@ const handleDialogAgree = () => {
     setButtonValue("Show");
   } 
  }
+ console.log(TestTableColumn);
+ console.log(TestTableRow);
   return (
     <>
       <div className="SingleStudent-container">
@@ -435,7 +438,7 @@ const handleDialogAgree = () => {
                       <div className='student'>
 
                         <span className='label'
-                          style={{ color: "#1378c09a", fontSize: ".9rem" }}
+                          style={{ color: "#1377C0", fontSize: ".9rem" }}
                         > Medium:</span>
                         <span>{medium}</span>
                       </div>
@@ -554,14 +557,14 @@ const handleDialogAgree = () => {
 
               </div>
               <div className='performanceAnalytic-toggle-button' >
-                <button onClick={perFormanceHandler}>{buttonValue}</button>
+             { showPerformance==0 &&  <button onClick={perFormanceHandler}>{buttonValue}</button>}
               </div>
               {/* <div className='performanceAnalytic-info-icon'>
                 <span>Performance</span>
                 <img src={Performance} alt="icon"></img>
               </div> */}
               {
-                showPerformance==1 &&
+                TestTableColumn.length>0 && TestTableRow.length>0  &&
               
               <div className='PerformanceAnalytic-body'>
                 <div className="performanceAnalytic-body-content">
@@ -582,7 +585,7 @@ const handleDialogAgree = () => {
 
                   <div className="performanceAnalytic-body-content-charts">
                     {subjectWisemark.map((item, index) => (
-                      <div className="container">
+                      <div key={index} className="container">
                         <div className='heading'>
                           <span className='head'>{item.value}</span>
                           <span className='subhead'>Recent Test Results</span>

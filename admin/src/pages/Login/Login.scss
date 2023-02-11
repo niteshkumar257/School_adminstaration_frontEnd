@@ -1,3 +1,4 @@
+$main-color:#1377C0;
 .login-container
 {
     display: flex;
@@ -132,7 +133,7 @@
                          border-radius: 9px;
                          font-weight: 500;
                          font-size: 1rem;
-                       background-color: #1377C0;
+                       background-color: $main-color;
                        color: white;
                          
                         border: transparent;
@@ -153,7 +154,7 @@
                         span{
                        
                         font-size: .7rem;
-                        color: #0597ff;
+                        color: $main-color;
                         cursor: pointer
                     }
                     };
@@ -164,7 +165,7 @@
              }
              .changePassword{
                 font-size: 0.8rem;
-            color:#0597ff;
+            color:$main-color;
             text-decoration: none;
 
 

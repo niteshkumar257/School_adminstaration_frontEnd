@@ -1,3 +1,4 @@
+$main-color:#1377C0;
 .grade-container
 {
     display: flex;
@@ -35,12 +36,13 @@
                         button{
                             height: 54px;
                             width: 150px;
-                            background-color:#009df1;
+                            background-color:$main-color;
                             color: white;
                         font-weight: 600;
                         font-size: 1rem;
                             border-radius: 9px;
                             border: none;
+                            text-decoration: none;
                         }
                     }
                 }
@@ -162,12 +164,13 @@
         button{
             height: 54px;
             width: 150px;
-            background-color:#009df1;
+            background-color:$main-color;
             color: white;
         font-weight: 600;
         font-size: 1rem;
             border-radius: 9px;
             border: none;
+            text-decoration: none;
         }
     }
 }

@@ -130,7 +130,7 @@ const Login = () => {
   }
   return (
     <div>
-  <div className='login-container'>
+  <div className='changePassword-container'>
     <div className='main-container'>
       <div className="left-container">
         <div className='content-box'>
@@ -162,14 +162,15 @@ const Login = () => {
                     <label>Current Password</label>
                      <input value={currentPassword} type='password' placeholder='enter current Password...' onChange={(e)=>setCurrentPassword(e.target.value)}></input>
                     </div>
+                      <div className="input-container">
+                   <label>New Password</label>
+                     <input type='password' value={newPassword} placeholder='New password' onChange={(e)=>setNewPassword(e.target.value)}></input>
+                   </div>
                    <div className={reEnteredPasswordError?"input-container-error input-container":"input-container"}>
                    <label>Re enter password</label>
                      <input  className= "input-container-error" value={reEnteredPassword} type='password' placeholder='Re enter Password' onChange={(e)=>setReEnteredPassword(e.target.value)}></input>
                    </div>
-                   <div className="input-container">
-                   <label>New Password</label>
-                     <input type='password' value={newPassword} placeholder='New password' onChange={(e)=>setNewPassword(e.target.value)}></input>
-                   </div>
+                 
                    <div className='button-container'>
                     <button type='submit'>Submit</button>
                     <div className='forgotpassword'>

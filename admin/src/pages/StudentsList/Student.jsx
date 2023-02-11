@@ -54,6 +54,7 @@ const Student = (props) => {
     align:"left",
     headerAlign:"left",
     flex:1,
+  disableFilter:true,
       renderCell: (params) => {
         return (
           <div className="viewButton">

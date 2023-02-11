@@ -149,12 +149,16 @@ const Grade = (props) => {
     
     console.log(err);
   })
+  setInputField([]);
+  setTempRow([]);
   setOpen(false)
+  setSubjectList([]);
   setOpenDialog(false);
  }
  const handleDialogClose=()=>
  {
         setOpenDialog(false);
+        setSubjectList([]);
         setOpen(false);
  }
   const pushMarks = () => {
@@ -310,6 +314,8 @@ const Grade = (props) => {
   const isExpandedHandler = (value) => {
     setExpanded(value);
   }
+  console.log(inputField);
+ 
   return (
     <div className='grade-container ' >
       <Sidebar isExpandedHandler={isExpandedHandler} />
@@ -336,6 +342,18 @@ const Grade = (props) => {
         </div>
       </div>
       {openDialog &&   <Dialog
+       sx={{
+        "& .MuiDialog-container": {
+          justifyContent: "center",
+          alignItems:"flex-start"
+         
+        }
+      }}
+        PaperProps={{ sx: { width: "25%", height: "20%",
+      justifyContent:"center",
+      alignItems:"center"
+       
+       } }}
         open={openDialog}
         onClose={handleDialogClose}
         aria-labelledby="alert-dialog-title"
@@ -348,7 +366,7 @@ const Grade = (props) => {
         <DialogActions>
           <Button
            style={{
-            backgroundColor:"green",
+            backgroundColor:"#1377C0",
             color:"white",
             fontSize:"0.7rem"
            }}
@@ -356,7 +374,7 @@ const Grade = (props) => {
           onClick={handleDialogConfirm}>confirm</Button>
           <Button
            style={{
-            backgroundColor:"Red",
+            backgroundColor:"grey",
             color:"white",
             fontSize:"0.7rem"
            }}

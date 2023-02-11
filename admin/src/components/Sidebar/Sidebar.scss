@@ -1,237 +1,246 @@
-.sidebar
-{
+$main-color: #1377C0;
+
+.sidebar {
     display: flex;
     flex-direction: columns;
-  
     width: 200px;
-   border-right: .5px solid rgb(225, 225, 225);
-   justify-content: center;
- 
- 
-   height: 100vh;
-  
-  
-  
+    border-right: .5px solid rgb(225, 225, 225);
+    justify-content: center;
+    height: 100vh;
 
 
+    .sidebar-container {
 
-    .sidebar-container{
-    
-       width: 100%;
-       height: 100vh;
-    
-      
-        .logo-container
-        {
-          
-           
+        width: 100%;
+        height: 100vh;
+     .logo-container {
             width: 100%;
-      
             height: 10vh;
             display: flex;
-           align-items: center;
-           justify-content: center;
-           border-bottom: .5px solid rgb(196, 196, 196);
-           gap: 20px;
-          
-      
-          
-           gap: 10px;
-           .logo-container-heading{
-           
+            align-items: center;
+            justify-content: center;
+            border-bottom: .5px solid rgb(196, 196, 196);
+            gap: 20px;
+
+
+
+            gap: 10px;
+
+            .logo-container-heading {
+
+                display: flex;
+                height: 6vh;
+                justify-content: center;
+                align-items: center;
+                width: 12vw;
+                gap: 10px;
+
+                img {
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    object-fit: cover;
+
+
+
+                }
+
+                .title {
+                    font-weight: 700;
+                    color: #000000;
+                }
+            }
+
+
+
+
+
+            .menu-icon {
+                background-color: white;
+                height: 6vh;
+                cursor: pointer;
+                color: $main-color;
+                font-size: 24px;
+                font-weight: 500;
+            }
+        }
+
+        .menuItems-container {
+
+
             display: flex;
-             height: 6vh;
+            width: 100%;
+
             justify-content: center;
             align-items: center;
-            width: 12vw;
-            gap: 10px;
-            img{
-                height: 30px;
-                width: 30px;
-                border-radius: 50%;
-                object-fit: cover;
-                 
-              
-                
-            }
-            span{
-                font-weight: 700;
-                color: #000000;
-            }
-           }
-           
-        
-        
-           
-      
-        .menu-icon
-        {
-            background-color: white
-            ;
-            height: 6vh;
-            cursor: pointer;
-            color: #0890cb;
-            font-size:24px ;
-            font-weight: 500;
-        }
-        }
-        .menuItems-container
-        {
-           
-         
-            display: flex;
-           width: 100%;
-      
-        justify-content: center;
-        align-items: center;
             padding-top: 1rem;
-            
-         
-            .menu-item{
-            
+
+
+            .menu-item {
+
                 width: 100%;
                 display: flex;
-             
-                 justify-content: center;
-             
-                 align-items: center;
-               
-             
-              
-    
-             
-               
+
+                justify-content: center;
+
+                align-items: center;
+
+
+
+
+
+
                 gap: 25px;
                 flex-direction: column;
-            .items{
-              
-              width: 85%;
-             
-            
-                display: flex;
-             
-                // justify-content:flex-start;
-                align-items: center;
-                height: 7vh;
-                
-               
-               
-               
-               
-                .item{
-                //    padding: 0.5rem 0.5rem 0.5rem 1rem;
-                
+
+                .items {
+
+                    width: 85%;
+
+
                     display: flex;
-                    gap: 10px;
-                    justify-content: center;
+
+                    // justify-content:flex-start;
                     align-items: center;
-                    cursor: pointer;
-                    padding-left:1rem;
-                  
-                    
+                    height: 7vh;
 
-                   
-                .link-text
-                {
-                    cursor: pointer;
-                    text-decoration: none;
-                     color: #000000;
-                    //  &:hover{
-                    //     color: white;
-                    //  }
-                    
-                }
-                .icon{
-                    font-size: 20px;
-                    cursor: pointer;
-                     color: black;
-                     font-weight: 450px;
-                    //  &:hover{
-                    //     color: white;
-                    //  }
-                }
-                span{
-                    font-size: 17px;
-                    cursor: pointer;
-                    font-weight: 450;
-                    color: #000000;
-                    // &:hover{
-                    //     color: white;
-                    //  }
-                    
+
+
+
+
+                    .item {
+                        //    padding: 0.5rem 0.5rem 0.5rem 1rem;
+
+                        display: flex;
+                        gap: 10px;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                        padding-left: 1rem;
+
+
+
+
+                        .link-text {
+                            cursor: pointer;
+                            text-decoration: none;
+                            color: #000000;
+
+                            //  &:hover{
+                            //     color: white;
+
+                            //  }
+
+                        }
+
+                        .icon {
+                            font-size: 20px;
+                            cursor: pointer;
+                            color: black;
+                            font-weight: 450px;
+                            //  &:hover{
+                            //     color: white;
+                            //  }
+                        }
+
+                        // span {
+                        //     font-size: 17px;
+                        //     cursor: pointer;
+                        //     font-weight: 450;
+                        //     color: #000000;
+                        //     // &:hover{
+                        //     //     color: white;
+                        //     //  }
+
+
+                        // }
+                    }
+
+
+
+
 
                 }
             }
-          
-                
-               
-
-               
-            }
-        }
         }
     }
 }
 
-.sidebar-toggle{
-     width: 50px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     flex:0.2
+.sidebar-toggle {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.2
 }
-.items{
-    &:hover{
-        background-color: #c7c7c7;
-        color: white;
-        border-radius: 9px;
-       
+
+.items {
+    &:hover {
+        // background-color: #eaeaea;
+
+        // border-radius: 9px;
+        // box-shadow: 0px 5px 5px 0px rgba(210, 209, 209, 0.75);
+
+
     }
 }
-.active{
-    background-color: #15adffc7;
-    color: white;
+
+.active {
+    background-color: $main-color;
+    box-shadow: 0px 5px 5px 0px rgba(228, 228, 228, 0.75);
     border-radius: 9px;
+    color: white;
 
-}
-.item-toggle{
-    width: 120px;
    
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      padding-left: 0px;
-      cursor: pointer;
-      .link-text
-                {
-                    cursor: pointer;
-                    text-decoration: none;
-                     color: #000000;
-                    //  &:hover{
-                    //     color: white;
-                    //  }
-                    
-                }
-                .icon{
-                    font-size: 20px;
-                    cursor: pointer;
-                     color: black;
-                     font-weight: 400;
-                    //  &:hover{
-                    //     color: white;
-                    //  }
-                }
-                span{
-                    font-size: 17px;
-                    cursor: pointer;
-                    font-weight: 400;
-                    color: #000000;
-                    // &:hover{
-                    //     color: white;
-                    //  }
-                    
 
-                }
+
+
+
 }
+
+
+
+.item-toggle {
+    width: 120px;
+
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px;
+    cursor: pointer;
+
+    // .link-text {
+    //     cursor: pointer;
+    //     text-decoration: none;
+    //     color: #000000;
+    //     //  &:hover{
+    //     //     color: white;
+    //     //  }
+
+    // }
+
+    .icon {
+        font-size: 20px;
+        cursor: pointer;
+        color: black;
+        font-weight: 400;
+        //  &:hover{
+        //     color: white;
+        //  }
+    }
+
+    // span {
+    //     font-size: 17px;
+    //     cursor: pointer;
+    //     font-weight: 400;
+    //     color: #000000;
+    //     // &:hover{
+    //     //     color: white;
+    //     //  }
+
+
+    // }
+}
+
