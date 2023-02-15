@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
 import "./Dash.scss"
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import { Email } from '@mui/icons-material';
 import student1 from "../../assest/s5.png";
 import teacher from "../../assest/t2.png";
 import department from "../../assest/d2.png";
@@ -18,7 +15,7 @@ const info = {
     admin_name: "GW Head"
 }
 
-const Dashboard = (props) => { 
+const Dashboard = (props) => {
     const [data, setData] = useState(info);
     const [studentCount, setStudentCount] = useState(0);
     const [teacherCount, setTeacherCount] = useState(0);
@@ -30,14 +27,12 @@ const Dashboard = (props) => {
             //  console.log(res)
             setData(res.data.schoolDetail);
             setStudentCount(res.data.totalStudent);
-            setTeacherCount(res.data.totalTeacher); 
+            setTeacherCount(res.data.totalTeacher);
             props.AdminNameHandler(res.data.schoolDetail.admin_name);
         })
     }, []);
 
-
     return (
-
         <div>
             <div className='dash'>
                 <div className="top">
@@ -46,9 +41,7 @@ const Dashboard = (props) => {
                     </div>
                     <div className="basic-info">
                         <div className='Name-of-school'>
-
                             <li>
-
                                 <span> {data.school_name}</span>
                             </li>
 
@@ -58,13 +51,13 @@ const Dashboard = (props) => {
                                 <div className="info-container">
                                     <li>
                                         <label>Owner Name : </label>
-                                        <span> { data.admin_name &&((data.admin_name).replace(/_/g," ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
+                                        <span> {data.admin_name && ((data.admin_name).replace(/_/g, " ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
                                     </li>
                                 </div>
                                 <div className="info-container">
                                     <li>
                                         <label>City : </label>
-                                        <span>{ data.city_name  && ((data.city_name).replace(/_/g," ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
+                                        <span>{data.city_name && ((data.city_name).replace(/_/g, " ")).replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}</span>
                                     </li>
                                 </div>
                             </div>

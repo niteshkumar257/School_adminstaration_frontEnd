@@ -101,8 +101,13 @@ const Login = () => {
                   <button>Create Account</button>
                   
                 </div> */}
-                 <span className='changePassword'>
-                  <Link to="/login/change">Change Password</Link>
+                 <span
+                
+                  className='changePassword'>
+                  <Link    style={{
+                  textDecoration:"none",
+                  color:"#1377C0"
+                 }}to="/login/change">Change Password</Link>
                   </span>
             </div>
            

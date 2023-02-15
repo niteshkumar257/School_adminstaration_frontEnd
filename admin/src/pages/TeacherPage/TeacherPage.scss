@@ -1,4 +1,5 @@
 $main-color:#1377C0;
+$container-bottom-border:.2px solid rgb(227, 227, 227);;
 .SingleTeacherPage-container
 {
     display: flex;
@@ -46,17 +47,18 @@ $main-color:#1377C0;
               
                 .section{
                    
-                    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                    // box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                     width: 98%;
                      height: 30vh;
                     flex: 1;
+                    border-bottom: $container-bottom-border;
               
                     
                     }
                     .basic-info{
                         width: 96.5%;
                         padding: 0.5rem;
-                        border-radius: 9px;
+                        border-radius: 0px;
                     //    border: 2px solid black;
                         display: flex;
                         flex: 1;
@@ -165,7 +167,7 @@ $main-color:#1377C0;
                 }
                 .student-salary-container{
                     // border: 2px solid black;
-                    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                    // box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                       width: 98%;
                       height:auto;
                       border-radius: 9px;
@@ -221,6 +223,7 @@ $main-color:#1377C0;
                         font-weight: 600;
                         font-size: 1rem;
                             border-radius: 9px;
+                            text-decoration: none;
                             border: none;
                         }
                      }

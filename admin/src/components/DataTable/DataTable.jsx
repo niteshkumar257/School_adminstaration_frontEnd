@@ -4,10 +4,6 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 
-
-
-
-
 const DataTable = ({rows,columns,rowsPerPageOption,h,expandHandler}) => {
 
 console.log(expandHandler);
@@ -77,10 +73,7 @@ console.log(expandHandler);
           fontSize:"17px",
           // fontWeight:900
         }
-        
-       
       }}
-    
         rows={rows}
         columns={columns}
         pageSize={8}

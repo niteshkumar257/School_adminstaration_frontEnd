@@ -1,4 +1,6 @@
 $main-color:#1377C0;
+$sub-heading:rgb(83, 83, 83);
+$container-bottom-border:.2px solid rgb(227, 227, 227);;
 .SingleStudent-container
 {
     display: flex;
@@ -16,7 +18,7 @@ $main-color:#1377C0;
            row-gap: 20px;
             height: auto;
            .student-info-main-container{
-            box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+            // box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
               display: flex;
               width: 100%;
               flex-direction: column;
@@ -48,11 +50,13 @@ $main-color:#1377C0;
                
                  height: auto;
                 flex: 1;
+                border-radius: 0px;
+            border-bottom: $container-bottom-border;
                 
                 }
                 .basic-info{
                     padding: 0.5rem;
-                    border-radius: 9px;
+                    border-radius: 0px;
                     width: 100%;
                     display: flex;
                     flex: 1;
@@ -101,7 +105,7 @@ $main-color:#1377C0;
                               
                                 font-size: 1.3rem;
                                 font-weight: 600;
-                              color: rgb(83, 83, 83);
+                              color:$sub-heading;
                           
         
                             }
@@ -132,7 +136,7 @@ $main-color:#1377C0;
                             }
                             span{
                                 font-size: 1rem;
-                                color: rgb(83, 83, 83);
+                                color: $sub-heading;
                             }
                               
                              
@@ -186,8 +190,9 @@ $main-color:#1377C0;
                 width: 98%;
                
                 padding: 0.5rem;
-                border-radius: 9px;
-                box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                // border-radius: 9px;
+        border-bottom: .2px solid rgb(185, 185, 185);
+                // box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
             //    background-color: aquamarine;
                align-items: center;
                 display: flex;
@@ -201,6 +206,7 @@ $main-color:#1377C0;
                     h1{
                         font-size: 1.3rem;
                         font-weight: 700;
+                        color:$sub-heading
         
                     }
                 }
@@ -231,7 +237,7 @@ $main-color:#1377C0;
                             }
                             span{
                                 font-size: 1rem;
-                                color: rgb(83, 83, 83);
+                                color: $sub-heading;
                                
                             }
                             
@@ -242,7 +248,7 @@ $main-color:#1377C0;
             .fee-info{
               
                width: 98%;
-                box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                // box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
                 border-radius: 9px;
         padding: 0.5rem;
         height: auto;
@@ -333,7 +339,9 @@ $main-color:#1377C0;
                     
                     flex: 2.5;
                     display: flex;
-                  
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     width: 100%;
                 min-height: 20vh;
                 max-height: 70vh;
@@ -354,27 +362,10 @@ $main-color:#1377C0;
                 display: flex;
                 flex-direction: column;
                 border-radius: 9px;
-                box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                // box-shadow: 0 2px 2px rgb(0 0 0 / 10%), 0 4px 2px rgb(0 0 0 / 10%);
                 width: 98%;
                 row-gap: 20px;
-                .performanceAnalytic-info-icon{
-                    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-                    height: 20vh;
-                width: 50vh;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                border-radius: 9px;
-                padding: 0 10px;
-                span{
-                    font-size: 1.4rem;
-                    color:$main-color;
-                }
-                img{
-                    height: 70px;
-                    width: 70x;
-                }
-                }
+              
                 .performanceAnalytic-heading{
                     width: 90%;
                     height: auto;
@@ -382,7 +373,7 @@ $main-color:#1377C0;
                       h1{
                           font-size: 1.3rem;
                           font-weight: 700;
-                      color: rgb(83, 83, 83);
+                      color:$sub-heading;
               
                       }
                 }
@@ -425,7 +416,7 @@ $main-color:#1377C0;
                           
                             border-radius: 9px;
                             height: 50vh;
-                            box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+                         
                             .heading{
                                 display: flex;
                                 width: 98%;
